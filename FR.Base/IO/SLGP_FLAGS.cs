@@ -6,13 +6,11 @@
 
 using System;
 
-namespace FR.IO
-{
-  [Flags]
-  internal enum SLGP_FLAGS
-  {
-    SLGP_SHORTPATH = 1,
-    SLGP_UNCPRIORITY = 2,
-    SLGP_RAWPATH = 4,
-  }
+namespace FR.IO {
+    [Flags]
+    internal enum SLGP_FLAGS {
+        SLGP_SHORTPATH = 1,
+        SLGP_UNCPRIORITY = 2,
+        SLGP_RAWPATH = 4,
+    }
 }

@@ -6,28 +6,26 @@
 
 using System;
 
-namespace FR.Logging
-{
-  public interface ILoggingProvider
-  {
-    LoggingManager Logger { get; set; }
+namespace FR.Logging {
+    public interface ILoggingProvider {
+        LoggingManager Logger { get; set; }
 
-    LogLevel LogLevel { get; set; }
+        LogLevel LogLevel { get; set; }
 
-    void SetLoggingProvider(ILoggingProvider loggingProvider);
+        void SetLoggingProvider(ILoggingProvider loggingProvider);
 
-    void Log(LogLevel logLevel, string message, params object[] args);
+        void Log(LogLevel logLevel, string message, params object[] args);
 
-    void LogEx(Exception ex);
+        void LogEx(Exception ex);
 
-    void LogObject(LogLevel logLevel, object obj);
+        void LogObject(LogLevel logLevel, object obj);
 
-    void ForceLog(LogLevel logLevel, string message, params object[] args);
+        void ForceLog(LogLevel logLevel, string message, params object[] args);
 
-    void ForceLog(Exception ex);
+        void ForceLog(Exception ex);
 
-    void CallEntry(LogLevel logLevel);
+        void CallEntry(LogLevel logLevel);
 
-    void CallLeave(LogLevel logLevel);
-  }
+        void CallLeave(LogLevel logLevel);
+    }
 }

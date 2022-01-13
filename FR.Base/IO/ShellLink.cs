@@ -7,13 +7,11 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace FR.IO
-{
-  [Guid("00021401-0000-0000-C000-000000000046")]
-  [ComImport]
-  internal class ShellLink
-  {
-    //[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-    //public extern ShellLink();
-  }
+namespace FR.IO {
+    [Guid("00021401-0000-0000-C000-000000000046")]
+    [ComImport]
+    internal class ShellLink {
+        //[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        //public extern ShellLink();
+    }
 }

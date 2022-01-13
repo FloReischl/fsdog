@@ -148,14 +148,14 @@ namespace FR.IO {
             return directory;
         }
 
-        public static string GetNotExistingFileName(FileInfo file, string mask, int indexStart) {
-            string fileName = file.FullName;
-            for (ShellFile shellFile = new ShellFile(fileName); shellFile.Exists; shellFile = new ShellFile(fileName)) {
-                string str = string.Format(mask, (object)Path.GetFileNameWithoutExtension(file.FullName), (object)indexStart++);
-                fileName = Path.Combine(file.DirectoryName, string.Format("{0}{1}", (object)str, (object)file.Extension));
-            }
-            return fileName;
-        }
+        //public static string GetNotExistingFileName(FileInfo file, string mask, int indexStart) {
+        //    string fileName = file.FullName;
+        //    for (ShellFile shellFile = new ShellFile(fileName); shellFile.Exists; shellFile = new ShellFile(fileName)) {
+        //        string str = string.Format(mask, (object)Path.GetFileNameWithoutExtension(file.FullName), (object)indexStart++);
+        //        fileName = Path.Combine(file.DirectoryName, string.Format("{0}{1}", (object)str, (object)file.Extension));
+        //    }
+        //    return fileName;
+        //}
 
         public static string GetTempFile() => FileHelper.GetTempFile(Environment.GetEnvironmentVariable("TEMP"));
 

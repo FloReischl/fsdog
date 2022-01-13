@@ -4,6 +4,8 @@
 // MVID: 86A1142D-AA42-437E-9D7A-2AF6376C2EE2
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FsDog.exe
 
+using FsDog.Detail;
+
 namespace FsDog.Commands {
     public class CmdViewPreview : CmdFsDogIntern {
         public override void Execute() {

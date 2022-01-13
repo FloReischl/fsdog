@@ -7,6 +7,7 @@
 using FR.Commands;
 using FR.Configuration;
 using FR.Windows.Forms;
+using FsDog.Detail;
 using FsDog.Properties;
 using System;
 using System.Drawing;

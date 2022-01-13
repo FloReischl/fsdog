@@ -4,7 +4,6 @@
 // MVID: E4325E6A-7973-47D1-9B4E-B328A6EAD270
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Base.dll
 
-namespace FR.Collections.Generic
-{
-  public delegate void DataStoreRemoveObjectCallback<TItem>(TItem objectToRemove);
+namespace FR.Collections.Generic {
+    public delegate void DataStoreRemoveObjectCallback<TItem>(TItem objectToRemove);
 }

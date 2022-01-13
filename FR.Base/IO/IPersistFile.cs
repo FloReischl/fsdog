@@ -8,24 +8,22 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace FR.IO
-{
-  [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-  [Guid("0000010B-0000-0000-C000-000000000046")]
-  [ComImport]
-  internal interface IPersistFile
-  {
-    void GetClassID(out Guid pClassID);
+namespace FR.IO {
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("0000010B-0000-0000-C000-000000000046")]
+    [ComImport]
+    internal interface IPersistFile {
+        void GetClassID(out Guid pClassID);
 
-    [MethodImpl(MethodImplOptions.PreserveSig)]
-    int IsDirty();
+        [MethodImpl(MethodImplOptions.PreserveSig)]
+        int IsDirty();
 
-    void Load([MarshalAs(UnmanagedType.LPWStr)] string pszFileName, int dwMode);
+        void Load([MarshalAs(UnmanagedType.LPWStr)] string pszFileName, int dwMode);
 
-    void Save([MarshalAs(UnmanagedType.LPWStr)] string pszFileName, [MarshalAs(UnmanagedType.Bool)] bool fRemember);
+        void Save([MarshalAs(UnmanagedType.LPWStr)] string pszFileName, [MarshalAs(UnmanagedType.Bool)] bool fRemember);
 
-    void SaveCompleted([MarshalAs(UnmanagedType.LPWStr)] string pszFileName);
+        void SaveCompleted([MarshalAs(UnmanagedType.LPWStr)] string pszFileName);
 
-    void GetCurFile(out IntPtr ppszFileName);
-  }
+        void GetCurFile(out IntPtr ppszFileName);
+    }
 }

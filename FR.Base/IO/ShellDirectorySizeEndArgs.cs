@@ -6,12 +6,10 @@
 
 using System;
 
-namespace FR.IO
-{
-  public class ShellDirectorySizeEndArgs : EventArgs
-  {
-    internal ShellDirectorySizeEndArgs(ulong size) => this.Size = size;
+namespace FR.IO {
+    public class ShellDirectorySizeEndArgs : EventArgs {
+        internal ShellDirectorySizeEndArgs(ulong size) => this.Size = size;
 
-    public ulong Size { get; private set; }
-  }
+        public ulong Size { get; private set; }
+    }
 }

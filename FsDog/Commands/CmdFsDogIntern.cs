@@ -4,7 +4,9 @@
 // MVID: 86A1142D-AA42-437E-9D7A-2AF6376C2EE2
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FsDog.exe
 
+using FsDog.Detail;
 using FsDog.Dialogs;
+using FsDog.Tree;
 using FsDogBase;
 using System.Diagnostics;
 using System.Windows.Forms;

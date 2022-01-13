@@ -149,25 +149,22 @@ namespace FsDog
     {
       if (this.SourceFile != null)
       {
-        if (this.ErrorType == CopyErrorType.None)
-        {
-          if (!this.DestinationFile.Directory.Exists)
-            this.DestinationFile.Directory.Create();
-          if (move)
-            this.SourceFile.MoveTo(this.DestinationFile.FullName);
-          else
-            this.SourceFile.CopyTo(this.DestinationFile.FullName);
-        }
-        else if (this.ErrorType == CopyErrorType.AlreadyExists)
-        {
-          if (this.ErrorHandling != CopyErrorHandling.Skip && this.ErrorHandling == CopyErrorHandling.Handle)
-          {
-            this.DestinationFile.Delete();
-            this.SourceFile.MoveTo(this.DestinationFile.FullName);
-          }
-        }
-        else if (this.ErrorType != CopyErrorType.LocationEqual)
-          ;
+                if (this.ErrorType == CopyErrorType.None) {
+                    if (!this.DestinationFile.Directory.Exists)
+                        this.DestinationFile.Directory.Create();
+                    if (move)
+                        this.SourceFile.MoveTo(this.DestinationFile.FullName);
+                    else
+                        this.SourceFile.CopyTo(this.DestinationFile.FullName);
+                }
+                else if (this.ErrorType == CopyErrorType.AlreadyExists) {
+                    if (this.ErrorHandling != CopyErrorHandling.Skip && this.ErrorHandling == CopyErrorHandling.Handle) {
+                        this.DestinationFile.Delete();
+                        this.SourceFile.MoveTo(this.DestinationFile.FullName);
+                    }
+                }
+                else if (this.ErrorType != CopyErrorType.LocationEqual) {
+                }
       }
       else if (this.ErrorType == CopyErrorType.None)
       {

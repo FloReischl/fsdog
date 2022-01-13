@@ -36,13 +36,13 @@ namespace FsDog {
         private FsApp() {
         }
 
-        public static FsApp Instance => (FsApp)WindowsApplication.Instance;
+        public static new FsApp Instance => (FsApp)WindowsApplication.Instance;
 
         public FsOptions Options { get; set; }
 
         public Dictionary<string, ScriptingHostConfiguration> ScriptingHosts { get; set; }
 
-        public FormMain MainForm => (FormMain)base.MainForm;
+        public new FormMain MainForm => (FormMain)base.MainForm;
 
         public string DefaultDirectoryName => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 

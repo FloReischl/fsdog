@@ -6,22 +6,20 @@
 
 using System.Runtime.InteropServices;
 
-namespace FR.IO
-{
-  [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-  internal class WIN32_FIND_DATA
-  {
-    public ShellFileAttributes dwFileAttributes;
-    public System.Runtime.InteropServices.ComTypes.FILETIME ftCreationTime;
-    public System.Runtime.InteropServices.ComTypes.FILETIME ftLastAccessTime;
-    public System.Runtime.InteropServices.ComTypes.FILETIME ftLastWriteTime;
-    public int nFileSizeHigh;
-    public int nFileSizeLow;
-    public int dwReserved0;
-    public int dwReserved1;
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
-    public string cFileName;
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 14)]
-    public string alternateFileName;
-  }
+namespace FR.IO {
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    internal class WIN32_FIND_DATA {
+        public ShellFileAttributes dwFileAttributes;
+        public System.Runtime.InteropServices.ComTypes.FILETIME ftCreationTime;
+        public System.Runtime.InteropServices.ComTypes.FILETIME ftLastAccessTime;
+        public System.Runtime.InteropServices.ComTypes.FILETIME ftLastWriteTime;
+        public int nFileSizeHigh;
+        public int nFileSizeLow;
+        public int dwReserved0;
+        public int dwReserved1;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+        public string cFileName;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 14)]
+        public string alternateFileName;
+    }
 }

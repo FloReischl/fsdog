@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using FsDog.Detail;
+using FsDog.Tree;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace FsDog.Dialogs {

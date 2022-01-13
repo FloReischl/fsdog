@@ -6,14 +6,11 @@
 
 using System.IO;
 
-namespace FR.IO
-{
-  public static class IOExceptionHelper
-  {
-    public static DirectoryNotFoundException GetDirectoryNotFound(
-      string directoryName)
-    {
-      return new DirectoryNotFoundException(string.Format("Directory: '{0}' was not found.", (object) directoryName));
+namespace FR.IO {
+    public static class IOExceptionHelper {
+        public static DirectoryNotFoundException GetDirectoryNotFound(
+          string directoryName) {
+            return new DirectoryNotFoundException(string.Format("Directory: '{0}' was not found.", (object)directoryName));
+        }
     }
-  }
 }

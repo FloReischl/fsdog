@@ -7,36 +7,34 @@
 using FR.Configuration;
 using System;
 
-namespace FR.Logging
-{
-  public interface ILoggingDevice : IDisposable
-  {
-    bool IsDisposed { get; }
+namespace FR.Logging {
+    public interface ILoggingDevice : IDisposable {
+        bool IsDisposed { get; }
 
-    LogLevel LogLevel { get; set; }
+        LogLevel LogLevel { get; set; }
 
-    LogLevel StackTraceLevel { get; set; }
+        LogLevel StackTraceLevel { get; set; }
 
-    void Open(IConfigurationProperty deviceConfiguration);
+        void Open(IConfigurationProperty deviceConfiguration);
 
-    void Close();
+        void Close();
 
-    void Log(
-      LogLevel logLevel,
-      string message,
-      DateTime dateTime,
-      string className,
-      string methodName,
-      int skipFrames);
+        void Log(
+          LogLevel logLevel,
+          string message,
+          DateTime dateTime,
+          string className,
+          string methodName,
+          int skipFrames);
 
-    void ForceLog(
-      LogLevel logLevel,
-      string message,
-      DateTime dateTime,
-      string className,
-      string methodName,
-      int skipFrames);
+        void ForceLog(
+          LogLevel logLevel,
+          string message,
+          DateTime dateTime,
+          string className,
+          string methodName,
+          int skipFrames);
 
-    void Flush();
-  }
+        void Flush();
+    }
 }

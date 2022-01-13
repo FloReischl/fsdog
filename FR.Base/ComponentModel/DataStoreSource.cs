@@ -39,7 +39,7 @@ namespace FR.ComponentModel
       [DebuggerNonUserCode] set => this.Refresh(value);
     }
 
-    public virtual DataStoreView FindAll(
+    public virtual new DataStoreView FindAll(
       string propertyName,
       IndexFindOption option,
       object key,
@@ -48,7 +48,7 @@ namespace FR.ComponentModel
       return new DataStoreView(this, (IEnumerable<DataStoreSourceObject>) base.FindAll(propertyName, option, key, keys));
     }
 
-    public virtual DataStoreView FindAll(
+    public virtual new DataStoreView FindAll(
       PropertyDescriptor property,
       IndexFindOption option,
       object key,

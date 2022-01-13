@@ -5,6 +5,7 @@
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FsDog.exe
 
 using FR.Commands;
+using FsDog.Detail;
 
 namespace FsDog.Commands {
     public class CmdEditSelectAll : CmdFsDogIntern {

@@ -61,6 +61,8 @@
     <Compile Include="Commands\CmdToolsClearImageCache.cs" />
     <Compile Include="Commands\CmdToolsOpenConfigFile.cs" />
     <Compile Include="Commands\CmdToolsOptions.cs" />
+    <Compile Include="Detail\DiskItem.cs" />
+    <Compile Include="Detail\GridColumnFactory.cs" />
     <Compile Include="Dialogs\FormCommands.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,23 +85,23 @@
     <Compile Include="Dialogs\FormRename.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DetailView.cs">
+    <Compile Include="Detail\DetailView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TreeMain.cs">
+    <Compile Include="Tree\TreeMain.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="NodeBase.cs" />
-    <Compile Include="NodeDrive.cs" />
-    <Compile Include="NodeDirectory.cs" />
-    <Compile Include="NodeNetworkRoot.cs" />
-    <Compile Include="NodeNetworkProvider.cs" />
-    <Compile Include="NodeNetworkDomain.cs" />
-    <Compile Include="NodeNetworkServer.cs" />
-    <Compile Include="NodeNetworkShare.cs" />
+    <Compile Include="Tree\NodeBase.cs" />
+    <Compile Include="Tree\NodeDrive.cs" />
+    <Compile Include="Tree\NodeDirectory.cs" />
+    <Compile Include="Tree\NodeNetworkRoot.cs" />
+    <Compile Include="Tree\NodeNetworkProvider.cs" />
+    <Compile Include="Tree\NodeNetworkDomain.cs" />
+    <Compile Include="Tree\NodeNetworkServer.cs" />
+    <Compile Include="Tree\NodeNetworkShare.cs" />
     <Compile Include="Commands\CmdHelpAbout.cs" />
     <Compile Include="IPreviewControl.cs" />
-    <Compile Include="PreviewImage.cs">
+    <Compile Include="Detail\PreviewImage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="FsApp.cs" />
@@ -107,7 +109,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MessageHandler.cs" />
-    <Compile Include="DetailGrid.cs">
+    <Compile Include="Detail\DetailGrid.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commands\CmdCommandsEdit.cs" />
@@ -118,10 +120,10 @@
     <Compile Include="Dialogs\FormCommands_old.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PreviewText.cs">
+    <Compile Include="Detail\PreviewText.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PreviewContainer.cs">
+    <Compile Include="Detail\PreviewContainer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="FsOptions.cs" />
@@ -131,8 +133,8 @@
     <Compile Include="Commands\CmdFavoritesEdit.cs" />
     <Compile Include="Commands\CmdFavorite.cs" />
     <Compile Include="FavoriteInfo.cs" />
-    <Compile Include="DetailViewRequestParentDirectoryHandler.cs" />
-    <Compile Include="DetailViewRequestDirectoryArgs.cs" />
+    <Compile Include="Detail\DetailViewRequestParentDirectoryHandler.cs" />
+    <Compile Include="Detail\DetailViewRequestDirectoryArgs.cs" />
     <Compile Include="Commands\CmdFileNewFile.cs" />
     <Compile Include="Commands\CmdFileNewDirectory.cs" />
     <Compile Include="Commands\CmdFileOpen.cs" />
@@ -165,12 +167,12 @@
     <Compile Include="HookType.cs" />
     <Compile Include="LocalWindowsHook.cs" />
     <Compile Include="ShellHelper.cs" />
-    <Compile Include="PreviewInfo.cs" />
-    <Compile Include="PreviewType.cs" />
-    <Compile Include="DetailTable.cs">
+    <Compile Include="Detail\PreviewInfo.cs" />
+    <Compile Include="Detail\PreviewType.cs" />
+    <Compile Include="Detail\DetailTable.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DetailTableView.cs">
+    <Compile Include="Detail\DetailTableView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DetailItem.cs" />
@@ -179,7 +181,7 @@
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DetailView.resx" />
+    <EmbeddedResource Include="Detail\DetailView.resx" />
     <EmbeddedResource Include="Dialogs\FormAbout.resx" />
     <EmbeddedResource Include="Dialogs\FormCommands.resx">
       <DependentUpon>FormCommands.cs</DependentUpon>
@@ -190,9 +192,9 @@
     <EmbeddedResource Include="Dialogs\FormMain_old.resx" />
     <EmbeddedResource Include="Dialogs\FormRename.resx" />
     <EmbeddedResource Include="Images\Help.png" />
-    <EmbeddedResource Include="PreviewContainer.resx" />
-    <EmbeddedResource Include="PreviewImage.resx" />
-    <EmbeddedResource Include="PreviewText.resx" />
+    <EmbeddedResource Include="Detail\PreviewContainer.resx" />
+    <EmbeddedResource Include="Detail\PreviewImage.resx" />
+    <EmbeddedResource Include="Detail\PreviewText.resx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
