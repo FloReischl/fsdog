@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FsDog.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7538451-1239-4353-991E-FEA62B543097}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>FsDog</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ApplicationVersion>1.1.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>FsDog</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>FsDog.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\CommandHelper.cs" />
+    <Compile Include="Commands\CommandType.cs" />
+    <Compile Include="Commands\CommandInfo.cs" />
+    <Compile Include="Commands\CmdFsDogIntern.cs" />
+    <Compile Include="Commands\CmdToolsClearImageCache.cs" />
+    <Compile Include="Commands\CmdToolsOpenConfigFile.cs" />
+    <Compile Include="Commands\CmdToolsOptions.cs" />
+    <Compile Include="Dialogs\FormCommands.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FormCommands.Designer.cs">
+      <DependentUpon>FormCommands.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FormMain.commands.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FormMain_old.cs" />
+    <Compile Include="Dialogs\FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FormRename.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TreeMain.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NodeBase.cs" />
+    <Compile Include="NodeDrive.cs" />
+    <Compile Include="NodeDirectory.cs" />
+    <Compile Include="NodeNetworkRoot.cs" />
+    <Compile Include="NodeNetworkProvider.cs" />
+    <Compile Include="NodeNetworkDomain.cs" />
+    <Compile Include="NodeNetworkServer.cs" />
+    <Compile Include="NodeNetworkShare.cs" />
+    <Compile Include="Commands\CmdHelpAbout.cs" />
+    <Compile Include="IPreviewControl.cs" />
+    <Compile Include="PreviewImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FsApp.cs" />
+    <Compile Include="Dialogs\FormCopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageHandler.cs" />
+    <Compile Include="DetailGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\CmdCommandsEdit.cs" />
+    <Compile Include="Commands\CmdCommandBase.cs" />
+    <Compile Include="Commands\CmdApplicationExecute.cs" />
+    <Compile Include="Commands\CmdScriptExecute.cs" />
+    <Compile Include="Commands\CmdScriptConfigureHosts.cs" />
+    <Compile Include="Dialogs\FormCommands_old.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PreviewContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FsOptions.cs" />
+    <Compile Include="Dialogs\FormFavorites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\CmdFavoritesEdit.cs" />
+    <Compile Include="Commands\CmdFavorite.cs" />
+    <Compile Include="FavoriteInfo.cs" />
+    <Compile Include="DetailViewRequestParentDirectoryHandler.cs" />
+    <Compile Include="DetailViewRequestDirectoryArgs.cs" />
+    <Compile Include="Commands\CmdFileNewFile.cs" />
+    <Compile Include="Commands\CmdFileNewDirectory.cs" />
+    <Compile Include="Commands\CmdFileOpen.cs" />
+    <Compile Include="Commands\CmdFileOpenWith.cs" />
+    <Compile Include="Commands\CmdFileRunAs.cs" />
+    <Compile Include="Commands\CmdFileProperties.cs" />
+    <Compile Include="Commands\CmdFileRenameMulti.cs" />
+    <Compile Include="Commands\CmdFileDosShell.cs" />
+    <Compile Include="Commands\CmdFilePowerShell.cs" />
+    <Compile Include="CopyErrorType.cs" />
+    <Compile Include="CopyErrorHandling.cs" />
+    <Compile Include="CopyItem.cs" />
+    <Compile Include="Commands\CmdViewPreview.cs" />
+    <Compile Include="Commands\CmdViewGotoFavorite.cs" />
+    <Compile Include="Commands\CmdViewDirectorySizes.cs" />
+    <Compile Include="Commands\CmdViewRefresh.cs" />
+    <Compile Include="Commands\CmdEditCut.cs" />
+    <Compile Include="Commands\CmdEditPaste.cs" />
+    <Compile Include="Commands\CmdEditCopy.cs" />
+    <Compile Include="Commands\CmdEditCopyToOtherView.cs" />
+    <Compile Include="Commands\CmdEditMoveToOtherView.cs" />
+    <Compile Include="Commands\CmdEditCopyFileNames.cs" />
+    <Compile Include="Commands\CmdEditDelete.cs" />
+    <Compile Include="Commands\CmdEditInvertSelection.cs" />
+    <Compile Include="Commands\CmdEditSelectAll.cs" />
+    <Compile Include="Commands\CmdEditFind.cs" />
+    <Compile Include="ShellContextMenu.cs" />
+    <Compile Include="ShellContextMenuException.cs" />
+    <Compile Include="HookEventArgs.cs" />
+    <Compile Include="HookType.cs" />
+    <Compile Include="LocalWindowsHook.cs" />
+    <Compile Include="ShellHelper.cs" />
+    <Compile Include="PreviewInfo.cs" />
+    <Compile Include="PreviewType.cs" />
+    <Compile Include="DetailTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DetailTableView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DetailItem.cs" />
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="Properties\Resources.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DetailView.resx" />
+    <EmbeddedResource Include="Dialogs\FormAbout.resx" />
+    <EmbeddedResource Include="Dialogs\FormCommands.resx">
+      <DependentUpon>FormCommands.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FormCommands_old.resx" />
+    <EmbeddedResource Include="Dialogs\FormCopy.resx" />
+    <EmbeddedResource Include="Dialogs\FormFavorites.resx" />
+    <EmbeddedResource Include="Dialogs\FormMain_old.resx" />
+    <EmbeddedResource Include="Dialogs\FormRename.resx" />
+    <EmbeddedResource Include="Images\Help.png" />
+    <EmbeddedResource Include="PreviewContainer.resx" />
+    <EmbeddedResource Include="PreviewImage.resx" />
+    <EmbeddedResource Include="PreviewText.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FsDog.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FR.Base\FR.Base.csproj">
+      <Project>{edc4bf2b-81c1-4ec3-af46-461c51bb212b}</Project>
+      <Name>FR.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FR.Data\FR.Data.csproj">
+      <Project>{08d60cd5-2354-43ae-98e8-243509870899}</Project>
+      <Name>FR.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FR.Drawing\FR.Drawing.csproj">
+      <Project>{dec3aaf2-0097-421f-bcd3-7b00829dbd87}</Project>
+      <Name>FR.Drawing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FR.Windows\FR.Windows.csproj">
+      <Project>{9ed2f0d7-9459-4b0f-8c7f-1174b1969153}</Project>
+      <Name>FR.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FsDogBase\FsDogBase.csproj">
+      <Project>{5782be06-66e9-4f7a-a08c-a1c36b6cc31f}</Project>
+      <Name>FsDogBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FsDogMain\FsDogMain.csproj">
+      <Project>{bcdae07a-03cc-4ff1-8a40-35b6b54ea615}</Project>
+      <Name>FsDogMain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

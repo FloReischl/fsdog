@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Data.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{08D60CD5-2354-43AE-98E8-243509870899}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>FR.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>FR.Data</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SqlClient\SqlTypeHelper.cs" />
+    <Compile Include="SqlClient\Smo\Statements.cs" />
+    <Compile Include="SqlClient\Smo\SmoObject.cs" />
+    <Compile Include="SqlClient\Smo\SmoIndexColumn.cs" />
+    <Compile Include="SqlClient\Smo\SmoCollection`1.cs" />
+    <Compile Include="SqlClient\Smo\SmoIndexColumnCollection.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabaseObject.cs" />
+    <Compile Include="SqlClient\Smo\SmoTable.cs" />
+    <Compile Include="SqlClient\Smo\SmoScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoTableScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabaseRoleScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabasePrincipal.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabaseRole.cs" />
+    <Compile Include="SqlClient\Smo\SmoIndexType.cs" />
+    <Compile Include="SqlClient\Smo\SmoIndexScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoIndex.cs" />
+    <Compile Include="SqlClient\Smo\SmoIndexCollection.cs" />
+    <Compile Include="SqlClient\Smo\SmoServerMajorVersion.cs" />
+    <Compile Include="SqlClient\Smo\SmoServer.cs" />
+    <Compile Include="SqlClient\Smo\SmoViewColumn.cs" />
+    <Compile Include="SqlClient\Smo\SmoViewColumnCollection.cs" />
+    <Compile Include="SqlClient\Smo\SmoFunction.cs" />
+    <Compile Include="SqlClient\Smo\SmoFunctionType.cs" />
+    <Compile Include="SqlClient\Smo\SmoConstraint.cs" />
+    <Compile Include="SqlClient\Smo\SmoCheckConstraint.cs" />
+    <Compile Include="SqlClient\Smo\SmoView.cs" />
+    <Compile Include="SqlClient\Smo\SmoViewScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoServerPrincipal.cs" />
+    <Compile Include="SqlClient\Smo\SmoServerRole.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabasePrincipalType.cs" />
+    <Compile Include="SqlClient\Smo\SmoStatistic.cs" />
+    <Compile Include="SqlClient\Smo\SmoStatisticCollection.cs" />
+    <Compile Include="SqlClient\Smo\SmoObjectState.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabaseObjectCollection`1.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabase.cs" />
+    <Compile Include="SqlClient\Smo\SmoSchemaScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoSchema.cs" />
+    <Compile Include="SqlClient\Smo\SmoSchemaCollection.cs" />
+    <Compile Include="SqlClient\Smo\SmoForeginKeyAction.cs" />
+    <Compile Include="SqlClient\Smo\SmoForeignKeyConstraint.cs" />
+    <Compile Include="SqlClient\Smo\SmoServerPrincipalType.cs" />
+    <Compile Include="SqlClient\Smo\SmoExceptionHelper.cs" />
+    <Compile Include="SqlClient\Smo\SmoDataType.cs" />
+    <Compile Include="SqlClient\Smo\SmoDataTypeCollection.cs" />
+    <Compile Include="SqlClient\Smo\SmoDataTypeDescriptionProvider.cs" />
+    <Compile Include="SqlClient\Smo\SmoDataTypeDescriptor.cs" />
+    <Compile Include="SqlClient\Smo\SmoDataTypeConverter.cs" />
+    <Compile Include="SqlClient\Smo\SmoTrigger.cs" />
+    <Compile Include="SqlClient\Smo\SmoTriggerCollection.cs" />
+    <Compile Include="SqlClient\Smo\SmoTriggerScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoTableColumn.cs" />
+    <Compile Include="SqlClient\Smo\SmoTableColumnCollection.cs" />
+    <Compile Include="SqlClient\Smo\SmoTableColumnScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoUserScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoUser.cs" />
+    <Compile Include="SqlClient\Smo\SmoLogin.cs" />
+    <Compile Include="SqlClient\Smo\SmoKeyConstraint.cs" />
+    <Compile Include="SqlClient\Smo\SmoProcedure.cs" />
+    <Compile Include="SqlClient\Smo\SmoProcedureScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabaseFile.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabaseFileType.cs" />
+    <Compile Include="SqlClient\Smo\SmoDatabaseFileState.cs" />
+    <Compile Include="SqlClient\Smo\SmoConstraintType.cs" />
+    <Compile Include="SqlClient\Smo\SmoConstraintScriptOptions.cs" />
+    <Compile Include="SqlClient\Smo\SmoConstraintCollection.cs" />
+    <Compile Include="Csv\CsvDataAdapter.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlClient\Smo\Statements.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FR.Base\FR.Base.csproj">
+      <Project>{edc4bf2b-81c1-4ec3-af46-461c51bb212b}</Project>
+      <Name>FR.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

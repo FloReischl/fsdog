@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Base.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EDC4BF2B-81C1-4EC3-AF46-461C51BB212B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>FR.Base</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>FR</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\Generic\DataStore`1_IndexKey.cs" />
+    <Compile Include="Collections\Generic\DataStore`1_Interfaces.cs" />
+    <Compile Include="Collections\Generic\DataStore`1_PrimaryKeyEntry.cs" />
+    <Compile Include="Collections\Generic\DataStore`1_IndexValue.cs" />
+    <Compile Include="Microsoft\Win32\FileTypeAssociator.cs" />
+    <Compile Include="Microsoft\Win32\FileTypeAssociatorException.cs" />
+    <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="MathHelper.cs" />
+    <Compile Include="StringHelper.cs" />
+    <Compile Include="EmbeddedResourceManager.cs" />
+    <Compile Include="ApplicationBase.cs" />
+    <Compile Include="ConsoleApplicationBase.cs" />
+    <Compile Include="BaseHelper.cs" />
+    <Compile Include="ComparableComparer.cs" />
+    <Compile Include="Int32Comparer.cs" />
+    <Compile Include="Int64Comparer.cs" />
+    <Compile Include="DateTimeComparer.cs" />
+    <Compile Include="BooleanComparer.cs" />
+    <Compile Include="ApplicationInformation.cs" />
+    <Compile Include="ExceptionHelper.cs" />
+    <Compile Include="Net\NetworkHelper.cs" />
+    <Compile Include="Net\SHARE_INFO_0.cs" />
+    <Compile Include="Net\SHARE_INFO_1.cs" />
+    <Compile Include="Net\SHARE_INFO_2.cs" />
+    <Compile Include="Net\NetworkShareType.cs" />
+    <Compile Include="Net\Win32Credentials.cs" />
+    <Compile Include="Net\NetworkErrorCode.cs" />
+    <Compile Include="Net\NetworkException.cs" />
+    <Compile Include="Net\NETRESOURCE.cs" />
+    <Compile Include="Net\NETRESOURCE_SCOPE.cs" />
+    <Compile Include="Net\NETRESOURCE_TYPE.cs" />
+    <Compile Include="Net\NETRESOURCE_DISPLAYTYPE.cs" />
+    <Compile Include="Net\NETRESOURCE_USAGE.cs" />
+    <Compile Include="Net\NETRESOURCE_CONNECT.cs" />
+    <Compile Include="ComponentModel\ReflectionTypeDescriptor.cs" />
+    <Compile Include="ComponentModel\IUniqueItem.cs" />
+    <Compile Include="ComponentModel\DataStoreViewObject.cs" />
+    <Compile Include="ComponentModel\DataStoreViewObjectProperty.cs" />
+    <Compile Include="ComponentModel\DataStoreViewObjectHandler.cs" />
+    <Compile Include="ComponentModel\DataStoreViewObjectArgs.cs" />
+    <Compile Include="ComponentModel\DataStoreView.cs" />
+    <Compile Include="ComponentModel\PropertyDescriptorHelper.cs" />
+    <Compile Include="ComponentModel\ReflectionPropertyDescriptor.cs" />
+    <Compile Include="ComponentModel\ExpandablePropertyDescriptor.cs" />
+    <Compile Include="ComponentModel\DataStoreSource.cs" />
+    <Compile Include="ComponentModel\DataStoreSourceObject.cs" />
+    <Compile Include="ComponentModel\DataStoreSourceObjectProperty.cs" />
+    <Compile Include="ComponentModel\EventsFilterCache.cs" />
+    <Compile Include="ComponentModel\DynamicPropertyCreator.cs" />
+    <Compile Include="ComponentModel\PropertiesFilterCache.cs" />
+    <Compile Include="ComponentModel\ReflectionEventDescriptor.cs" />
+    <Compile Include="ComponentModel\ReflectionDescriptionProvider.cs" />
+    <Compile Include="Collections\IIndex.cs" />
+    <Compile Include="Collections\IPrimaryKey.cs" />
+    <Compile Include="Collections\IIndexNode.cs" />
+    <Compile Include="Collections\IPrimaryKeyNode.cs" />
+    <Compile Include="Collections\HashQueue.cs" />
+    <Compile Include="Collections\HashIndex.cs" />
+    <Compile Include="Collections\DataContext.cs" />
+    <Compile Include="Collections\HashQueueDuplicateHandling.cs" />
+    <Compile Include="Collections\IndexExceptionHelper.cs" />
+    <Compile Include="Collections\RedBlackTree.cs" />
+    <Compile Include="Collections\IndexFindOption.cs" />
+    <Compile Include="Collections\ReadOnlyDictionary.cs" />
+    <Compile Include="Collections\IndexTestNode.cs" />
+    <Compile Include="Collections\IndexRelation.cs" />
+    <Compile Include="Collections\Generic\HashQueue`2.cs" />
+    <Compile Include="Collections\Generic\NotifyingList`1.cs" />
+    <Compile Include="Collections\Generic\RBTreeBase`3.cs" />
+    <Compile Include="Collections\Generic\DataStore`1.cs" />
+    <Compile Include="Collections\Generic\RedBlackTree`2.cs" />
+    <Compile Include="Collections\Generic\DictionaryEnumerator`2.cs" />
+    <Compile Include="Collections\Generic\ReadOnlyDictionary`2.cs" />
+    <Compile Include="Collections\Generic\PrimaryKeyDictionary`2.cs" />
+    <Compile Include="Collections\Generic\DataStoreNewObjectCallback`1.cs" />
+    <Compile Include="Collections\Generic\DataStoreRemoveObjectCallback`1.cs" />
+    <Compile Include="Collections\Generic\PrimaryKey`2.cs" />
+    <Compile Include="Collections\Generic\Enumerator`1.cs" />
+    <Compile Include="Collections\Generic\IndexValueEnumerator`1.cs" />
+    <Compile Include="Collections\Generic\SortedList`2.cs" />
+    <Compile Include="Configuration\CommandLineArg.cs" />
+    <Compile Include="Configuration\CommandLineArgs.cs" />
+    <Compile Include="Configuration\IConfigurable.cs" />
+    <Compile Include="Configuration\IConfigurationSource.cs" />
+    <Compile Include="Configuration\ConfigurationFile.cs" />
+    <Compile Include="Configuration\ConfigurationFilePropertyDoesNotExistException.cs" />
+    <Compile Include="Configuration\IConfigurationProperty.cs" />
+    <Compile Include="Configuration\CommandLineParser.cs" />
+    <Compile Include="Configuration\ConfigurationFileProperty.cs" />
+    <Compile Include="Logging\ILoggingProvider.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Logging\ILoggingDevice.cs" />
+    <Compile Include="Logging\LoggingProvider.cs" />
+    <Compile Include="Logging\LoggingDeviceConsole.cs" />
+    <Compile Include="Logging\LoggingDeviceFlatFile.cs" />
+    <Compile Include="Logging\LoggingManager.cs" />
+    <Compile Include="Commands\ICommandReceiver.cs" />
+    <Compile Include="Commands\ICommandHandler.cs" />
+    <Compile Include="Commands\CommandExecutionState.cs" />
+    <Compile Include="Commands\CommandInstanceState.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\CommandExecuteHandler.cs" />
+    <Compile Include="Commands\StandardCommandBase.cs" />
+    <Compile Include="IO\SLR_FLAGS.cs" />
+    <Compile Include="IO\SLGP_FLAGS.cs" />
+    <Compile Include="IO\WIN32_FIND_DATAA.cs" />
+    <Compile Include="IO\WIN32_FIND_DATAW.cs" />
+    <Compile Include="IO\IPersistFile.cs" />
+    <Compile Include="IO\IShellLinkA.cs" />
+    <Compile Include="IO\IShellLinkW.cs" />
+    <Compile Include="IO\ShellLink.cs" />
+    <Compile Include="IO\ShellItem.cs" />
+    <Compile Include="IO\ShellFile.cs" />
+    <Compile Include="IO\IOExceptionHelper.cs" />
+    <Compile Include="IO\ShellShortcut.cs" />
+    <Compile Include="IO\ShellApi.cs" />
+    <Compile Include="IO\WIN32_FIND_DATA.cs" />
+    <Compile Include="IO\ShellFileAttributes.cs" />
+    <Compile Include="IO\ShellDirectorySizeEndHandler.cs" />
+    <Compile Include="IO\ShellDirectorySizeEndArgs.cs" />
+    <Compile Include="IO\ShellDirectory.cs" />
+    <Compile Include="IO\FileHelper.cs" />
+    <Compile Include="Security\Permissions\DeviceConnector.cs" />
+    <Compile Include="CodeDom\Compiler\CSharpScriptCompiler.cs" />
+    <Compile Include="CodeDom\Compiler\CSharpScriptCompilerException.cs" />
+    <Compile Include="CodeDom\Compiler\CSharpScriptHost.cs" />
+    <Compile Include="Threading\Schedular.cs" />
+    <Compile Include="Threading\ScheduleOccurresEventArgs.cs" />
+    <Compile Include="Threading\SchedularException.cs" />
+    <Compile Include="Threading\SchedularTask.cs" />
+    <Compile Include="Threading\SchedularTaskType.cs" />
+    <Compile Include="Threading\SchedularTaskIntervalType.cs" />
+    <Compile Include="Threading\AsynchronousWorkerSettings.cs" />
+    <Compile Include="Threading\AsynchronousWorker.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

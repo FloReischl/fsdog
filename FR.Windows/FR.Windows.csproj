@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Windows.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9ED2F0D7-9459-4B0F-8C7F-1174B1969153}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>FR.Windows</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>FR.Windows.Forms</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFeedback.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDataTableFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataGridViewComboBoxInitEditControlHandler.cs" />
+    <Compile Include="DataGridViewComboBoxGetDisplayValueHandler.cs" />
+    <Compile Include="CDataGridViewComboBoxGetDisplayValueArgs.cs" />
+    <Compile Include="DataGridViewColumnInitializeEditingControlArgs.cs" />
+    <Compile Include="CDataGridViewComboBoxColumn.cs" />
+    <Compile Include="CDataGridViewComboBoxCell.cs" />
+    <Compile Include="ComboBoxBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CDataGridViewComboBoxEditControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SqlConnectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RichTextEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormTextInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormListSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFolderBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowsApplication.cs" />
+    <Compile Include="TextBoxBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextBoxValidationType.cs" />
+    <Compile Include="TextBoxValidationErrorType.cs" />
+    <Compile Include="FormOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TreeNodeBase.cs" />
+    <Compile Include="FormOptionsTreeNode.cs" />
+    <Compile Include="IOptionsNode.cs" />
+    <Compile Include="IOptionsTree.cs" />
+    <Compile Include="IOptionsProperty.cs" />
+    <Compile Include="IOptionsEditControl.cs" />
+    <Compile Include="FormOptionsPropertySpecialType.cs" />
+    <Compile Include="ConfigurationOptionsNode.cs" />
+    <Compile Include="ConfigurationOptionsTree.cs" />
+    <Compile Include="ConfigurationOptionsProperty.cs" />
+    <Compile Include="RichTextBoxBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormScriptingHostConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptingHostConfiguration.cs" />
+    <Compile Include="ScriptExecutionLocation.cs" />
+    <Compile Include="ComboBoxItem.cs" />
+    <Compile Include="FormListSelectItem.cs" />
+    <Compile Include="CollapsibleGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TreeViewBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TreeViewNodeCollection.cs" />
+    <Compile Include="DrawTreeNodeEventHandler.cs" />
+    <Compile Include="DrawNodeEventArgs.cs" />
+    <Compile Include="TreeNodeTextComparer.cs" />
+    <Compile Include="FormLoggingDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SendMessageHelper.cs" />
+    <Compile Include="ProgressDialogStyle.cs" />
+    <Compile Include="ProgressDialogLineType.cs" />
+    <Compile Include="ProgressBarUpdateArgs.cs" />
+    <Compile Include="OnProgressBarUpdate.cs" />
+    <Compile Include="ProgressDialogCom.cs" />
+    <Compile Include="IProgressDialog.cs" />
+    <Compile Include="ProgressDialog.cs" />
+    <Compile Include="ListViewSorter.cs" />
+    <Compile Include="Commands\CommandToolItem.cs" />
+    <Compile Include="Commands\CommandFileNewBase.cs" />
+    <Compile Include="Commands\CommandFileOpenBase.cs" />
+    <Compile Include="Commands\CommandFileSaveBase.cs" />
+    <Compile Include="Commands\CommandFilePrintBase.cs" />
+    <Compile Include="Commands\CommandFilePrintPreviewBase.cs" />
+    <Compile Include="Commands\CommandFileExitBase.cs" />
+    <Compile Include="Commands\CommandEditUndoBase.cs" />
+    <Compile Include="Commands\CommandEditRedoBase.cs" />
+    <Compile Include="Commands\CommandEditCopyBase.cs" />
+    <Compile Include="Commands\CommandEditCutBase.cs" />
+    <Compile Include="Commands\CommandEditPasteBase.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormBase.resx" />
+    <EmbeddedResource Include="FormDataTableFilter.resx" />
+    <EmbeddedResource Include="FormError.resx" />
+    <EmbeddedResource Include="FormFeedback.resx" />
+    <EmbeddedResource Include="FormFolderBrowser.resx" />
+    <EmbeddedResource Include="FormListSelect.resx" />
+    <EmbeddedResource Include="FormLoggingDevice.resx" />
+    <EmbeddedResource Include="FormOptions.resx" />
+    <EmbeddedResource Include="FormScriptingHostConfiguration.resx" />
+    <EmbeddedResource Include="FormTextInput.resx" />
+    <EmbeddedResource Include="RichTextEditor.resx" />
+    <EmbeddedResource Include="SqlConnectionDialog.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FR.Base\FR.Base.csproj">
+      <Project>{edc4bf2b-81c1-4ec3-af46-461c51bb212b}</Project>
+      <Name>FR.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FR.Data\FR.Data.csproj">
+      <Project>{08d60cd5-2354-43ae-98e8-243509870899}</Project>
+      <Name>FR.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FR.Drawing\FR.Drawing.csproj">
+      <Project>{dec3aaf2-0097-421f-bcd3-7b00829dbd87}</Project>
+      <Name>FR.Drawing</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

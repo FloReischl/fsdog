@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Drawing.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DEC3AAF2-0097-421F-BCD3-7B00829DBD87}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>FR.Drawing</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>FR.Drawing</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonImageType.cs" />
+    <Compile Include="CommonImages.cs" />
+    <Compile Include="ImageHelper.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Accept.png" />
+    <EmbeddedResource Include="Images\Add.png" />
+    <EmbeddedResource Include="Images\Cancel.png" />
+    <EmbeddedResource Include="Images\Copy.png" />
+    <EmbeddedResource Include="Images\Cut.png" />
+    <EmbeddedResource Include="Images\Database.png" />
+    <EmbeddedResource Include="Images\DatabaseAdd.png" />
+    <EmbeddedResource Include="Images\Delete.png" />
+    <EmbeddedResource Include="Images\Directory.png" />
+    <EmbeddedResource Include="Images\DirectoryOpen.png" />
+    <EmbeddedResource Include="Images\Email.png" />
+    <EmbeddedResource Include="Images\Exclamation.png" />
+    <EmbeddedResource Include="Images\Exit.png" />
+    <EmbeddedResource Include="Images\Find.png" />
+    <EmbeddedResource Include="Images\Help.png" />
+    <EmbeddedResource Include="Images\Home.png" />
+    <EmbeddedResource Include="Images\Information.png" />
+    <EmbeddedResource Include="Images\Page.png" />
+    <EmbeddedResource Include="Images\PageFind.png" />
+    <EmbeddedResource Include="Images\PageNew.png" />
+    <EmbeddedResource Include="Images\Paste.png" />
+    <EmbeddedResource Include="Images\Print.png" />
+    <EmbeddedResource Include="Images\PrintPreview.png" />
+    <EmbeddedResource Include="Images\Redo.png" />
+    <EmbeddedResource Include="Images\Refresh.png" />
+    <EmbeddedResource Include="Images\Save.png" />
+    <EmbeddedResource Include="Images\SaveAll.png" />
+    <EmbeddedResource Include="Images\Undo.png" />
+    <EmbeddedResource Include="Images\Unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FR.Base\FR.Base.csproj">
+      <Project>{edc4bf2b-81c1-4ec3-af46-461c51bb212b}</Project>
+      <Name>FR.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
