@@ -21,7 +21,7 @@ namespace FR.IO {
         private const int SW_SHOWMAXIMIZED = 3;
         private const int SW_SHOWMINNOACTIVE = 7;
         private IShellLinkA _link;
-        private string _path;
+        private readonly string _path;
 
         public ShellShortcut(string linkPath) {
             this._path = linkPath;
@@ -80,8 +80,7 @@ namespace FR.IO {
         public int IconIndex {
             get {
                 StringBuilder pszIconPath = new StringBuilder(260);
-                int piIcon;
-                this._link.GetIconLocation(pszIconPath, pszIconPath.Capacity, out piIcon);
+                this._link.GetIconLocation(pszIconPath, pszIconPath.Capacity, out int piIcon);
                 return piIcon;
             }
             set => this._link.SetIconLocation(this.IconPath, value);
@@ -90,8 +89,7 @@ namespace FR.IO {
         public Icon Icon {
             get {
                 StringBuilder pszIconPath = new StringBuilder(260);
-                int piIcon;
-                this._link.GetIconLocation(pszIconPath, pszIconPath.Capacity, out piIcon);
+                this._link.GetIconLocation(pszIconPath, pszIconPath.Capacity, out int piIcon);
                 IntPtr icon1 = ShellApi.ExtractIcon(Marshal.GetHINSTANCE(this.GetType().Module), pszIconPath.ToString(), piIcon);
                 if (icon1 == IntPtr.Zero)
                     return (Icon)null;
@@ -105,8 +103,7 @@ namespace FR.IO {
 
         public ProcessWindowStyle WindowStyle {
             get {
-                int piShowCmd;
-                this._link.GetShowCmd(out piShowCmd);
+                this._link.GetShowCmd(out int piShowCmd);
                 switch (piShowCmd) {
                     case 2:
                     case 7:
@@ -138,8 +135,7 @@ namespace FR.IO {
 
         public Keys Hotkey {
             get {
-                short pwHotkey;
-                this._link.GetHotkey(out pwHotkey);
+                this._link.GetHotkey(out short pwHotkey);
                 return (Keys)(((int)pwHotkey & 65280) << 8 | (int)pwHotkey & (int)byte.MaxValue);
             }
             set {

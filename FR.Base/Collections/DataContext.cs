@@ -12,7 +12,7 @@ namespace FR.Collections
 {
   public class DataContext : IDictionary, ICollection, IEnumerable
   {
-    private Hashtable _ht;
+    private readonly Hashtable _ht;
 
     public DataContext() => this._ht = new Hashtable();
 

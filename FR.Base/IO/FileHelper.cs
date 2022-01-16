@@ -114,9 +114,8 @@ namespace FR.IO {
         }
 
         public static string GetDisplayName(string fileName) {
-            FileHelper.SHGFI flags = FileHelper.SHGFI.SHGFI_DISPLAYNAME;
-            FileHelper.SHFILEINFO info;
-            return FileHelper.GetSHFILEINFO(fileName, flags, out info) != 0 ? info.szDisplayName : (string)null;
+            SHGFI flags = SHGFI.SHGFI_DISPLAYNAME;
+            return FileHelper.GetSHFILEINFO(fileName, flags, out SHFILEINFO info) != 0 ? info.szDisplayName : (string)null;
         }
 
         public static DragDropEffects GetFilesFromClipboard(ref List<ShellItem> items) {
@@ -171,9 +170,8 @@ namespace FR.IO {
         }
 
         public static string GetTypeName(string fileName) {
-            FileHelper.SHGFI flags = FileHelper.SHGFI.SHGFI_TYPENAME;
-            FileHelper.SHFILEINFO info;
-            return FileHelper.GetSHFILEINFO(fileName, flags, out info) != 0 ? info.szTypeName : (string)null;
+            SHGFI flags = SHGFI.SHGFI_TYPENAME;
+            return FileHelper.GetSHFILEINFO(fileName, flags, out SHFILEINFO info) != 0 ? info.szTypeName : (string)null;
         }
 
         public static void MoveTo(IntPtr handle, string[] files, string destination, bool silent) {

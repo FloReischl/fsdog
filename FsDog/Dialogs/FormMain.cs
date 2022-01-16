@@ -37,7 +37,7 @@ namespace FsDog.Dialogs {
         private Point _location;
         private Size _size;
         private static readonly HashSet<Type> MyCommands = new HashSet<Type> {
-                typeof(CmdFileNewFile), typeof(CmdFileNewFile), typeof(CmdFileNewDirectory), typeof(CmdFileRenameMulti), typeof(CmdFileOpen), typeof(CmdFileOpenWith), typeof(CmdFileRunAs), typeof(CmdFileProperties), typeof(CmdFileDosShell), typeof(CmdFilePowerShell), typeof(CommandFileExitBase), typeof(CommandEditCutBase), typeof(CommandEditCopyBase), typeof(CommandEditPasteBase), typeof(CmdEditCopyToOtherView), typeof(CmdEditMoveToOtherView), typeof(CmdEditCopyFileNames), typeof(CmdEditDelete), typeof(CmdEditSelectAll), typeof(CmdEditInvertSelection), typeof(CmdViewPreview), typeof(CmdViewGotoFavorite), typeof(CmdViewDirectorySizes), typeof(CmdViewRefresh), typeof(CmdFavorite), typeof(CmdFavoritesEdit), typeof(CmdCommandsEdit), typeof(CmdApplicationExecute), typeof(CmdScriptExecute), typeof(CmdScriptConfigureHosts), typeof(CmdToolsClearImageCache), typeof(CmdToolsOpenConfigFile), typeof(CmdToolsOptions), typeof(CmdHelpAbout)
+                typeof(CmdFileNewFile), typeof(CmdFileNewFile), typeof(CmdFileNewDirectory), typeof(CmdFileRenameMulti), typeof(CmdFileOpen), typeof(CmdFileOpenWith), typeof(CmdFileRunAs), typeof(CmdFileProperties), typeof(CmdFileDosShell), typeof(CmdFilePowerShell), typeof(CommandFileExitBase), typeof(CommandEditCutBase), typeof(CommandEditCopyBase), typeof(CommandEditPasteBase), typeof(CmdEditCopyToOtherView), typeof(CmdEditMoveToOtherView), typeof(CmdEditCopyFileNames), typeof(CmdEditDelete), typeof(CmdEditSelectAll), typeof(CmdEditInvertSelection), typeof(CmdViewFind), typeof(CmdViewPreview), typeof(CmdViewGotoFavorite), typeof(CmdViewDirectorySizes), typeof(CmdViewRefresh), typeof(CmdFavorite), typeof(CmdFavoritesEdit), typeof(CmdCommandsEdit), typeof(CmdApplicationExecute), typeof(CmdScriptExecute), typeof(CmdScriptConfigureHosts), typeof(CmdToolsClearImageCache), typeof(CmdToolsOpenConfigFile), typeof(CmdToolsOptions), typeof(CmdHelpAbout)
             };
 
 
@@ -76,6 +76,7 @@ namespace FsDog.Dialogs {
         }
 
         public PreviewContainer CurrentPreview { get; private set; }
+        public DirectoryInfo CurrentDirectory { get => _currentDetailView?.ParentDirectory; }
 
         public void GotoNextControl(Control ctrl, bool forward) {
             if (forward) {

@@ -93,12 +93,13 @@ namespace FsDog.Dialogs {
             editParent.Items.Add(new CommandToolItem("&Invert Selection", typeof(CmdEditInvertSelection), (Image)null, Keys.A | Keys.Shift | Keys.Control) {
                 ShowNeverToolStrip = true
             });
-            editParent.Items.Add(new CommandToolItem("&Find", typeof(CmdEditFind), CommonImages.GetImage(CommonImageType.Find), Keys.F3 | Keys.Control) {
-                ShowAlwaysToolStrip = true
-            });
 
             var viewParent = new CommandToolItem("&View");
             _menu.Items.Add(viewParent);
+            viewParent.Items.Add(new CommandToolItem("&Find", typeof(CmdViewFind), CommonImages.GetImage(CommonImageType.Find), Keys.F | Keys.Control) {
+                ShowAlwaysToolStrip = true
+            });
+            viewParent.Items.Add(new CommandToolItem("-"));
             var commandToolItem8 = new CommandToolItem("Preview", typeof(CmdViewPreview), (Image)Resources.Preview, Keys.F11);
             viewParent.Items.Add(commandToolItem8);
             viewParent.Items.Add(new CommandToolItem("-"));

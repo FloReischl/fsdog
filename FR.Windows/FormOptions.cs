@@ -16,7 +16,7 @@ using System.Windows.Forms;
 namespace FR.Windows.Forms {
     public class FormOptions : FormBase {
         public const int ControlMaxWidth = 2147483647;
-        private List<IOptionsEditControl> _optionsEditControls;
+        private readonly List<IOptionsEditControl> _optionsEditControls;
         private IOptionsTree _optionsTree;
         private double _treeProportion;
         private IContainer components;
@@ -53,9 +53,10 @@ namespace FR.Windows.Forms {
           EventHandler buttonClick) {
             Control controlWithButton = new Control();
             Button button = new Button();
-            DataContext dataContext = new DataContext();
-            dataContext.Add((object)"EditControl", (object)editControl);
-            dataContext.Add((object)"Property", (object)property);
+            DataContext dataContext = new DataContext {
+                { "EditControl", editControl },
+                { "Property", property }
+            };
             editControl.Location = new Point(0, 0);
             editControl.Tag = (object)dataContext;
             button.Location = new Point(editControl.Width + editControl.Margin.Right, 0);
@@ -95,7 +96,7 @@ namespace FR.Windows.Forms {
                 return;
             IOptionsNode optionsNode = node.OptionsNode;
             float val1_1 = 0.0f;
-            List<FormOptions.OptionItemSet> optionItemSetList = new List<FormOptions.OptionItemSet>();
+            List<OptionItemSet> optionItemSetList = new List<OptionItemSet>();
             this.pnlMain.Controls.Clear();
             if (optionsNode.EditControl != null) {
                 if (optionsNode.EditControl is IOptionsEditControl editControl) {
@@ -108,15 +109,17 @@ namespace FR.Windows.Forms {
             else {
                 Graphics graphics = this.CreateGraphics();
                 foreach (IOptionsProperty property in optionsNode.Properties) {
-                    FormOptions.OptionItemSet optionItemSet = new FormOptions.OptionItemSet();
-                    optionItemSet.Property = property;
+                    OptionItemSet optionItemSet = new OptionItemSet {
+                        Property = property
+                    };
                     optionItemSetList.Add(optionItemSet);
                     SizeF sizeF1 = graphics.MeasureString(property.Text, this.Font);
                     val1_1 = Math.Max(val1_1, sizeF1.Width);
-                    Label label = new Label();
-                    label.Text = property.Text;
-                    label.AutoSize = true;
-                    label.TextAlign = ContentAlignment.MiddleLeft;
+                    Label label = new Label {
+                        Text = property.Text,
+                        AutoSize = true,
+                        TextAlign = ContentAlignment.MiddleLeft
+                    };
                     optionItemSet.Label = label;
                     if (property.EditControl != null) {
                         Control editControl = property.EditControl;
@@ -142,17 +145,19 @@ namespace FR.Windows.Forms {
                         optionItemSet.EditControl = controlWithButton;
                     }
                     else if (property.SpecialType == FormOptionsPropertySpecialType.Directory) {
-                        TextBox editControl = new TextBox();
-                        editControl.Text = property.Value == null ? "" : property.Value.ToString();
-                        editControl.ReadOnly = true;
+                        TextBox editControl = new TextBox {
+                            Text = property.Value == null ? "" : property.Value.ToString(),
+                            ReadOnly = true
+                        };
                         Control controlWithButton = this.GetControlWithButton(property, (Control)editControl, new EventHandler(this.BtnDirectory_Click));
                         controlWithButton.Width = int.MaxValue;
                         optionItemSet.EditControl = controlWithButton;
                     }
                     else if (property.SpecialType == FormOptionsPropertySpecialType.File) {
-                        TextBox editControl = new TextBox();
-                        editControl.Text = property.Value == null ? "" : property.Value.ToString();
-                        editControl.ReadOnly = true;
+                        TextBox editControl = new TextBox {
+                            Text = property.Value == null ? "" : property.Value.ToString(),
+                            ReadOnly = true
+                        };
                         Control controlWithButton = this.GetControlWithButton(property, (Control)editControl, new EventHandler(this.BtnFile_Click));
                         controlWithButton.Width = int.MaxValue;
                         optionItemSet.EditControl = controlWithButton;
@@ -175,9 +180,10 @@ namespace FR.Windows.Forms {
                             obj2 = fontConverter.ConvertFrom(obj1);
                         }
                         Font font = obj2 as Font;
-                        TextBox editControl = new TextBox();
-                        editControl.Text = fontConverter.ConvertToString((object)font);
-                        editControl.ReadOnly = true;
+                        TextBox editControl = new TextBox {
+                            Text = fontConverter.ConvertToString((object)font),
+                            ReadOnly = true
+                        };
                         Control controlWithButton = this.GetControlWithButton(property, (Control)editControl, new EventHandler(this.BtnFont_Click));
                         DataContext tag = (DataContext)controlWithButton.Tag;
                         tag.Add((object)"Type", (object)type);
@@ -187,10 +193,11 @@ namespace FR.Windows.Forms {
                     }
                     else if (property.SpecialType != FormOptionsPropertySpecialType.SqlConnectionString) {
                         if (property.SpecialType == FormOptionsPropertySpecialType.CheckBox) {
-                            CheckBox checkBox = new CheckBox();
-                            checkBox.Width = 200;
-                            checkBox.Checked = property.Value is bool ? (bool)property.Value : bool.Parse(property.Value.ToString());
-                            optionItemSet.EditControl = (Control)checkBox;
+                            CheckBox checkBox = new CheckBox {
+                                Width = 200,
+                                Checked = property.Value is bool ? (bool)property.Value : bool.Parse(property.Value.ToString())
+                            };
+                            optionItemSet.EditControl = checkBox;
                             checkBox.Click += new EventHandler(this.CheckBox_Click);
                         }
                         else if (property.AllowedValues != null) {
@@ -209,20 +216,23 @@ namespace FR.Windows.Forms {
                             optionItemSet.EditControl = (Control)comboBox;
                         }
                         else if (BaseHelper.InList((object)property.PropertyType, (object)typeof(byte), (object)typeof(sbyte), (object)typeof(short), (object)typeof(ushort), (object)typeof(int), (object)typeof(uint), (object)typeof(long), (object)typeof(ulong), (object)typeof(float), (object)typeof(double), (object)typeof(Decimal))) {
-                            NumericUpDown numericUpDown = new NumericUpDown();
-                            numericUpDown.Value = (Decimal)Convert.ChangeType(property.Value, typeof(Decimal));
+                            NumericUpDown numericUpDown = new NumericUpDown {
+                                Value = (Decimal)Convert.ChangeType(property.Value, typeof(Decimal))
+                            };
                             optionItemSet.EditControl = (Control)numericUpDown;
                             numericUpDown.Validating += new CancelEventHandler(this.NumericUpDown_Validating);
                         }
                         else if (property.PropertyType == typeof(DateTime)) {
-                            DateTimePicker dateTimePicker = new DateTimePicker();
-                            dateTimePicker.Value = (DateTime)property.Value;
-                            optionItemSet.EditControl = (Control)dateTimePicker;
+                            DateTimePicker dateTimePicker = new DateTimePicker {
+                                Value = (DateTime)property.Value
+                            };
+                            optionItemSet.EditControl = dateTimePicker;
                             dateTimePicker.Validating += new CancelEventHandler(this.DateTimePicker_Validating);
                         }
                         else {
-                            TextBox textBox = new TextBox();
-                            textBox.Text = property.Value == null ? "" : property.Value.ToString();
+                            TextBox textBox = new TextBox {
+                                Text = property.Value == null ? "" : property.Value.ToString()
+                            };
                             optionItemSet.EditControl = (Control)textBox;
                             textBox.Validating += new CancelEventHandler(this.TextBox_Validating);
                         }
@@ -319,8 +329,9 @@ namespace FR.Windows.Forms {
             FontConverter fontConverter = new FontConverter();
             System.Type asType = tag.GetAsType((object)"Type");
             Font font = (Font)tag[(object)"Font"];
-            FontDialog fontDialog = new FontDialog();
-            fontDialog.Font = font;
+            FontDialog fontDialog = new FontDialog {
+                Font = font
+            };
             if (fontDialog.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
             optionsProperty.Value = fontConverter.ConvertTo((object)fontDialog.Font, asType);

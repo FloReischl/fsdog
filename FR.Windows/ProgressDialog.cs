@@ -210,8 +210,8 @@ namespace FR.Windows.Forms {
                 flags |= 8U;
             if (this.NoProgressBar)
                 flags |= 16U;
-            if (this.Normal)
-                flags = flags;
+            //if (this.Normal)
+            //    flags = flags;??????
             if (this.NoTime)
                 flags |= 4U;
             return flags;

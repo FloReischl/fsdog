@@ -13,7 +13,7 @@ using System.IO;
 
 namespace FsDog.Detail {
     internal class DetailTable : DataTable {
-        private FsApp _app;
+        private readonly FsApp _app;
 
         public DetailTable() {
             this._app = FsApp.Instance;
@@ -27,6 +27,7 @@ namespace FsDog.Detail {
             this.Columns.Add(new DataColumn("DateCreated", typeof(DateTime)));
             this.Columns.Add(new DataColumn("Attributes", typeof(string)));
             this.Columns.Add(new DataColumn("FileSystemInfo", typeof(FileSystemInfo)));
+            this.Columns.Add(new DataColumn("ParentPath", typeof(string)));
         }
 
         public DetailItem Add(FileInfo fi) {

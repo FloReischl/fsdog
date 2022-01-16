@@ -21,6 +21,7 @@ namespace FsDog.Detail {
                 if (e.KeyCode == Keys.Down && e.Shift && e.Control)
                     this.OnKeyDown(new KeyEventArgs(Keys.Down | Keys.Shift));
                 else if (e.KeyCode == Keys.Down && e.Shift) {
+                    // (un)select down
                     DataGridViewRow currentRow = this.CurrentRow;
                     if (currentRow.Index == this.RowCount - 1)
                         return;
@@ -36,6 +37,7 @@ namespace FsDog.Detail {
                     }
                 }
                 else if (e.KeyCode == Keys.Down && e.Control) {
+                    // 
                     if (this.CurrentCell.RowIndex >= this.RowCount - 1)
                         return;
                     int rowIndex = this.CurrentCell.RowIndex + 1;
@@ -43,6 +45,7 @@ namespace FsDog.Detail {
                     this.ScrollToRow(rowIndex, false);
                 }
                 else if (e.KeyCode == Keys.Down) {
+                    // scroll down
                     DataGridViewRow lastSelectedRow = this.GetLastSelectedRow(this.CurrentRow);
                     bool flag = this.SelectedRows.Count != 1;
                     this.ClearSelection();

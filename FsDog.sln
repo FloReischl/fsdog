@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FsDogMain", "FsDogMain\FsDo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FsDog", "FsDog\FsDog.csproj", "{A7538451-1239-4353-991E-FEA62B543097}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FsDog.Tests", "FsDog.Tests\FsDog.Tests.csproj", "{BFAFF098-207D-4116-AADA-7B7C691591D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FR.Base.Tests", "FR.Base.Tests\FR.Base.Tests.csproj", "{89A59538-0600-471D-A4CA-2F1CE7DD062F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{A7538451-1239-4353-991E-FEA62B543097}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7538451-1239-4353-991E-FEA62B543097}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7538451-1239-4353-991E-FEA62B543097}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFAFF098-207D-4116-AADA-7B7C691591D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFAFF098-207D-4116-AADA-7B7C691591D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFAFF098-207D-4116-AADA-7B7C691591D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFAFF098-207D-4116-AADA-7B7C691591D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89A59538-0600-471D-A4CA-2F1CE7DD062F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89A59538-0600-471D-A4CA-2F1CE7DD062F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89A59538-0600-471D-A4CA-2F1CE7DD062F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89A59538-0600-471D-A4CA-2F1CE7DD062F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

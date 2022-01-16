@@ -4,6 +4,7 @@
 // MVID: 86A1142D-AA42-437E-9D7A-2AF6376C2EE2
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FsDog.exe
 
+using FR.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,6 +40,7 @@ namespace FsDog.Detail {
         public static PreviewType GetTypeForFile(string fileName) {
             if (Directory.Exists(fileName))
                 return PreviewType.Unknown;
+
             if (PreviewInfo._dictTxt == null) {
                 FsApp instance = FsApp.Instance;
                 PreviewInfo._dictTxt = new Dictionary<string, string>((IEqualityComparer<string>)StringComparer.CurrentCultureIgnoreCase);
@@ -49,8 +51,14 @@ namespace FsDog.Detail {
                         PreviewInfo._dictTxt.Add(key, key);
                 }
             }
+
             if (PreviewInfo._dictTxt.ContainsKey(Path.GetExtension(fileName)))
                 return PreviewType.Text;
+
+            if (TextFile.CouldBeTextFile(fileName)) {
+                return PreviewType.Text;
+            }
+
             if (PreviewInfo._dictImg == null) {
                 FsApp instance = FsApp.Instance;
                 PreviewInfo._dictImg = new Dictionary<string, string>((IEqualityComparer<string>)StringComparer.CurrentCultureIgnoreCase);
@@ -61,6 +69,7 @@ namespace FsDog.Detail {
                         PreviewInfo._dictImg.Add(key, key);
                 }
             }
+
             return PreviewInfo._dictImg.ContainsKey(Path.GetExtension(fileName)) ? PreviewType.Image : PreviewType.Unknown;
         }
 

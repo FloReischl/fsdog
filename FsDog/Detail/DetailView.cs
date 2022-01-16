@@ -264,18 +264,18 @@ namespace FsDog.Detail {
                     this._fsw.EnableRaisingEvents = true;
                 }
                 this._files.EndLoadData();
-                this.dgvFiles.AutoGenerateColumns = false;
+                //this.dgvFiles.AutoGenerateColumns = false;
                 this.dgvFiles.DataSource = (object)new DetailTableView(this._files, sortColumn, sortOrder);
-                this.dgvFiles.Columns.Clear();
-                foreach (DataColumn column in (InternalDataCollectionBase)this._files.Columns) {
-                    DataGridViewColumn gridColumn = GridColumnFactory.CreateGridColumn(column);
-                    if (gridColumn != null) {
-                        int num;
-                        if (this._columnWidths.TryGetValue(column.ColumnName, out num))
-                            gridColumn.Width = num;
-                        this.dgvFiles.Columns.Add(gridColumn);
-                    }
-                }
+                //this.dgvFiles.Columns.Clear();
+
+                //foreach (DataColumn column in (InternalDataCollectionBase)this._files.Columns) {
+                //    DataGridViewColumn gridColumn = GridColumnFactory.CreateGridColumn(column);
+                //    if (gridColumn != null) {
+                //        if (this._columnWidths.TryGetValue(column.ColumnName, out int num))
+                //            gridColumn.Width = num;
+                //        this.dgvFiles.Columns.Add(gridColumn);
+                //    }
+                //}
                 if (dictionary != null) {
                     this.dgvFiles.ClearSelection();
                     foreach (DataGridViewRow row in (IEnumerable)this.dgvFiles.Rows) {
@@ -345,6 +345,20 @@ namespace FsDog.Detail {
             this._columnWidths = new Dictionary<string, int>();
             this.BackColor = instance.Options.AppearanceFileView.ActiveBackgroundColor;
             this.dgvFiles.BackgroundColor = instance.Options.AppearanceFileView.ActiveBackgroundColor;
+
+            this.dgvFiles.AutoGenerateColumns = false;
+
+            this.dgvFiles.Columns.Clear();
+            void addGridColumn(string columnName, bool show) {
+                if (show) dgvFiles.Columns.Add(GridColumnFactory.CreateGridColumn(columnName));
+            }
+
+            var app = FsApp.Instance;
+            addGridColumn("Image", true);
+            addGridColumn("Name", true);
+            addGridColumn("Size", true);
+            addGridColumn("TypeName", true);
+            addGridColumn("DateModified", app.Options.DetailView.ShowModificationDateColumn);
         }
 
         protected void OnColumnWidthChanged(DataGridViewColumnEventArgs e) {
@@ -641,8 +655,7 @@ namespace FsDog.Detail {
         }
 
         private void dgvFiles_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e) {
-            int num;
-            if (this._columnWidths.TryGetValue(e.Column.Name, out num)) {
+            if (this._columnWidths.TryGetValue(e.Column.Name, out int num)) {
                 if (num == e.Column.Width)
                     return;
                 this._columnWidths.Remove(e.Column.Name);
@@ -689,7 +702,7 @@ namespace FsDog.Detail {
             formCopy.Sources = (IList<FileSystemInfo>)fileSystemInfoList;
             if (this._dragOverRow != null) {
                 DetailItem detailItem = this.GetDetailItem(this._dragOverRow);
-                formCopy.Destination = detailItem.DirectoryInfo == null ? this.ParentDirectory : detailItem.DirectoryInfo;
+                formCopy.Destination = detailItem.DirectoryInfo ?? this.ParentDirectory;
             }
             else
                 formCopy.Destination = this.ParentDirectory;

@@ -71,6 +71,7 @@
     <Compile Include="CDataGridViewComboBoxEditControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="SqlConnectionDialog.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -51,6 +51,7 @@
     <Compile Include="Collections\Generic\DataStore`1_Interfaces.cs" />
     <Compile Include="Collections\Generic\DataStore`1_PrimaryKeyEntry.cs" />
     <Compile Include="Collections\Generic\DataStore`1_IndexValue.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Microsoft\Win32\FileTypeAssociator.cs" />
     <Compile Include="Microsoft\Win32\FileTypeAssociatorException.cs" />
     <Compile Include="ConsoleHelper.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="CodeDom\Compiler\CSharpScriptCompiler.cs" />
     <Compile Include="CodeDom\Compiler\CSharpScriptCompilerException.cs" />
     <Compile Include="CodeDom\Compiler\CSharpScriptHost.cs" />
+    <Compile Include="IO\TextFile.cs" />
     <Compile Include="Threading\Schedular.cs" />
     <Compile Include="Threading\ScheduleOccurresEventArgs.cs" />
     <Compile Include="Threading\SchedularException.cs" />

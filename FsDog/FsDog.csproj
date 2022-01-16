@@ -8,7 +8,6 @@
     <OutputType>WinExe</OutputType>
     <AssemblyName>FsDog</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <ApplicationVersion>1.1.0.0</ApplicationVersion>
     <FileAlignment>512</FileAlignment>
     <RootNamespace>FsDog</RootNamespace>
     <FileUpgradeFlags>
@@ -17,6 +16,21 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.1.0.0</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -87,6 +101,13 @@
     </Compile>
     <Compile Include="Detail\DetailView.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Search\FormSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Search\FormSearch.Designer.cs">
+      <DependentUpon>FormSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Tree\TreeMain.cs">
       <SubType>Component</SubType>
@@ -160,7 +181,7 @@
     <Compile Include="Commands\CmdEditDelete.cs" />
     <Compile Include="Commands\CmdEditInvertSelection.cs" />
     <Compile Include="Commands\CmdEditSelectAll.cs" />
-    <Compile Include="Commands\CmdEditFind.cs" />
+    <Compile Include="Commands\CmdViewFind.cs" />
     <Compile Include="ShellContextMenu.cs" />
     <Compile Include="ShellContextMenuException.cs" />
     <Compile Include="HookEventArgs.cs" />
@@ -175,7 +196,7 @@
     <Compile Include="Detail\DetailTableView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DetailItem.cs" />
+    <Compile Include="Detail\DetailItem.cs" />
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="Properties\Resources.cs" />
     <Compile Include="AssemblyInfo.cs" />
@@ -196,6 +217,9 @@
     <EmbeddedResource Include="Detail\PreviewImage.resx" />
     <EmbeddedResource Include="Detail\PreviewText.resx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="Search\FormSearch.resx">
+      <DependentUpon>FormSearch.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="FsDog.ico" />
@@ -229,6 +253,18 @@
       <Project>{bcdae07a-03cc-4ff1-8a40-35b6b54ea615}</Project>
       <Name>FsDogMain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
