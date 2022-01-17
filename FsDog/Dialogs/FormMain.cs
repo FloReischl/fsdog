@@ -43,6 +43,10 @@ namespace FsDog.Dialogs {
 
         public FormMain() {
             InitializeComponent();
+
+            if (DesignMode) {
+                return;
+            }
             FormClosing += new FormClosingEventHandler(this.FormMain_FormClosing);
             Load += new EventHandler(this.FormMain_Load);
             Move += new EventHandler(this.FormMain_Move);
@@ -442,14 +446,19 @@ namespace FsDog.Dialogs {
             SizeConverter sizeConverter = new SizeConverter();
             PointConverter pointConverter = new PointConverter();
             _size = (Size)sizeConverter.ConvertFromString(this.ConfigurationRoot.GetSubProperty("Size", true).ToString(sizeConverter.ConvertToString((object)this.Size)));
+
             if (instance.Options.AppearanceMain.RememberSize)
                 Size = this._size;
+
             _location = (Point)pointConverter.ConvertFromString(this.ConfigurationRoot.GetSubProperty("Location", true).ToString(pointConverter.ConvertToString((object)this.Location)));
             if (instance.Options.AppearanceMain.RememberLocation)
                 Location = this._location;
-            if (!instance.Options.AppearanceMain.RememberWindowState)
-                return;
-            WindowState = (FormWindowState)Enum.Parse(typeof(FormWindowState), this.ConfigurationRoot.GetSubProperty("WindowState", true).ToString(this.WindowState.ToString()));
+
+            if (instance.Options.AppearanceMain.RememberWindowState)
+                WindowState = (FormWindowState)Enum.Parse(typeof(FormWindowState), this.ConfigurationRoot.GetSubProperty("WindowState", true).ToString(this.WindowState.ToString()));
+            
+            AppearanceProvider appearance = new AppearanceProvider();
+            appearance.ApplyToForm(this);
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e) {

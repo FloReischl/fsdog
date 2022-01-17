@@ -68,6 +68,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppearanceProvider.cs" />
     <Compile Include="Commands\CommandHelper.cs" />
     <Compile Include="Commands\CommandType.cs" />
     <Compile Include="Commands\CommandInfo.cs" />

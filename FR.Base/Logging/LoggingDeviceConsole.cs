@@ -28,7 +28,8 @@ namespace FR.Logging {
         public bool IsDisposed => this._isDisposed;
 
         public void Open(IConfigurationProperty deviceConfiguration) {
-            this.LogLevel = (LogLevel)deviceConfiguration.GetSubProperty("LogLevel", true).ToUInt32(7U);
+
+            this.LogLevel = LogLevel.Default; //(LogLevel)deviceConfiguration.GetSubProperty("LogLevel", true).ToUInt32(7U);
             this.StackTraceLevel = (LogLevel)deviceConfiguration.GetSubProperty("StackTrace", true).ToUInt32(1U);
         }
 

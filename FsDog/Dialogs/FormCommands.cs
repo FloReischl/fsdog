@@ -42,7 +42,11 @@ namespace FsDog.Dialogs {
 
             if ((add || update) && cboType.SelectedIndex == -1) {
                 show("No command type specified.");
+                return false;
             }
+
+            //var ctype = (CommandType)cboScriptType.SelectedItem;
+
             if ((add || update) && string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtFileName.Text)) {
                 show("No name was specified.");
             }

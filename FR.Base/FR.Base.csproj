@@ -52,6 +52,8 @@
     <Compile Include="Collections\Generic\DataStore`1_PrimaryKeyEntry.cs" />
     <Compile Include="Collections\Generic\DataStore`1_IndexValue.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Microsoft\Win32\FileTypeAssociator.cs" />
     <Compile Include="Microsoft\Win32\FileTypeAssociatorException.cs" />
     <Compile Include="ConsoleHelper.cs" />

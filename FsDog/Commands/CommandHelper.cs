@@ -54,20 +54,28 @@ namespace FsDog.Commands {
                     }
                 }
             }
+
+            AppearanceProvider appearance = new AppearanceProvider();
+
             if (CommandHelper._appsToolStrips == null)
                 CommandHelper._appsToolStrips = new List<ToolStrip>();
+
             if (commandToolItem1.Items.Count != 0 && instance.Options.MenusApplications.ShowCtrlToolStrip) {
                 ToolStrip toolStrip = commandToolItem1.CreateToolStrip();
                 CommandHelper.ApplyDisplaySettings(toolStrip, instance.Options.MenusApplications.ShowCtrlImage, instance.Options.MenusApplications.ShowCtrlName, instance.Options.MenusApplications.ShowCtrlShortcut);
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Ctrl"));
+                appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._appsToolStrips.Add(toolStrip);
             }
+
             if (commandToolItem2.Items.Count != 0 && instance.Options.MenusApplications.ShowShiftToolStrip) {
                 ToolStrip toolStrip = commandToolItem2.CreateToolStrip();
                 CommandHelper.ApplyDisplaySettings(toolStrip, instance.Options.MenusApplications.ShowShiftImage, instance.Options.MenusApplications.ShowShiftName, instance.Options.MenusApplications.ShowShiftShortcut);
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Shift"));
+                appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._appsToolStrips.Add(toolStrip);
             }
+
             return (IList<ToolStrip>)CommandHelper._appsToolStrips;
         }
 
@@ -128,20 +136,27 @@ namespace FsDog.Commands {
                     }
                 }
             }
+
+            AppearanceProvider appearance = new AppearanceProvider();
+
             if (CommandHelper._scriptsToolStrips == null)
                 CommandHelper._scriptsToolStrips = new List<ToolStrip>();
             if (commandToolItem1.Items.Count != 0 && instance.Options.MenusScripts.ShowCtrlToolStrip) {
                 ToolStrip toolStrip = commandToolItem1.CreateToolStrip();
                 CommandHelper.ApplyDisplaySettings(toolStrip, instance.Options.MenusScripts.ShowCtrlImage, instance.Options.MenusScripts.ShowCtrlName, instance.Options.MenusScripts.ShowCtrlShortcut);
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Ctrl"));
+                appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._scriptsToolStrips.Add(toolStrip);
             }
+
             if (commandToolItem2.Items.Count != 0 && instance.Options.MenusScripts.ShowShiftToolStrip) {
                 ToolStrip toolStrip = commandToolItem2.CreateToolStrip();
                 CommandHelper.ApplyDisplaySettings(toolStrip, instance.Options.MenusScripts.ShowShiftImage, instance.Options.MenusScripts.ShowShiftName, instance.Options.MenusScripts.ShowShiftShortcut);
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Shift"));
+                appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._scriptsToolStrips.Add(toolStrip);
             }
+
             return (IList<ToolStrip>)CommandHelper._scriptsToolStrips;
         }
 

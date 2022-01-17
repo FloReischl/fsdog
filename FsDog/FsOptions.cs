@@ -209,9 +209,9 @@ namespace FsDog {
                 this.Font = Control.DefaultFont; //(Font) fontConverter.ConvertFromString(this.ConfigurationRoot.GetSubProperty(nameof (Font), true).ToString(fontConverter.ConvertToString((object) Control.DefaultFont)));
             }
 
-            public Color ActiveForeColor { get; private set; }
+            public Color ActiveForeColor { get; set; }
 
-            public Color ActiveBackgroundColor { get; private set; }
+            public Color ActiveBackgroundColor { get; set; }
 
             public Color InactiveForeColor { get; private set; }
 

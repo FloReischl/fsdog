@@ -8,6 +8,7 @@ using FR;
 using FR.Configuration;
 using FR.Drawing;
 using FR.IO;
+using FR.Logging;
 using FR.Windows.Forms;
 using FsDog.Commands;
 using FsDog.Dialogs;
@@ -28,8 +29,6 @@ namespace FsDog {
 
         [STAThread]
         private static void Main() {
-            SynchronizationContext.SetSynchronizationContext(
-                new WindowsFormsSynchronizationContext());
             FsApp fsApp = new FsApp();
             fsApp.Start(typeof(FormMain));
             fsApp.ConfigurationSource.Save();
@@ -49,6 +48,8 @@ namespace FsDog {
         public string DefaultDirectoryName => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
         public void ClearImageCache() => this._fileImages.Clear();
+
+        public ILogger CreateLogger() => new Logger(Logger);
 
         public override void Dispose() {
             ConfigurationSource.Save();

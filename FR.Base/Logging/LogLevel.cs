@@ -10,7 +10,7 @@ namespace FR.Logging {
         Exception = 1,
         Error = 2,
         Warning = 4,
-        Default = 7,
+        Default = Exception | Error | Info | Warning,
         Info = 16, // 0x00000010
         Debug = 32, // 0x00000020
         Trace = 64, // 0x00000040

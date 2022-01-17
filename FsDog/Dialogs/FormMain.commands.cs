@@ -154,6 +154,8 @@ namespace FsDog.Dialogs {
             _menu.Items.Remove(scriptsParent);
             _menu.Items.Remove(favoritesParent);
             ToolStrip toolStrip = this._menu.CreateToolStrip();
+            AppearanceProvider appearance = new AppearanceProvider();
+            appearance.ApplyToToolStrip(toolStrip);
             Point location = new Point(toolStrip.Location.X, toolStrip.Location.Y);
             if (subProperty.ExistsSubProperty(toolStrip.Name))
                 location = (Point)pointConverter.ConvertFrom((object)subProperty[toolStrip.Name]["Location"].ToString(pointConverter.ConvertToString((object)location)));
