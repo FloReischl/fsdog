@@ -22,7 +22,7 @@ namespace FsDog.Commands {
             this.ScriptingHost = other.ScriptingHost;
         }
 
-        public Keys Key { get; set; }
+        public Keys? Key { get; set; }
 
         public string Name { get; set; }
 
@@ -34,7 +34,7 @@ namespace FsDog.Commands {
 
         public string ScriptingHost { get; set; }
         
-        public string GetShortcutText() => this.Key.ToString().Replace("|", "+").Replace(",", " +");
+        public string GetShortcutText() => this.Key?.ToString().Replace("|", "+").Replace(",", " +");
 
         public Image GetImage() => FsApp.Instance.GetFsiImage((FileSystemInfo)new FileInfo(this.Command));
     }

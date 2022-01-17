@@ -38,14 +38,14 @@ namespace FsDog.Dialogs {
             });
             var commandToolItem2 = new CommandToolItem("Properties", typeof(CmdFileProperties), (Image)Resources.Properties, Keys.Return | Keys.Alt);
             fileParent.Items.Add(commandToolItem2);
-            fileParent.Items.Add(new CommandToolItem("-"));
-            var commandToolItem3 = new CommandToolItem("Open DOS Shell", typeof(CmdFileDosShell), (Image)Resources.DosShell, Keys.D | Keys.Control);
-            fileParent.Items.Add(commandToolItem3);
-            string str = (string)Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell", "Path", (object)null);
-            if (!string.IsNullOrEmpty(str))
-                fileParent.Items.Add(new CommandToolItem("Open PowerShell", typeof(CmdFilePowerShell), (Image)Resources.PowerShell, Keys.D | Keys.Shift | Keys.Control) {
-                    CommandContext = { { "PowerShell", str } }
-                });
+            //fileParent.Items.Add(new CommandToolItem("-"));
+            //var commandToolItem3 = new CommandToolItem("Open DOS Shell", typeof(CmdFileDosShell), (Image)Resources.DosShell, Keys.D | Keys.Control);
+            //fileParent.Items.Add(commandToolItem3);
+            //string str = (string)Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell", "Path", (object)null);
+            //if (!string.IsNullOrEmpty(str))
+            //    fileParent.Items.Add(new CommandToolItem("Open PowerShell", typeof(CmdFilePowerShell), (Image)Resources.PowerShell, Keys.D | Keys.Shift | Keys.Control) {
+            //        CommandContext = { { "PowerShell", str } }
+            //    });
             fileParent.Items.Add(new CommandToolItem("-"));
             var fileExit = CommandToolItem.CreateFileExit((System.Type)null);
             fileParent.Items.Add(fileExit);
@@ -113,8 +113,10 @@ namespace FsDog.Dialogs {
             _menu.Items.Add(favoritesParent);
             favoritesParent.Items.Insert(0, new CommandToolItem("&Go to Favorite", typeof(CmdViewGotoFavorite), (Image)Resources.Favorites, Keys.F4));
             favoritesParent.Items.Insert(1, new CommandToolItem("-"));
+
             var applicationsParent = CommandHelper.GetApplicationsToolItem();
             _menu.Items.Add(applicationsParent);
+
             var scriptsParent = CommandHelper.GetScriptsToolItem();
             _menu.Items.Add(scriptsParent);
 

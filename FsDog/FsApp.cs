@@ -28,6 +28,8 @@ namespace FsDog {
 
         [STAThread]
         private static void Main() {
+            SynchronizationContext.SetSynchronizationContext(
+                new WindowsFormsSynchronizationContext());
             FsApp fsApp = new FsApp();
             fsApp.Start(typeof(FormMain));
             fsApp.ConfigurationSource.Save();

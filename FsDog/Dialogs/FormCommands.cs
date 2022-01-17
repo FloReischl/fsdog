@@ -49,9 +49,9 @@ namespace FsDog.Dialogs {
             else if ((add || update) && string.IsNullOrEmpty(txtFileName.Text) && !string.IsNullOrEmpty(txtName.Text)) {
                 show("No command was specified.");
             }
-            else if ((add || update) && string.IsNullOrEmpty(txtKeys.Text)) {
-                show("No shortcut specified.");
-            }
+            //else if ((add || update) && string.IsNullOrEmpty(txtKeys.Text)) {
+            //    show("No shortcut specified.");
+            //}
             else if ((add || update) && cboType.SelectedText.Equals(CommandType.Script.ToString()) && cboScriptType.SelectedIndex == -1) {
                 show("No scripting host was specified.");
             }
@@ -84,8 +84,12 @@ namespace FsDog.Dialogs {
                 cmd.ScriptingHost = ((ScriptingHostConfiguration)selectedItem.Value).Name;
             }
 
-            KeysConverter keysConverter = new KeysConverter();
-            cmd.Key = (Keys)keysConverter.ConvertFromString(txtKeys.Text);
+            string keys = txtKeys.Text;
+            if (!string.IsNullOrEmpty(keys)) {
+                KeysConverter keysConverter = new KeysConverter();
+                cmd.Key = (Keys)keysConverter.ConvertFromString(keys);
+            }
+
             return cmd;
         }
 

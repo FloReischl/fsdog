@@ -51,7 +51,7 @@ namespace FR {
                 return this._configurationSource;
             }
             set {
-                this.resetFallbackLogger();
+                this.ResetFallbackLogger();
                 this._configurationSource = value;
             }
         }
@@ -84,7 +84,7 @@ namespace FR {
             }
             [DebuggerNonUserCode]
             set {
-                this.resetFallbackLogger();
+                this.ResetFallbackLogger();
                 base.Logger = value;
             }
         }
@@ -128,7 +128,7 @@ namespace FR {
 
         public virtual void Dispose() {
             if (this.Disposing != null)
-                this.Disposing((object)this, EventArgs.Empty);
+                Disposing((object)this, EventArgs.Empty);
             if (this.Logger == null || this.Logger.IsClosed)
                 return;
             this.Logger.Flush();
@@ -217,7 +217,7 @@ namespace FR {
             command.Receiver.FinishCommand(command);
         }
 
-        private void resetFallbackLogger() {
+        private void ResetFallbackLogger() {
             if (!this._fallbackLoggerCreated)
                 return;
             if (this._fallbackLoggingConfigurationSource != null) {

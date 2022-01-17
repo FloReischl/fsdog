@@ -14,6 +14,7 @@ using System.Windows.Forms;
 
 namespace FsDog.Search {
     public partial class FormSearch : Form {
+        private bool _cancelSearch;
         private DirectoryInfo _root;
         //private string _fileName;
         private Regex _fileName;
@@ -50,14 +51,14 @@ namespace FsDog.Search {
             gridResults.Columns.Add(createColumn("DateModified", 150));
         }
 
-        private void btnSearch_Click(object sender, EventArgs e) {
+        private async void btnSearch_Click(object sender, EventArgs e) {
             if (!TryPrepareInput()) {
                 return;
             }
 
             _table.Rows.Clear();
 
-            SearchAsync(_root);
+            await SearchAsync(_root);
         }
 
         private bool TryPrepareInput() {
@@ -91,7 +92,7 @@ namespace FsDog.Search {
             return true;
         }
 
-        private void SearchAsync(DirectoryInfo dir) {
+        private async Task SearchAsync(DirectoryInfo dir) {
             foreach (var item in dir.GetFiles()) {
                 if (!IsValidExtension(item)) {
                     continue;
@@ -101,7 +102,7 @@ namespace FsDog.Search {
                     continue;
                 }
 
-                if (!IsValidContent(item)) {
+                if (!await IsValidContentAsync(item)) {
                     continue;
                 }
 
@@ -113,7 +114,7 @@ namespace FsDog.Search {
                     _table.Add(item);
                 }
 
-                SearchAsync(item);
+                await SearchAsync(item);
             }
         }
 
@@ -125,9 +126,9 @@ namespace FsDog.Search {
             return _fileName.IsMatch(fsi.Name);
         }
 
-        private bool IsValidContent(FileInfo file) {
+        private async Task<bool> IsValidContentAsync(FileInfo file) {
             return string.IsNullOrEmpty(_contained)
-                || (TextFile.CouldBeTextFile(file.FullName) && TextFile.Contains(file.FullName, _contained, StringComparison.InvariantCultureIgnoreCase));
+                || (TextFile.CouldBeTextFile(file.FullName) && await TextFile.ContainsAsync(file.FullName, _contained, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

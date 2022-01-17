@@ -5,3 +5,4 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")] //, Scope = "member", Target = "~M:FR.Windows.Forms.FormOptions.tvwMain_AfterSelect(System.Object,System.Windows.Forms.TreeViewEventArgs)")]
 
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification = "<Pending>")] //, Scope = "member", Target = "~M:FR.Windows.Forms.Commands.CommandToolItem.GetToolStripMenuItem(System.Windows.Forms.ToolStrip)~System.Windows.Forms.ToolStripItem[]")]
