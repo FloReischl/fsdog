@@ -40,6 +40,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -51,6 +54,7 @@
     <Compile Include="Collections\Generic\DataStore`1_Interfaces.cs" />
     <Compile Include="Collections\Generic\DataStore`1_PrimaryKeyEntry.cs" />
     <Compile Include="Collections\Generic\DataStore`1_IndexValue.cs" />
+    <Compile Include="Configuration\JsonConfigFile.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
@@ -187,6 +191,9 @@
     <Compile Include="Threading\AsynchronousWorkerSettings.cs" />
     <Compile Include="Threading\AsynchronousWorker.cs" />
     <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

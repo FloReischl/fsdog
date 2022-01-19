@@ -434,7 +434,7 @@ namespace FsDog.Dialogs {
             _toolStrips = new Dictionary<string, ToolStrip>();
             CreateMenu();
             CreateCommandsToolStrips();
-            if (!instance.Options.AppearanceMain.ShowStatusBar)
+            if (!instance.Config.Options.Appearance.Main.ShowStatusbar)
                 statMain.Visible = false;
             sptDetailView.BackColor = SystemColors.Control;
             _currentDetailView = this.detailView1;
@@ -447,14 +447,14 @@ namespace FsDog.Dialogs {
             PointConverter pointConverter = new PointConverter();
             _size = (Size)sizeConverter.ConvertFromString(this.ConfigurationRoot.GetSubProperty("Size", true).ToString(sizeConverter.ConvertToString((object)this.Size)));
 
-            if (instance.Options.AppearanceMain.RememberSize)
+            if (instance.Config.Options.Appearance.Main.RememberSize)
                 Size = this._size;
 
             _location = (Point)pointConverter.ConvertFromString(this.ConfigurationRoot.GetSubProperty("Location", true).ToString(pointConverter.ConvertToString((object)this.Location)));
-            if (instance.Options.AppearanceMain.RememberLocation)
+            if (instance.Config.Options.Appearance.Main.RememberLocation)
                 Location = this._location;
 
-            if (instance.Options.AppearanceMain.RememberWindowState)
+            if (instance.Config.Options.Appearance.Main.RememberWindowState)
                 WindowState = (FormWindowState)Enum.Parse(typeof(FormWindowState), this.ConfigurationRoot.GetSubProperty("WindowState", true).ToString(this.WindowState.ToString()));
             
             AppearanceProvider appearance = new AppearanceProvider();
@@ -526,8 +526,8 @@ namespace FsDog.Dialogs {
                     tvwMain.SelectedNode = nodeFromTreePath;
                     _currentDetailView.SetParentDirectory(directoryInfo, treePath2, true);
                 }
-                if (instance.Options.AppearanceMain.FullPathInTitle)
-                    Text = string.Format("{0} - {1}", (object)instance.Information.Title, (object)directoryInfo.FullName);
+                if (instance.Config.Options.Appearance.Main.FullPathInTitle)
+                    Text = string.Format("{0} - {1}", instance.Information.Title, directoryInfo.FullName);
                 else
                     Text = instance.Information.Title;
             }
@@ -615,7 +615,7 @@ namespace FsDog.Dialogs {
         }
 
         private void detailView_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e) {
-            if (!FsApp.Instance.Options.DetailView.SynchronizeColumnWidths)
+            if (!FsApp.Instance.Config.Options.DetailView.SynchronizeColumnWidths)
                 return;
             if ((DetailView)sender == this.detailView1)
                 detailView2.SetColumnWidth(e.Column.Name, e.Column.Width);

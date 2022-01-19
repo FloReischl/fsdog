@@ -138,9 +138,9 @@ namespace FsDog.Detail {
             }
             try {
                 string treePath = root.GetSubProperty("Path", true).ToString("");
-                if (!string.IsNullOrEmpty(treePath) && treePath.StartsWith("\\\\") && instance.Options.General.RestoreNetworkDirectories)
+                if (!string.IsNullOrEmpty(treePath) && treePath.StartsWith("\\\\") && instance.Config.Options.General.RestoreNetworkDirectories)
                     this.OnRequestParentDirectory(treePath);
-                else if (!string.IsNullOrEmpty(treePath) && instance.Options.General.RestoreDirectories)
+                else if (!string.IsNullOrEmpty(treePath) && instance.Config.Options.General.RestoreDirectories)
                     this.OnRequestParentDirectory(treePath);
                 else
                     this.OnRequestParentDirectory(instance.DefaultDirectoryName);
@@ -172,16 +172,16 @@ namespace FsDog.Detail {
         public void SetActive(bool active) {
             FsApp instance = FsApp.Instance;
             if (active) {
-                this.txtSearch.BackColor = instance.Options.AppearanceFileView.ActiveBackgroundColor;
-                this.txtSearch.ForeColor = instance.Options.AppearanceFileView.ActiveForeColor;
-                this.cboPath.BackColor = instance.Options.AppearanceFileView.ActiveBackgroundColor;
-                this.cboPath.ForeColor = instance.Options.AppearanceFileView.ActiveForeColor;
+                this.txtSearch.BackColor = instance.Config.Options.Appearance.FileView.ActiveBackgroundColor;
+                this.txtSearch.ForeColor = instance.Config.Options.Appearance.FileView.ActiveForeColor;
+                this.cboPath.BackColor = instance.Config.Options.Appearance.FileView.ActiveBackgroundColor;
+                this.cboPath.ForeColor = instance.Config.Options.Appearance.FileView.ActiveForeColor;
             }
             else {
-                this.txtSearch.BackColor = instance.Options.AppearanceFileView.InactiveBackgroundColor;
-                this.txtSearch.ForeColor = instance.Options.AppearanceFileView.InactiveForeColor;
-                this.cboPath.BackColor = instance.Options.AppearanceFileView.InactiveBackgroundColor;
-                this.cboPath.ForeColor = instance.Options.AppearanceFileView.InactiveForeColor;
+                this.txtSearch.BackColor = instance.Config.Options.Appearance.FileView.InactiveBackgroundColor;
+                this.txtSearch.ForeColor = instance.Config.Options.Appearance.FileView.InactiveForeColor;
+                this.cboPath.BackColor = instance.Config.Options.Appearance.FileView.InactiveBackgroundColor;
+                this.cboPath.ForeColor = instance.Config.Options.Appearance.FileView.InactiveForeColor;
             }
         }
 
@@ -296,7 +296,7 @@ namespace FsDog.Detail {
                         }
                     }
                 }
-                if (instance.Options.DetailView.ShowDirectorySize)
+                if (instance.Config.Options.DetailView.ShowDirectorySize)
                     this.GetDirectorySizes();
                 if (this._historyDirection == 0) {
                     if (!string.IsNullOrEmpty(treePath1))
@@ -343,8 +343,8 @@ namespace FsDog.Detail {
             this._shellItems = new List<ShellItem>();
             this._files = new DetailTable();
             this._columnWidths = new Dictionary<string, int>();
-            this.BackColor = instance.Options.AppearanceFileView.ActiveBackgroundColor;
-            this.dgvFiles.BackgroundColor = instance.Options.AppearanceFileView.ActiveBackgroundColor;
+            this.BackColor = instance.Config.Options.Appearance.FileView.ActiveBackgroundColor;
+            this.dgvFiles.BackgroundColor = instance.Config.Options.Appearance.FileView.ActiveBackgroundColor;
 
             this.dgvFiles.AutoGenerateColumns = false;
 
@@ -358,7 +358,7 @@ namespace FsDog.Detail {
             addGridColumn("Name", true);
             addGridColumn("Size", true);
             addGridColumn("TypeName", true);
-            addGridColumn("DateModified", app.Options.DetailView.ShowModificationDateColumn);
+            addGridColumn("DateModified", app.Config.Options.DetailView.ShowModificationDateColumn);
         }
 
         protected void OnColumnWidthChanged(DataGridViewColumnEventArgs e) {

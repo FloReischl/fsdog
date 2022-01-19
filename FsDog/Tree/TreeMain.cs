@@ -32,7 +32,7 @@ namespace FsDog.Tree {
             this.ImageList.ColorDepth = ColorDepth.Depth32Bit;
             this.ImageList.Images.Add("DirectoryClosed", (Image)Resources.DirectoryClosed);
             this.ImageList.Images.Add("DirectoryOpen", (Image)Resources.DirectoryOpen);
-            if (instance.Options.Navigation.ShowUserFolder) {
+            if (instance.Config.Options.Navigation.ShowUserFolder) {
                 string path = Environment.GetEnvironmentVariable("USERPROFILE");
                 if (string.IsNullOrEmpty(path)) {
                     string environmentVariable1 = Environment.GetEnvironmentVariable("HOMEDRIVE");
@@ -43,7 +43,7 @@ namespace FsDog.Tree {
                 if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
                     this.Nodes.Add((TreeNodeBase)new NodeDirectory(new DirectoryInfo(path)));
             }
-            if (instance.Options.Navigation.ShowMyDocumentsFolder)
+            if (instance.Config.Options.Navigation.ShowMyDocumentsFolder)
                 this.Nodes.Add((TreeNodeBase)new NodeDirectory(new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Personal))));
             foreach (DriveInfo drive in DriveInfo.GetDrives())
                 this.Nodes.Add((TreeNodeBase)new NodeDrive(drive));

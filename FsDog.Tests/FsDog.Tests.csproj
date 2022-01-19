@@ -45,12 +45,16 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FsDogConfigTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -59,6 +63,18 @@
     <ProjectReference Include="..\FR.Base\FR.Base.csproj">
       <Project>{EDC4BF2B-81C1-4EC3-AF46-461C51BB212B}</Project>
       <Name>FR.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FR.Windows\FR.Windows.csproj">
+      <Project>{9ed2f0d7-9459-4b0f-8c7f-1174b1969153}</Project>
+      <Name>FR.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FsDogBase\FsDogBase.csproj">
+      <Project>{5782be06-66e9-4f7a-a08c-a1c36b6cc31f}</Project>
+      <Name>FsDogBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FsDog\FsDog.csproj">
+      <Project>{a7538451-1239-4353-991e-fea62b543097}</Project>
+      <Name>FsDog</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

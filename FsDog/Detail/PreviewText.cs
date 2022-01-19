@@ -59,8 +59,8 @@ namespace FsDog.Detail {
         protected override void InitLayout() {
             base.InitLayout();
             FsApp instance = FsApp.Instance;
-            this.txtContent.Font = instance.Options.Preview.TextFont;
-            this.txtContent.WordWrap = instance.Options.Preview.TextWrap;
+            this.txtContent.Font = instance.Config.Options.Preview.TextFont;
+            this.txtContent.WordWrap = instance.Config.Options.Preview.TextWrap;
         }
     }
 }

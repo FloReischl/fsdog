@@ -31,6 +31,7 @@ namespace FsDog {
         private static void Main() {
             FsApp fsApp = new FsApp();
             fsApp.Start(typeof(FormMain));
+            fsApp.Config.Save();
             fsApp.ConfigurationSource.Save();
         }
 
@@ -39,7 +40,9 @@ namespace FsDog {
 
         public static new FsApp Instance => (FsApp)WindowsApplication.Instance;
 
-        public FsOptions Options { get; set; }
+        //public FsOptions Options { get; set; }
+
+        public FsDogConfig Config { get; set; }
 
         public Dictionary<string, ScriptingHostConfiguration> ScriptingHosts { get; set; }
 
@@ -58,9 +61,10 @@ namespace FsDog {
 
         public override void Initialize() {
             Application.ThreadException += new ThreadExceptionEventHandler(this.Application_ThreadException);
-            ConfigurationSource = (IConfigurationSource)new ConfigurationFile(this.GetConfigFile().FullName, ConfigurationFile.FileAccessMode.CreateIfNotExists);
+            ConfigurationSource = new ConfigurationFile(this.GetConfigFile().FullName, ConfigurationFile.FileAccessMode.CreateIfNotExists);
             base.Initialize();
-            Options = new FsOptions();
+            //Options = new FsOptions();
+            Config = FsDogConfig.Load();
             _fileImages = new Dictionary<string, Image>();
             _fileTypeNames = new Dictionary<string, string>();
             ReloadScriptingHosts();
@@ -94,13 +98,13 @@ namespace FsDog {
                     if (BaseHelper.InList((object)lower, (object)".exe", (object)".scr", (object)".lnk", (object)".ico", (object)".cur")) {
                         if (!this._fileImages.TryGetValue(fileInfo.FullName, out associatedImage)) {
                             associatedImage = ImageHelper.ExtractAssociatedImage(fileInfo.FullName, true);
-                            if (this.Options.General.CacheImages)
+                            if (this.Config.Options.General.CacheImages)
                                 _fileImages.Add(fileInfo.FullName, associatedImage);
                         }
                     }
                     else if (!this._fileImages.TryGetValue(lower, out associatedImage)) {
                         associatedImage = ImageHelper.ExtractAssociatedImage(fileInfo.FullName, true);
-                        if (this.Options.General.CacheImages)
+                        if (this.Config.Options.General.CacheImages)
                             _fileImages.Add(lower, associatedImage);
                     }
                     return associatedImage;
@@ -136,7 +140,7 @@ namespace FsDog {
             return subDirectories;
         }
 
-        public bool IsValidToShow(FileSystemInfo fsi) => ((fsi.Attributes & FileAttributes.System) == (FileAttributes)0 || this.Options.Navigation.ShowSystemFiles) && ((fsi.Attributes & FileAttributes.Hidden) == (FileAttributes)0 || this.Options.Navigation.ShowHiddenFiles);
+        public bool IsValidToShow(FileSystemInfo fsi) => ((fsi.Attributes & FileAttributes.System) == (FileAttributes)0 || this.Config.Options.Navigation.ShowSystemFiles) && ((fsi.Attributes & FileAttributes.Hidden) == (FileAttributes)0 || this.Config.Options.Navigation.ShowHiddenFiles);
 
         public void ReloadScriptingHosts() {
             ScriptingHosts = new Dictionary<string, ScriptingHostConfiguration>();

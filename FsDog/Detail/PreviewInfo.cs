@@ -44,9 +44,8 @@ namespace FsDog.Detail {
             if (PreviewInfo._dictTxt == null) {
                 FsApp instance = FsApp.Instance;
                 PreviewInfo._dictTxt = new Dictionary<string, string>((IEqualityComparer<string>)StringComparer.CurrentCultureIgnoreCase);
-                string textExtensions = instance.Options.Preview.TextExtensions;
-                char[] separator = new char[1] { ';' };
-                foreach (string key in textExtensions.Split(separator, StringSplitOptions.RemoveEmptyEntries)) {
+                var textExtensions = instance.Config.Options.Preview.TextExtensions;
+                foreach (string key in textExtensions) {
                     if (!PreviewInfo._dictTxt.ContainsKey(key))
                         PreviewInfo._dictTxt.Add(key, key);
                 }
@@ -62,9 +61,8 @@ namespace FsDog.Detail {
             if (PreviewInfo._dictImg == null) {
                 FsApp instance = FsApp.Instance;
                 PreviewInfo._dictImg = new Dictionary<string, string>((IEqualityComparer<string>)StringComparer.CurrentCultureIgnoreCase);
-                string imageExtensions = instance.Options.Preview.ImageExtensions;
-                char[] separator = new char[1] { ';' };
-                foreach (string key in imageExtensions.Split(separator, StringSplitOptions.RemoveEmptyEntries)) {
+                var imageExtensions = instance.Config.Options.Preview.ImageExtensions;
+                foreach (string key in imageExtensions) {
                     if (!PreviewInfo._dictImg.ContainsKey(key))
                         PreviewInfo._dictImg.Add(key, key);
                 }

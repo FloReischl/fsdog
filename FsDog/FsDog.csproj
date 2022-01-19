@@ -61,6 +61,9 @@
     <ApplicationIcon>FsDog.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -104,6 +107,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="FsDogConfig.cs" />
     <Compile Include="Search\FormSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,16 +143,12 @@
     <Compile Include="Commands\CmdApplicationExecute.cs" />
     <Compile Include="Commands\CmdScriptExecute.cs" />
     <Compile Include="Commands\CmdScriptConfigureHosts.cs" />
-    <Compile Include="Dialogs\FormCommands_old.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Detail\PreviewText.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Detail\PreviewContainer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FsOptions.cs" />
     <Compile Include="Dialogs\FormFavorites.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,7 +208,6 @@
     <EmbeddedResource Include="Dialogs\FormCommands.resx">
       <DependentUpon>FormCommands.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\FormCommands_old.resx" />
     <EmbeddedResource Include="Dialogs\FormCopy.resx" />
     <EmbeddedResource Include="Dialogs\FormFavorites.resx" />
     <EmbeddedResource Include="Dialogs\FormMain_old.resx" />
@@ -228,6 +227,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>

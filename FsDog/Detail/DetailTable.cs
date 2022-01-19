@@ -67,7 +67,7 @@ namespace FsDog.Detail {
                 item.TypeName = FsApp.Instance.GetFsiTypeName((FileSystemInfo)fi);
                 item.DateModified = fi.LastWriteTime;
                 item.DateCreated = fi.CreationTime;
-                item.SortOrder = !FsApp.Instance.Options.DetailView.DirectoriesAlwasOnTop ? 0 : 1;
+                item.SortOrder = !FsApp.Instance.Config.Options.DetailView.DirectoriesAlwasOnTop ? 0 : 1;
                 FileAttributes attributes = fi.Attributes;
                 item.Attributes = "";
                 item.Attributes += (attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly ? "r" : "-";

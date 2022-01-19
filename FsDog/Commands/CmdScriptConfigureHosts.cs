@@ -17,6 +17,7 @@ namespace FsDog.Commands {
                 return;
             CommandHelper.SetScriptingHostsToConfig((IList<ScriptingHostConfiguration>)hostConfiguration.Hosts);
             this.Application.ConfigurationSource.Save();
+            this.Application.Config.Save();
             this.Application.ReloadScriptingHosts();
         }
     }

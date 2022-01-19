@@ -191,16 +191,16 @@ namespace FR.Windows.Forms {
                         controlWithButton.Width = int.MaxValue;
                         optionItemSet.EditControl = controlWithButton;
                     }
+                    else if (property.SpecialType == FormOptionsPropertySpecialType.CheckBox) {
+                        CheckBox checkBox = new CheckBox {
+                            Width = 200,
+                            Checked = property.Value is bool ? (bool)property.Value : bool.Parse(property.Value.ToString())
+                        };
+                        optionItemSet.EditControl = checkBox;
+                        checkBox.Click += new EventHandler(this.CheckBox_Click);
+                    }
                     else if (property.SpecialType != FormOptionsPropertySpecialType.SqlConnectionString) {
-                        if (property.SpecialType == FormOptionsPropertySpecialType.CheckBox) {
-                            CheckBox checkBox = new CheckBox {
-                                Width = 200,
-                                Checked = property.Value is bool ? (bool)property.Value : bool.Parse(property.Value.ToString())
-                            };
-                            optionItemSet.EditControl = checkBox;
-                            checkBox.Click += new EventHandler(this.CheckBox_Click);
-                        }
-                        else if (property.AllowedValues != null) {
+                        if (property.AllowedValues != null) {
                             float val1_2 = 0.0f;
                             ComboBox comboBox = new ComboBox();
                             foreach (object allowedValue in property.AllowedValues) {

@@ -18,19 +18,19 @@ namespace FsDog.Detail {
                 viewTextBoxColumn.HeaderText = "Name";
                 gridColumn = (DataGridViewColumn)viewTextBoxColumn;
             }
-            else if (column.ColumnName == "DateModified" && App.Options.DetailView.ShowModificationDateColumn) {
+            else if (column.ColumnName == "DateModified" && App.Config.Options.DetailView.ShowModificationDateColumn) {
                 DataGridViewTextBoxColumn viewTextBoxColumn = new DataGridViewTextBoxColumn();
                 viewTextBoxColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 viewTextBoxColumn.HeaderText = "Modified";
                 gridColumn = (DataGridViewColumn)viewTextBoxColumn;
             }
-            else if (column.ColumnName == "DateCreated" && App.Options.DetailView.ShowCreationDateColumn) {
+            else if (column.ColumnName == "DateCreated" && App.Config.Options.DetailView.ShowCreationDateColumn) {
                 DataGridViewTextBoxColumn viewTextBoxColumn = new DataGridViewTextBoxColumn();
                 viewTextBoxColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 viewTextBoxColumn.HeaderText = "Created";
                 gridColumn = (DataGridViewColumn)viewTextBoxColumn;
             }
-            else if (column.ColumnName == "Extension" && App.Options.DetailView.ShowFileExtensionColumn) {
+            else if (column.ColumnName == "Extension" && App.Config.Options.DetailView.ShowFileExtensionColumn) {
                 DataGridViewTextBoxColumn viewTextBoxColumn = new DataGridViewTextBoxColumn();
                 viewTextBoxColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 viewTextBoxColumn.HeaderText = "Ext";
@@ -48,7 +48,7 @@ namespace FsDog.Detail {
                 viewTextBoxColumn.HeaderText = "Type";
                 gridColumn = (DataGridViewColumn)viewTextBoxColumn;
             }
-            else if (column.ColumnName == "Attributes" && App.Options.DetailView.ShowAttributesColumn) {
+            else if (column.ColumnName == "Attributes" && App.Config.Options.DetailView.ShowAttributesColumn) {
                 DataGridViewTextBoxColumn viewTextBoxColumn = new DataGridViewTextBoxColumn();
                 viewTextBoxColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 viewTextBoxColumn.HeaderText = "Attrs";

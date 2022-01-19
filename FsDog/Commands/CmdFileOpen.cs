@@ -25,7 +25,7 @@ namespace FsDog.Commands {
                         return;
                     }
                     if (this.SelectedItems[0] is FileInfo selectedItem2 && string.Compare(selectedItem2.Extension, ".lnk", true) == 0) {
-                        if (this.Application.Options.Navigation.ResolveDirectoryLinks) {
+                        if (this.Application.Config.Options.Navigation.ResolveDirectoryLinks) {
                             try {
                                 DirectoryInfo dir = new DirectoryInfo(new ShellShortcut(selectedItem2.FullName).Path);
                                 if (dir.Exists) {

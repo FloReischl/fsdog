@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 
 namespace FsDog.Commands {
     public class CmdFavorite : CmdFsDogIntern {
@@ -24,11 +25,8 @@ namespace FsDog.Commands {
             foreach (FavoriteInfo info in CmdFavorite.GetInfos())
                 favoritesToolItem.Items.Add(new CommandToolItem(info.DirectoryName, typeof(CmdFavorite), (Image)Resources.FavoritesItem) {
                     CommandContext = {
-            {
-              (object) "FavoriteInfo",
-              (object) info
-            }
-          }
+                        { "FavoriteInfo", info }
+                    }
                 });
             CommandToolItem commandToolItem = new CommandToolItem("-");
             favoritesToolItem.Items.Add(commandToolItem);
@@ -39,12 +37,12 @@ namespace FsDog.Commands {
         }
 
         public static ReadOnlyCollection<FavoriteInfo> GetInfos() {
-            List<FavoriteInfo> list = new List<FavoriteInfo>();
-            foreach (IConfigurationProperty subProperty in FsApp.Instance.ConfigurationSource.GetProperty(".", "Favorites", true).GetSubProperties("Item"))
-                list.Add(new FavoriteInfo() {
-                    DirectoryName = subProperty["Directory"].ToString()
-                });
-            return new ReadOnlyCollection<FavoriteInfo>((IList<FavoriteInfo>)list);
+            List<FavoriteInfo> list = FsApp.Instance.Config.Favorites.Select(s => new FavoriteInfo { DirectoryName = s }).ToList();
+            //foreach (IConfigurationProperty subProperty in FsApp.Instance.ConfigurationSource.GetProperty(".", "Favorites", true).GetSubProperties("Item"))
+            //    list.Add(new FavoriteInfo() {
+            //        DirectoryName = subProperty["Directory"].ToString()
+            //    });
+            return new ReadOnlyCollection<FavoriteInfo>(list);
         }
 
         public override void Execute() {

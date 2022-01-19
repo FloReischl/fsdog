@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace FsDog {
     class AppearanceProvider {
-        private readonly FsOptions _rootOptions;
-        private readonly FsOptions.AppearanceFileViewOptions _options;
+        //private readonly FsOptions _rootOptions;
+        //private readonly FsOptions.AppearanceFileViewOptions _options;
         private readonly ILogger _log;
 
         public AppearanceProvider() {
             //FsApp.Instance.Logger.Write
-            _rootOptions = FsApp.Instance.Options;
-            _options = _rootOptions.AppearanceFileView;
+            //_rootOptions = FsApp.Instance.Options;
+            //_options = _rootOptions.AppearanceFileView;
             //_options.ActiveBackgroundColor = Color.Black;
             //_options.ActiveForeColor = Color.White;
             _log = FsApp.Instance.CreateLogger();

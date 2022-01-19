@@ -10,6 +10,7 @@ using FR.Windows.Forms.Commands;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
 
@@ -60,17 +61,17 @@ namespace FsDog.Commands {
             if (CommandHelper._appsToolStrips == null)
                 CommandHelper._appsToolStrips = new List<ToolStrip>();
 
-            if (commandToolItem1.Items.Count != 0 && instance.Options.MenusApplications.ShowCtrlToolStrip) {
+            if (commandToolItem1.Items.Count != 0 && instance.Config.Options.Menus.Applications.ShowCtrlToolStrip) {
                 ToolStrip toolStrip = commandToolItem1.CreateToolStrip();
-                CommandHelper.ApplyDisplaySettings(toolStrip, instance.Options.MenusApplications.ShowCtrlImage, instance.Options.MenusApplications.ShowCtrlName, instance.Options.MenusApplications.ShowCtrlShortcut);
+                CommandHelper.ApplyDisplaySettings(toolStrip, instance.Config.Options.Menus.Applications.ShowCtrlImage, instance.Config.Options.Menus.Applications.ShowCtrlName, instance.Config.Options.Menus.Applications.ShowCtrlShortcut);
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Ctrl"));
                 appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._appsToolStrips.Add(toolStrip);
             }
 
-            if (commandToolItem2.Items.Count != 0 && instance.Options.MenusApplications.ShowShiftToolStrip) {
+            if (commandToolItem2.Items.Count != 0 && instance.Config.Options.Menus.Applications.ShowShiftToolStrip) {
                 ToolStrip toolStrip = commandToolItem2.CreateToolStrip();
-                CommandHelper.ApplyDisplaySettings(toolStrip, instance.Options.MenusApplications.ShowShiftImage, instance.Options.MenusApplications.ShowShiftName, instance.Options.MenusApplications.ShowShiftShortcut);
+                CommandHelper.ApplyDisplaySettings(toolStrip, instance.Config.Options.Menus.Applications.ShowShiftImage, instance.Config.Options.Menus.Applications.ShowShiftName, instance.Config.Options.Menus.Applications.ShowShiftShortcut);
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Shift"));
                 appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._appsToolStrips.Add(toolStrip);
@@ -141,17 +142,17 @@ namespace FsDog.Commands {
 
             if (CommandHelper._scriptsToolStrips == null)
                 CommandHelper._scriptsToolStrips = new List<ToolStrip>();
-            if (commandToolItem1.Items.Count != 0 && instance.Options.MenusScripts.ShowCtrlToolStrip) {
+            if (commandToolItem1.Items.Count != 0 && instance.Config.Options.Menus.Scripts.ShowCtrlToolStrip) {
                 ToolStrip toolStrip = commandToolItem1.CreateToolStrip();
-                CommandHelper.ApplyDisplaySettings(toolStrip, instance.Options.MenusScripts.ShowCtrlImage, instance.Options.MenusScripts.ShowCtrlName, instance.Options.MenusScripts.ShowCtrlShortcut);
+                CommandHelper.ApplyDisplaySettings(toolStrip, instance.Config.Options.Menus.Scripts.ShowCtrlImage, instance.Config.Options.Menus.Scripts.ShowCtrlName, instance.Config.Options.Menus.Scripts.ShowCtrlShortcut);
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Ctrl"));
                 appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._scriptsToolStrips.Add(toolStrip);
             }
 
-            if (commandToolItem2.Items.Count != 0 && instance.Options.MenusScripts.ShowShiftToolStrip) {
+            if (commandToolItem2.Items.Count != 0 && instance.Config.Options.Menus.Scripts.ShowShiftToolStrip) {
                 ToolStrip toolStrip = commandToolItem2.CreateToolStrip();
-                CommandHelper.ApplyDisplaySettings(toolStrip, instance.Options.MenusScripts.ShowShiftImage, instance.Options.MenusScripts.ShowShiftName, instance.Options.MenusScripts.ShowShiftShortcut);
+                CommandHelper.ApplyDisplaySettings(toolStrip, instance.Config.Options.Menus.Scripts.ShowShiftImage, instance.Config.Options.Menus.Scripts.ShowShiftName, instance.Config.Options.Menus.Scripts.ShowShiftShortcut);
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Shift"));
                 appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._scriptsToolStrips.Add(toolStrip);
@@ -185,60 +186,72 @@ namespace FsDog.Commands {
         }
 
         public static List<CommandInfo> GetInfos() {
-            List<CommandInfo> infos = new List<CommandInfo>();
-            foreach (IConfigurationProperty subProperty in FsApp.Instance.ConfigurationSource.GetProperty(".", "Commands", true).GetSubProperties("Command")) {
-                Keys keys = (Keys)new KeysConverter().ConvertFromString(subProperty["Key"].ToString());
-                infos.Add(new CommandInfo() {
-                    Key = keys != Keys.None ? keys : (Keys?)null,
-                    Name = subProperty["Name"].ToString(),
-                    Command = subProperty["Command"].ToString(),
-                    Arguments = subProperty["Arguments"].ToString(""),
-                    CommandType = (CommandType)Enum.Parse(typeof(CommandType), subProperty.GetSubProperty("CommandType", true).ToString(CommandType.Application.ToString())),
-                    ScriptingHost = subProperty.GetSubProperty("ScriptingHost", true).ToString("")
-                });
-            }
-            return infos;
+            var config = FsApp.Instance.Config;
+            return config.Commands.Select(cmd => cmd.ToCommandInfo()).ToList();
+
+            //List<CommandInfo> infos = new List<CommandInfo>();
+            //foreach (IConfigurationProperty subProperty in FsApp.Instance.ConfigurationSource.GetProperty(".", "Commands", true).GetSubProperties("Command")) {
+            //    Keys keys = (Keys)new KeysConverter().ConvertFromString(subProperty["Key"].ToString());
+            //    infos.Add(new CommandInfo() {
+            //        Key = keys != Keys.None ? keys : (Keys?)null,
+            //        Name = subProperty["Name"].ToString(),
+            //        Command = subProperty["Command"].ToString(),
+            //        Arguments = subProperty["Arguments"].ToString(""),
+            //        CommandType = (CommandType)Enum.Parse(typeof(CommandType), subProperty.GetSubProperty("CommandType", true).ToString(CommandType.Application.ToString())),
+            //        ScriptingHost = subProperty.GetSubProperty("ScriptingHost", true).ToString("")
+            //    });
+            //}
+            //return infos;
         }
 
         public static List<ScriptingHostConfiguration> GetScriptingHosts() {
-            List<ScriptingHostConfiguration> scriptingHosts = new List<ScriptingHostConfiguration>();
-            foreach (IConfigurationProperty subProperty in FsApp.Instance.ConfigurationSource.GetProperty("Scripting", "Hosts", true).GetSubProperties("Item"))
-                scriptingHosts.Add(new ScriptingHostConfiguration() {
-                    Name = subProperty["Name"].ToString(),
-                    Location = subProperty["Location"].ToString(),
-                    Arguments = subProperty["Arguments"].ToString(""),
-                    ExecutionLocation = (ScriptExecutionLocation)Enum.Parse(typeof(ScriptExecutionLocation), subProperty["ExecuteAt"].ToString())
-                });
-            return scriptingHosts;
+            return FsApp.Instance.Config.Scripting.Hosts.Select(host => host.ToScriptingHost()).ToList();
+            //List<ScriptingHostConfiguration> scriptingHosts = new List<ScriptingHostConfiguration>();
+            //foreach (IConfigurationProperty subProperty in FsApp.Instance.ConfigurationSource.GetProperty("Scripting", "Hosts", true).GetSubProperties("Item"))
+            //    scriptingHosts.Add(new ScriptingHostConfiguration() {
+            //        Name = subProperty["Name"].ToString(),
+            //        Location = subProperty["Location"].ToString(),
+            //        Arguments = subProperty["Arguments"].ToString(""),
+            //        ExecutionLocation = (ScriptExecutionLocation)Enum.Parse(typeof(ScriptExecutionLocation), subProperty["ExecuteAt"].ToString())
+            //    });
+            //return scriptingHosts;
         }
 
         public static void SetScriptingHostsToConfig(IList<ScriptingHostConfiguration> hosts) {
-            IConfigurationProperty property = FsApp.Instance.ConfigurationSource.GetProperty("Scripting", "Hosts", true);
-            while (property.ExistsSubProperty("Item"))
-                property["Item"].Delete();
-            foreach (ScriptingHostConfiguration host in (IEnumerable<ScriptingHostConfiguration>)hosts) {
-                IConfigurationProperty configurationProperty = property.AddSubProperty("Item");
-                configurationProperty.GetSubProperty("Name", true).Set(host.Name);
-                configurationProperty.GetSubProperty("Location", true).Set(host.Location);
-                configurationProperty.GetSubProperty("Arguments", true).Set(host.Arguments);
-                configurationProperty.GetSubProperty("ExecuteAt", true).Set(host.ExecutionLocation.ToString());
-            }
+            var config = FsApp.Instance.Config;
+            config.Scripting.Hosts.Clear();
+            config.Scripting.Hosts.AddRange(hosts.Select(host => FsDogConfig.HostsConfig.FromHost(host)));
+
+            //IConfigurationProperty property = FsApp.Instance.ConfigurationSource.GetProperty("Scripting", "Hosts", true);
+            //while (property.ExistsSubProperty("Item"))
+            //    property["Item"].Delete();
+            //foreach (ScriptingHostConfiguration host in (IEnumerable<ScriptingHostConfiguration>)hosts) {
+            //    IConfigurationProperty configurationProperty = property.AddSubProperty("Item");
+            //    configurationProperty.GetSubProperty("Name", true).Set(host.Name);
+            //    configurationProperty.GetSubProperty("Location", true).Set(host.Location);
+            //    configurationProperty.GetSubProperty("Arguments", true).Set(host.Arguments);
+            //    configurationProperty.GetSubProperty("ExecuteAt", true).Set(host.ExecutionLocation.ToString());
+            //}
         }
 
         public static void SetToConfig(IList<CommandInfo> infos) {
-            IConfigurationProperty property = FsApp.Instance.ConfigurationSource.GetProperty(".", "Commands");
-            foreach (IConfigurationProperty subProperty in property.GetSubProperties("Command"))
-                subProperty.Delete();
-            foreach (CommandInfo info in (IEnumerable<CommandInfo>)infos) {
-                IConfigurationProperty configurationProperty = property.AddSubProperty("Command");
-                configurationProperty.GetSubProperty("Key", true).Set((info.Key ?? Keys.None).ToString());
-                configurationProperty.GetSubProperty("CommandType", true).Set(info.CommandType.ToString());
-                configurationProperty.GetSubProperty("Name", true).Set(info.Name);
-                configurationProperty.GetSubProperty("Command", true).Set(info.Command);
-                configurationProperty.GetSubProperty("Arguments", true).Set(info.Arguments);
-                if (info.CommandType == CommandType.Script)
-                    configurationProperty.GetSubProperty("ScriptingHost", true).Set(info.ScriptingHost);
-            }
+            var config = FsApp.Instance.Config;
+            config.Commands.Clear();
+            config.Commands.AddRange(infos.Select(info => FsDogConfig.CommandConfig.FromInfo(info)));
+
+            //IConfigurationProperty property = FsApp.Instance.ConfigurationSource.GetProperty(".", "Commands");
+            //foreach (IConfigurationProperty subProperty in property.GetSubProperties("Command"))
+            //    subProperty.Delete();
+            //foreach (CommandInfo info in (IEnumerable<CommandInfo>)infos) {
+            //    IConfigurationProperty configurationProperty = property.AddSubProperty("Command");
+            //    configurationProperty.GetSubProperty("Key", true).Set((info.Key ?? Keys.None).ToString());
+            //    configurationProperty.GetSubProperty("CommandType", true).Set(info.CommandType.ToString());
+            //    configurationProperty.GetSubProperty("Name", true).Set(info.Name);
+            //    configurationProperty.GetSubProperty("Command", true).Set(info.Command);
+            //    configurationProperty.GetSubProperty("Arguments", true).Set(info.Arguments);
+            //    if (info.CommandType == CommandType.Script)
+            //        configurationProperty.GetSubProperty("ScriptingHost", true).Set(info.ScriptingHost);
+            //}
         }
 
         private static void ApplyDisplaySettings(
