@@ -9,6 +9,7 @@ using FR.Commands;
 using FR.Configuration;
 using FR.Logging;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -20,9 +21,9 @@ namespace FR {
       IDisposable,
       ICommandHandler,
       IConfigurable {
-        private XmlDocument _fallbackLoggingDom;
-        private ConfigurationFile _fallbackLoggingConfigurationSource;
-        private bool _fallbackLoggerCreated;
+        //private XmlDocument _fallbackLoggingDom;
+        //private ConfigurationFile _fallbackLoggingConfigurationSource;
+        //private bool _fallbackLoggerCreated;
         private static ApplicationBase _instance;
         private IConfigurationSource _configurationSource;
         private IConfigurationProperty _configurationRoot;
@@ -46,12 +47,16 @@ namespace FR {
 
         public IConfigurationSource ConfigurationSource {
             get {
-                if (this._configurationSource == null && File.Exists(ConfigurationFile.GetDefaultConfigFileName(this.GetType().Assembly)))
-                    this._configurationSource = (IConfigurationSource)new ConfigurationFile();
+                if (_configurationSource == null) {
+                    ConfigurationFile.TryGetConfigFile(GetType().Assembly, out ConfigurationFile config);
+                    _configurationSource = config;
+                }
+                //if (this._configurationSource == null && File.Exists(ConfigurationFile.GetDefaultConfigFileName(this.GetType().Assembly)))
+                //    this._configurationSource = (IConfigurationSource)new ConfigurationFile();
                 return this._configurationSource;
             }
             set {
-                this.ResetFallbackLogger();
+                //this.ResetFallbackLogger();
                 this._configurationSource = value;
             }
         }
@@ -69,22 +74,27 @@ namespace FR {
             [DebuggerNonUserCode]
             get {
                 if (base.Logger == null) {
-                    if ((this.ConfigurationSource == null || !this.ConfigurationSource.ExistsProperty(".", "Logging")) && !this._fallbackLoggerCreated) {
-                        this._fallbackLoggingDom = new XmlDocument();
-                        this._fallbackLoggingDom.AppendChild((XmlNode)this._fallbackLoggingDom.CreateElement("Configuration"));
-                        this._fallbackLoggingConfigurationSource = new ConfigurationFile((XmlElement)this._fallbackLoggingDom.SelectSingleNode("Configuration"));
-                        this._fallbackLoggingConfigurationSource.SetProperty("Logging/Device", "ClassName", typeof(LoggingDeviceConsole).ToString());
-                        this._fallbackLoggerCreated = true;
-                        base.Logger = new LoggingManager((IConfigurationProperty)this._fallbackLoggingConfigurationSource.GetProperty(".", "Logging", false));
-                    }
-                    else if (this.ConfigurationSource.ExistsProperty(".", "Logging"))
-                        base.Logger = new LoggingManager(this.ConfigurationSource.GetProperty(".", "Logging", false));
+                    base.Logger = new LoggingManager();
+                    base.Logger.Devices.Add(new LoggingDeviceConsole());
                 }
+
+                //if (base.Logger == null) {
+                //    if ((this.ConfigurationSource == null || !this.ConfigurationSource.ExistsProperty(".", "Logging")) && !this._fallbackLoggerCreated) {
+                //        this._fallbackLoggingDom = new XmlDocument();
+                //        this._fallbackLoggingDom.AppendChild((XmlNode)this._fallbackLoggingDom.CreateElement("Configuration"));
+                //        this._fallbackLoggingConfigurationSource = new ConfigurationFile((XmlElement)this._fallbackLoggingDom.SelectSingleNode("Configuration"));
+                //        this._fallbackLoggingConfigurationSource.SetProperty("Logging/Device", "ClassName", typeof(LoggingDeviceConsole).ToString());
+                //        this._fallbackLoggerCreated = true;
+                //        base.Logger = new LoggingManager((IConfigurationProperty)this._fallbackLoggingConfigurationSource.GetProperty(".", "Logging", false));
+                //    }
+                //    else if (this.ConfigurationSource.ExistsProperty(".", "Logging"))
+                //        base.Logger = new LoggingManager(this.ConfigurationSource.GetProperty(".", "Logging", false));
+                //}
                 return base.Logger;
             }
             [DebuggerNonUserCode]
             set {
-                this.ResetFallbackLogger();
+                //this.ResetFallbackLogger();
                 base.Logger = value;
             }
         }
@@ -114,16 +124,16 @@ namespace FR {
 
         public virtual void Initialize() {
             this._commandLineArgs = new CommandLineArgs(Environment.GetCommandLineArgs());
-            CommandLineArg byArgument = this.CommandLineArgs.FindByArgument("config", false);
-            if (byArgument != null)
-                this.ConfigurationSource = (IConfigurationSource)new ConfigurationFile(byArgument.Value, ConfigurationFile.FileAccessMode.CreateIfNotExists);
-            else if (this.ConfigurationSource == null && File.Exists(ConfigurationFile.GetDefaultConfigFileName(this.GetType().Assembly)))
-                this.ConfigurationSource = (IConfigurationSource)new ConfigurationFile();
-            if (this.ConfigurationSource != null && this.ConfigurationSource.ExistsProperty(".", "Logging"))
-                this.Logger = new LoggingManager(this.ConfigurationSource.GetProperty(".", "Logging", false));
-            if (this.ConfigurationSource == null || !this.ConfigurationSource.ExistsProperty(".", this.GetType().Name))
-                return;
-            this.ConfigurationRoot = this.ConfigurationSource.GetProperty(".", this.GetType().Name, true);
+            //CommandLineArg byArgument = this.CommandLineArgs.FindByArgument("config", false);
+            //if (byArgument != null)
+            //    this.ConfigurationSource = (IConfigurationSource)new ConfigurationFile(byArgument.Value, ConfigurationFile.FileAccessMode.CreateIfNotExists);
+            //else if (this.ConfigurationSource == null && File.Exists(ConfigurationFile.GetDefaultConfigFileName(this.GetType().Assembly)))
+            //    this.ConfigurationSource = (IConfigurationSource)new ConfigurationFile();
+            //if (this.ConfigurationSource != null && this.ConfigurationSource.ExistsProperty(".", "Logging"))
+            //    this.Logger = new LoggingManager(this.ConfigurationSource.GetProperty(".", "Logging", false));
+            //if (this.ConfigurationSource == null || !this.ConfigurationSource.ExistsProperty(".", this.GetType().Name))
+            //    return;
+            this.ConfigurationRoot = this.ConfigurationSource?.GetProperty(".", this.GetType().Name, true);
         }
 
         public virtual void Dispose() {
@@ -217,19 +227,19 @@ namespace FR {
             command.Receiver.FinishCommand(command);
         }
 
-        private void ResetFallbackLogger() {
-            if (!this._fallbackLoggerCreated)
-                return;
-            if (this._fallbackLoggingConfigurationSource != null) {
-                if (base.Logger != null && !base.Logger.IsClosed)
-                    base.Logger.Close();
-                base.Logger = (LoggingManager)null;
-                this._fallbackLoggingConfigurationSource = (ConfigurationFile)null;
-            }
-            if (this._fallbackLoggingDom == null)
-                return;
-            this._fallbackLoggingDom = (XmlDocument)null;
-        }
+        //private void ResetFallbackLogger() {
+        //    if (!this._fallbackLoggerCreated)
+        //        return;
+        //    if (this._fallbackLoggingConfigurationSource != null) {
+        //        if (base.Logger != null && !base.Logger.IsClosed)
+        //            base.Logger.Close();
+        //        base.Logger = (LoggingManager)null;
+        //        this._fallbackLoggingConfigurationSource = (ConfigurationFile)null;
+        //    }
+        //    if (this._fallbackLoggingDom == null)
+        //        return;
+        //    this._fallbackLoggingDom = (XmlDocument)null;
+        //}
 
         void IDisposable.Dispose() => this.Dispose();
 

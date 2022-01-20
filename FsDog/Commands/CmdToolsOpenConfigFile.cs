@@ -6,6 +6,7 @@
 
 using FR.Configuration;
 using FR.IO;
+using FsDog.Configuration;
 using System.Windows.Forms;
 
 namespace FsDog.Commands {

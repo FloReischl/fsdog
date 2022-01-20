@@ -15,14 +15,14 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace FR.Windows.Forms {
-    public class FormBase : Form, ILoggingProvider, IConfigurable, ICommandReceiver {
+    public class FormBase : Form, /*ILoggingProvider, *//*IConfigurable,*/ ICommandReceiver {
         private bool _bMoveForm;
         private Point _ptMoveMouse;
         private Point _ptMoveForm;
-        private IConfigurationProperty _configurationRoot;
+        //private IConfigurationProperty _configurationRoot;
         private Color _gradientColorStart;
         private Color _gradientColorEnd;
-        private bool _moveByClientArea;
+
         //private IContainer components;
 
         public FormBase() {
@@ -59,26 +59,26 @@ namespace FR.Windows.Forms {
             }
         }
 
-        [Browsable(false)]
-        public IConfigurationSource ConfigurationSource {
-            [DebuggerNonUserCode, Browsable(false)]
-            get => this.ApplicationInstance != null ? ((IConfigurable)this.ApplicationInstance).ConfigurationSource : (IConfigurationSource)null;
-        }
+        //[Browsable(false)]
+        //public IConfigurationSource ConfigurationSource {
+        //    [DebuggerNonUserCode, Browsable(false)]
+        //    get => this.ApplicationInstance?.ConfigurationSource;
+        //}
 
-        [Browsable(false)]
-        public IConfigurationProperty ConfigurationRoot {
-            [Browsable(false)]
-            get {
-                if (this._configurationRoot == null) {
-                    IConfigurable applicationInstance = (IConfigurable)this.ApplicationInstance;
-                    if (applicationInstance != null && applicationInstance.ConfigurationRoot != null)
-                        this._configurationRoot = applicationInstance.ConfigurationRoot.GetSubProperty(this.Name, true);
-                }
-                return this._configurationRoot;
-            }
-            [Browsable(false)]
-            set => this._configurationRoot = value;
-        }
+        //[Browsable(false)]
+        //public IConfigurationProperty ConfigurationRoot {
+        //    [Browsable(false)]
+        //    get {
+        //        if (this._configurationRoot == null) {
+        //            IConfigurable applicationInstance = (IConfigurable)this.ApplicationInstance;
+        //            if (applicationInstance != null && applicationInstance.ConfigurationRoot != null)
+        //                this._configurationRoot = applicationInstance.ConfigurationRoot.GetSubProperty(this.Name, true);
+        //        }
+        //        return this._configurationRoot;
+        //    }
+        //    [Browsable(false)]
+        //    set => this._configurationRoot = value;
+        //}
 
         [Description("The left side gradient color")]
         [Category("Appearance")]
@@ -109,12 +109,9 @@ namespace FR.Windows.Forms {
         [DefaultValue(false)]
         [Category("Window Style")]
         [Description("Defines if it is possible to move the form by the client area")]
-        public bool MoveByClientArea {
-            [DebuggerNonUserCode]
-            get => this._moveByClientArea;
-            [DebuggerNonUserCode]
-            set => this._moveByClientArea = value;
-        }
+        public bool MoveByClientArea { [DebuggerNonUserCode]
+            get; [DebuggerNonUserCode]
+            set; }
 
         public static Control GetActiveChildControl() {
             Form activeForm = Form.ActiveForm;
@@ -129,68 +126,68 @@ namespace FR.Windows.Forms {
             return (Control)null;
         }
 
-        public static bool IsDescendantOf(Control parent, Control descendant) {
-            for (; descendant != null; descendant = descendant.Parent) {
-                if (descendant.Parent != null && parent == descendant.Parent)
-                    return true;
-            }
-            return false;
-        }
+        //public static bool IsDescendantOf(Control parent, Control descendant) {
+        //    for (; descendant != null; descendant = descendant.Parent) {
+        //        if (descendant.Parent != null && parent == descendant.Parent)
+        //            return true;
+        //    }
+        //    return false;
+        //}
 
-        protected void SetLoggingProvider(ILoggingProvider loggingProvider) {
-            if (loggingProvider == null)
-                return;
-            this.Logger = loggingProvider.Logger;
-        }
+        //protected void SetLoggingProvider(ILoggingProvider loggingProvider) {
+        //    if (loggingProvider == null)
+        //        return;
+        //    this.Logger = loggingProvider.Logger;
+        //}
 
-        [DebuggerNonUserCode]
-        protected void Log(FR.Logging.LogLevel logLevel, string message, params object[] args) {
-            if (this.Logger == null)
-                return;
-            this.Logger.Write(logLevel, 1, message, args);
-        }
+        //[DebuggerNonUserCode]
+        //protected void Log(FR.Logging.LogLevel logLevel, string message, params object[] args) {
+        //    if (this.Logger == null)
+        //        return;
+        //    this.Logger.Write(logLevel, 1, message, args);
+        //}
 
-        [DebuggerNonUserCode]
-        protected void LogEx(Exception ex) {
-            if (this.Logger == null)
-                return;
-            this.Logger.WriteEx(ex, 1);
-        }
+        //[DebuggerNonUserCode]
+        //protected void LogEx(Exception ex) {
+        //    if (this.Logger == null)
+        //        return;
+        //    this.Logger.WriteEx(ex, 1);
+        //}
 
-        [DebuggerNonUserCode]
-        protected void LogObject(FR.Logging.LogLevel logLevel, object obj) {
-            if (this.Logger == null)
-                return;
-            this.Logger.WriteObject(logLevel, 1, obj);
-        }
+        //[DebuggerNonUserCode]
+        //protected void LogObject(FR.Logging.LogLevel logLevel, object obj) {
+        //    if (this.Logger == null)
+        //        return;
+        //    this.Logger.WriteObject(logLevel, 1, obj);
+        //}
 
-        [DebuggerNonUserCode]
-        protected void ForceLog(FR.Logging.LogLevel logLevel, string message, params object[] args) {
-            if (this.Logger == null)
-                return;
-            this.Logger.ForceLog(logLevel, 1, message, args);
-        }
+        //[DebuggerNonUserCode]
+        //protected void ForceLog(FR.Logging.LogLevel logLevel, string message, params object[] args) {
+        //    if (this.Logger == null)
+        //        return;
+        //    this.Logger.ForceLog(logLevel, 1, message, args);
+        //}
 
-        [DebuggerNonUserCode]
-        protected void ForceLog(Exception ex) {
-            if (this.Logger == null)
-                return;
-            this.Logger.ForceLog(ex, 1);
-        }
+        //[DebuggerNonUserCode]
+        //protected void ForceLog(Exception ex) {
+        //    if (this.Logger == null)
+        //        return;
+        //    this.Logger.ForceLog(ex, 1);
+        //}
 
-        [DebuggerNonUserCode]
-        protected void CallEntry(FR.Logging.LogLevel logLevel) {
-            if (this.Logger == null)
-                return;
-            this.Logger.CallEntry(logLevel, 1);
-        }
+        //[DebuggerNonUserCode]
+        //protected void CallEntry(FR.Logging.LogLevel logLevel) {
+        //    if (this.Logger == null)
+        //        return;
+        //    this.Logger.CallEntry(logLevel, 1);
+        //}
 
-        [DebuggerNonUserCode]
-        protected void CallLeave(FR.Logging.LogLevel logLevel) {
-            if (this.Logger == null)
-                return;
-            this.Logger.CallLeave(logLevel, 1);
-        }
+        //[DebuggerNonUserCode]
+        //protected void CallLeave(FR.Logging.LogLevel logLevel) {
+        //    if (this.Logger == null)
+        //        return;
+        //    this.Logger.CallLeave(logLevel, 1);
+        //}
 
         [DebuggerNonUserCode]
         public virtual ICommandReceiver GetCommandReceiver(System.Type commandType) => (ICommandReceiver)null;
@@ -251,53 +248,53 @@ namespace FR.Windows.Forms {
             this._bMoveForm = false;
         }
 
-        LoggingManager ILoggingProvider.Logger {
-            get => this.Logger;
-            set => this.Logger = value;
-        }
+        //LoggingManager ILoggingProvider.Logger {
+        //    get => this.Logger;
+        //    set => this.Logger = value;
+        //}
 
-        [Browsable(false)]
-        FR.Logging.LogLevel ILoggingProvider.LogLevel {
-            get => this.LogLevel;
-            set => this.LogLevel = value;
-        }
+        //[Browsable(false)]
+        //FR.Logging.LogLevel ILoggingProvider.LogLevel {
+        //    get => this.LogLevel;
+        //    set => this.LogLevel = value;
+        //}
 
-        void ILoggingProvider.SetLoggingProvider(ILoggingProvider loggingProvider) => this.SetLoggingProvider(loggingProvider);
+        //void ILoggingProvider.SetLoggingProvider(ILoggingProvider loggingProvider) => this.SetLoggingProvider(loggingProvider);
 
-        void ILoggingProvider.Log(
-          FR.Logging.LogLevel logLevel,
-          string message,
-          params object[] args) {
-            this.Log(logLevel, message, args);
-        }
+        //void ILoggingProvider.Log(
+        //  FR.Logging.LogLevel logLevel,
+        //  string message,
+        //  params object[] args) {
+        //    this.Log(logLevel, message, args);
+        //}
 
-        void ILoggingProvider.LogEx(Exception ex) => this.LogEx(ex);
+        //void ILoggingProvider.LogEx(Exception ex) => this.LogEx(ex);
 
-        void ILoggingProvider.LogObject(FR.Logging.LogLevel logLevel, object obj) => this.LogObject(logLevel, obj);
+        //void ILoggingProvider.LogObject(FR.Logging.LogLevel logLevel, object obj) => this.LogObject(logLevel, obj);
 
-        void ILoggingProvider.ForceLog(
-          FR.Logging.LogLevel logLevel,
-          string message,
-          params object[] args) {
-            this.ForceLog(logLevel, message, args);
-        }
+        //void ILoggingProvider.ForceLog(
+        //  FR.Logging.LogLevel logLevel,
+        //  string message,
+        //  params object[] args) {
+        //    this.ForceLog(logLevel, message, args);
+        //}
 
-        void ILoggingProvider.ForceLog(Exception ex) => this.ForceLog(ex);
+        //void ILoggingProvider.ForceLog(Exception ex) => this.ForceLog(ex);
 
-        void ILoggingProvider.CallEntry(FR.Logging.LogLevel logLevel) => this.CallEntry(logLevel);
+        //void ILoggingProvider.CallEntry(FR.Logging.LogLevel logLevel) => this.CallEntry(logLevel);
 
-        void ILoggingProvider.CallLeave(FR.Logging.LogLevel logLevel) => this.CallLeave(logLevel);
+        //void ILoggingProvider.CallLeave(FR.Logging.LogLevel logLevel) => this.CallLeave(logLevel);
 
-        IConfigurationSource IConfigurable.ConfigurationSource {
-            get => this.ConfigurationSource;
-            set {
-            }
-        }
+        //IConfigurationSource IConfigurable.ConfigurationSource {
+        //    get => this.ConfigurationSource;
+        //    set {
+        //    }
+        //}
 
-        IConfigurationProperty IConfigurable.ConfigurationRoot {
-            get => this.ConfigurationRoot;
-            set => this.ConfigurationRoot = value;
-        }
+        //IConfigurationProperty IConfigurable.ConfigurationRoot {
+        //    get => this.ConfigurationRoot;
+        //    set => this.ConfigurationRoot = value;
+        //}
 
         [DebuggerNonUserCode]
         ICommandReceiver ICommandReceiver.GetCommandReceiver(System.Type commandType) {

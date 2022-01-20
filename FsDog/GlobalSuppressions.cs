@@ -6,3 +6,5 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")] //, Scope = "member", Target = "~M:FsDog.FormCommands_old.ctxArguments_Items_Click(System.Object,System.EventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification = "<Pending>")] //, Scope = "member", Target = "~M:FsDog.Commands.CmdViewFind.Execute")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0018:Inline variable declaration", Justification = "<Pending>", Scope = "member", Target = "~M:FsDog.Dialogs.FormMain.CreateCommandsToolStrips")]
+

@@ -41,6 +41,12 @@ namespace FR.Configuration {
 
         bool ExistsProperty(string path, string name);
 
+        T TryGetConfig<T>(string path) where T : class;
+
+        bool TryGetConfig<T>(string path, out T config) where T : class;
+
+        T GetConfig<T>(string path) where T : class;
+
         //bool ExistsProperty(string path, string name, int index);
 
         //void SetProperty(string path, string name, string value);

@@ -34,8 +34,6 @@ namespace FsDog.Tests {
                 var foo = ser.Deserialize<Foo>(r);
                 Assert.AreEqual("blah", foo.Bar);
             }
-
-            sub.SelectToken
         }
     }
 }

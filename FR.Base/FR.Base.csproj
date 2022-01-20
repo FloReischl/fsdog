@@ -54,7 +54,6 @@
     <Compile Include="Collections\Generic\DataStore`1_Interfaces.cs" />
     <Compile Include="Collections\Generic\DataStore`1_PrimaryKeyEntry.cs" />
     <Compile Include="Collections\Generic\DataStore`1_IndexValue.cs" />
-    <Compile Include="Configuration\JsonConfigFile.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
@@ -134,14 +133,14 @@
     <Compile Include="Collections\Generic\Enumerator`1.cs" />
     <Compile Include="Collections\Generic\IndexValueEnumerator`1.cs" />
     <Compile Include="Collections\Generic\SortedList`2.cs" />
-    <Compile Include="Configuration\CommandLineArg.cs" />
-    <Compile Include="Configuration\CommandLineArgs.cs" />
+    <Compile Include="CommandLineArg.cs" />
+    <Compile Include="CommandLineArgs.cs" />
     <Compile Include="Configuration\IConfigurable.cs" />
     <Compile Include="Configuration\IConfigurationSource.cs" />
     <Compile Include="Configuration\ConfigurationFile.cs" />
     <Compile Include="Configuration\ConfigurationFilePropertyDoesNotExistException.cs" />
     <Compile Include="Configuration\IConfigurationProperty.cs" />
-    <Compile Include="Configuration\CommandLineParser.cs" />
+    <Compile Include="CommandLineParser.cs" />
     <Compile Include="Configuration\ConfigurationFileProperty.cs" />
     <Compile Include="Logging\ILoggingProvider.cs" />
     <Compile Include="Logging\LogLevel.cs" />

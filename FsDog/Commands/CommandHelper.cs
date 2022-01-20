@@ -7,6 +7,7 @@
 using FR.Configuration;
 using FR.Windows.Forms;
 using FR.Windows.Forms.Commands;
+using FsDog.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -21,7 +22,7 @@ namespace FsDog.Commands {
         private static List<ToolStrip> _appsToolStrips;
         private static List<ToolStrip> _scriptsToolStrips;
 
-        public static IList<ToolStrip> GetApplicationsToolStrips() {
+        public static void GetApplicationsToolStrips(out ToolStrip shift, out ToolStrip ctrl) {
             if (CommandHelper._appsToolStrips != null) {
                 foreach (ToolStrip appsToolStrip in CommandHelper._appsToolStrips) {
                     if (appsToolStrip.Parent != null)
@@ -67,6 +68,10 @@ namespace FsDog.Commands {
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Ctrl"));
                 appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._appsToolStrips.Add(toolStrip);
+                ctrl = toolStrip;
+            }
+            else {
+                ctrl = null;
             }
 
             if (commandToolItem2.Items.Count != 0 && instance.Config.Options.Menus.Applications.ShowShiftToolStrip) {
@@ -75,10 +80,71 @@ namespace FsDog.Commands {
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Shift"));
                 appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._appsToolStrips.Add(toolStrip);
+                shift = toolStrip;
             }
-
-            return (IList<ToolStrip>)CommandHelper._appsToolStrips;
+            else {
+                shift = null;
+            }
         }
+
+        //public static IList<ToolStrip> GetApplicationsToolStrips() {
+        //    if (CommandHelper._appsToolStrips != null) {
+        //        foreach (ToolStrip appsToolStrip in CommandHelper._appsToolStrips) {
+        //            if (appsToolStrip.Parent != null)
+        //                appsToolStrip.Parent.Controls.Remove((Control)appsToolStrip);
+        //            while (appsToolStrip.Items.Count != 0) {
+        //                ToolStripItem toolStripItem = appsToolStrip.Items[0];
+        //                appsToolStrip.Items.Remove(toolStripItem);
+        //                if (!toolStripItem.IsDisposed)
+        //                    toolStripItem.Dispose();
+        //            }
+        //            appsToolStrip.Dispose();
+        //        }
+        //        CommandHelper._appsToolStrips.Clear();
+        //    }
+        //    FsApp instance = FsApp.Instance;
+        //    CommandToolItem applicationsToolItem = CommandHelper.GetApplicationsToolItem();
+        //    CommandToolItem commandToolItem1 = new CommandToolItem("ApplicationsCtrl");
+        //    commandToolItem1.Name = "ApplicationsCtrl";
+        //    CommandToolItem commandToolItem2 = new CommandToolItem("ApplicationsShift");
+        //    commandToolItem2.Name = "ApplicationsShift";
+        //    foreach (CommandToolItem commandToolItem3 in applicationsToolItem.Items) {
+        //        CommandInfo commandInfo = (CommandInfo)commandToolItem3.CommandContext[(object)"CommandInfo"];
+        //        if (commandInfo != null) {
+        //            if ((commandInfo.Key & Keys.Control) == Keys.Control) {
+        //                commandToolItem1.Items.Add(commandToolItem3);
+        //                commandToolItem1.Items.Add(new CommandToolItem("-"));
+        //            }
+        //            if ((commandInfo.Key & Keys.Shift) == Keys.Shift) {
+        //                commandToolItem2.Items.Add(commandToolItem3);
+        //                commandToolItem2.Items.Add(new CommandToolItem("-"));
+        //            }
+        //        }
+        //    }
+
+        //    AppearanceProvider appearance = new AppearanceProvider();
+
+        //    if (CommandHelper._appsToolStrips == null)
+        //        CommandHelper._appsToolStrips = new List<ToolStrip>();
+
+        //    if (commandToolItem1.Items.Count != 0 && instance.Config.Options.Menus.Applications.ShowCtrlToolStrip) {
+        //        ToolStrip toolStrip = commandToolItem1.CreateToolStrip();
+        //        CommandHelper.ApplyDisplaySettings(toolStrip, instance.Config.Options.Menus.Applications.ShowCtrlImage, instance.Config.Options.Menus.Applications.ShowCtrlName, instance.Config.Options.Menus.Applications.ShowCtrlShortcut);
+        //        toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Ctrl"));
+        //        appearance.ApplyToToolStrip(toolStrip);
+        //        CommandHelper._appsToolStrips.Add(toolStrip);
+        //    }
+
+        //    if (commandToolItem2.Items.Count != 0 && instance.Config.Options.Menus.Applications.ShowShiftToolStrip) {
+        //        ToolStrip toolStrip = commandToolItem2.CreateToolStrip();
+        //        CommandHelper.ApplyDisplaySettings(toolStrip, instance.Config.Options.Menus.Applications.ShowShiftImage, instance.Config.Options.Menus.Applications.ShowShiftName, instance.Config.Options.Menus.Applications.ShowShiftShortcut);
+        //        toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Shift"));
+        //        appearance.ApplyToToolStrip(toolStrip);
+        //        CommandHelper._appsToolStrips.Add(toolStrip);
+        //    }
+
+        //    return (IList<ToolStrip>)CommandHelper._appsToolStrips;
+        //}
 
         public static CommandToolItem GetApplicationsToolItem() {
             FsApp instance = FsApp.Instance;
@@ -103,7 +169,7 @@ namespace FsDog.Commands {
             return applicationsToolItem;
         }
 
-        public static IList<ToolStrip> GetScriptsToolStrips() {
+        public static void GetScriptsToolStrips(out ToolStrip shift, out ToolStrip ctrl) {
             if (CommandHelper._scriptsToolStrips != null) {
                 foreach (ToolStrip scriptsToolStrip in CommandHelper._scriptsToolStrips) {
                     if (scriptsToolStrip.Parent != null)
@@ -148,6 +214,10 @@ namespace FsDog.Commands {
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Ctrl"));
                 appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._scriptsToolStrips.Add(toolStrip);
+                ctrl = toolStrip;
+            }
+            else {
+                ctrl = null;
             }
 
             if (commandToolItem2.Items.Count != 0 && instance.Config.Options.Menus.Scripts.ShowShiftToolStrip) {
@@ -156,9 +226,11 @@ namespace FsDog.Commands {
                 toolStrip.Items.Insert(0, (ToolStripItem)new ToolStripLabel("Shift"));
                 appearance.ApplyToToolStrip(toolStrip);
                 CommandHelper._scriptsToolStrips.Add(toolStrip);
+                shift = toolStrip;
             }
-
-            return (IList<ToolStrip>)CommandHelper._scriptsToolStrips;
+            else {
+                shift = null;
+            }
         }
 
         public static CommandToolItem GetScriptsToolItem() {
@@ -220,7 +292,7 @@ namespace FsDog.Commands {
         public static void SetScriptingHostsToConfig(IList<ScriptingHostConfiguration> hosts) {
             var config = FsApp.Instance.Config;
             config.Scripting.Hosts.Clear();
-            config.Scripting.Hosts.AddRange(hosts.Select(host => FsDogConfig.HostsConfig.FromHost(host)));
+            config.Scripting.Hosts.AddRange(hosts.Select(host => HostsConfig.FromHost(host)));
 
             //IConfigurationProperty property = FsApp.Instance.ConfigurationSource.GetProperty("Scripting", "Hosts", true);
             //while (property.ExistsSubProperty("Item"))
@@ -237,7 +309,7 @@ namespace FsDog.Commands {
         public static void SetToConfig(IList<CommandInfo> infos) {
             var config = FsApp.Instance.Config;
             config.Commands.Clear();
-            config.Commands.AddRange(infos.Select(info => FsDogConfig.CommandConfig.FromInfo(info)));
+            config.Commands.AddRange(infos.Select(info => CommandConfig.FromInfo(info)));
 
             //IConfigurationProperty property = FsApp.Instance.ConfigurationSource.GetProperty(".", "Commands");
             //foreach (IConfigurationProperty subProperty in property.GetSubProperties("Command"))

@@ -58,7 +58,7 @@ namespace FR.Configuration {
         public void Set(bool value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, bool value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -78,7 +78,7 @@ namespace FR.Configuration {
         public void Set(byte value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, byte value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -98,7 +98,7 @@ namespace FR.Configuration {
         public void Set(DateTime value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString(this.ConfigurationSource.DateTimeFormat));
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, DateTime value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -118,7 +118,7 @@ namespace FR.Configuration {
         public void Set(double value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, double value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -138,7 +138,7 @@ namespace FR.Configuration {
         public void Set(short value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, short value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -158,7 +158,7 @@ namespace FR.Configuration {
         public void Set(int value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, int value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -178,7 +178,7 @@ namespace FR.Configuration {
         public void Set(long value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, long value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -198,7 +198,7 @@ namespace FR.Configuration {
         public void Set(sbyte value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, sbyte value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -218,7 +218,7 @@ namespace FR.Configuration {
         public void Set(float value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, float value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -238,7 +238,7 @@ namespace FR.Configuration {
         public void Set(string value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value);
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, string value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -258,7 +258,7 @@ namespace FR.Configuration {
         public void Set(ushort value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, ushort value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -278,7 +278,7 @@ namespace FR.Configuration {
         public void Set(uint value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, uint value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -298,7 +298,7 @@ namespace FR.Configuration {
         public void Set(ulong value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, ulong value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -328,8 +328,8 @@ namespace FR.Configuration {
                 element.AppendChild((XmlNode)textNode);
                 this.Element.AppendChild((XmlNode)element);
             }
-            this.ConfigurationSource.setChanged();
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.SetChanged();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, Array value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -368,8 +368,8 @@ namespace FR.Configuration {
                 object oValue = value[key];
                 this._setKeyValuePair(this.Element, key, oValue);
             }
-            this.ConfigurationSource.setChanged();
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.SetChanged();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, Hashtable value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -418,8 +418,8 @@ namespace FR.Configuration {
                 object oValue = value[key];
                 this._setKeyValuePair(this.Element, key, oValue);
             }
-            this.ConfigurationSource.setChanged();
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.SetChanged();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, IDictionary value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -472,7 +472,7 @@ namespace FR.Configuration {
         public void Set(object value) {
             XmlText textNode = this._getTextNode(true);
             this._setTextValue(ref textNode, value.ToString());
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, object value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -502,8 +502,8 @@ namespace FR.Configuration {
             parentNode.RemoveChild((XmlNode)this.Element);
             value = (XmlElement)this.ConfigurationSource.Dom.ImportNode((XmlNode)value, true);
             parentNode.AppendChild((XmlNode)value);
-            this.ConfigurationSource.setChanged();
-            this.ConfigurationSource.autoSave();
+            this.ConfigurationSource.SetChanged();
+            this.ConfigurationSource.AutoSaveInternal();
         }
 
         public void Set(string subProperty, XmlElement value) => this.GetSubProperty(subProperty, true).Set(value);
@@ -622,7 +622,7 @@ namespace FR.Configuration {
             else if (autoCreate) {
                 newChild = this.ConfigurationSource.Dom.CreateTextNode("");
                 this.Element.AppendChild((XmlNode)newChild);
-                this.ConfigurationSource.autoSave();
+                this.ConfigurationSource.AutoSaveInternal();
             }
             return newChild;
         }
@@ -669,7 +669,7 @@ namespace FR.Configuration {
             if (tValue.Value == null || !(tValue.Value != value))
                 return;
             tValue.Value = value;
-            this.ConfigurationSource.setChanged();
+            this.ConfigurationSource.SetChanged();
         }
 
         TypeCode IConvertible.GetTypeCode() => throw new Exception("The method or operation is not implemented.");

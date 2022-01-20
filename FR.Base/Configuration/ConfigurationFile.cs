@@ -4,6 +4,8 @@
 // MVID: E4325E6A-7973-47D1-9B4E-B328A6EAD270
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Base.dll
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,73 +19,71 @@ namespace FR.Configuration {
     [DebuggerDisplay("FileName: {FileName}")]
     public class ConfigurationFile : IConfigurationSource {
         private bool _changed;
-        private string _fileName = string.Empty;
-        private XmlElement _root;
         private ConfigurationFileProperty _rootProperty;
-        private CultureInfo _formatCulture;
-        private bool _bAutoSave;
-        private string _dateTimeFormat = "yyyyMMdd HH:mm:ss.FFFF";
-        private bool _writeCollectionItemType;
+        private JObject _root;
 
         public ConfigurationFile()
           : this((string)null, ConfigurationFile.FileAccessMode.CreateIfNotExists) {
         }
 
         public ConfigurationFile(XmlElement root) {
-            this._fileName = (string)null;
-            this._root = root;
+            this.FileName = (string)null;
+            this.RootElement = root;
         }
 
         public ConfigurationFile(string filename, ConfigurationFile.FileAccessMode accessMode) {
-            this._fileName = filename;
+            this.FileName = filename;
             this.FormatCulture = CultureInfo.CurrentCulture;
             this.WriteType = true;
-            if (this.FileName == null)
-                this._fileName = ConfigurationFile.GetDefaultConfigFileName(Assembly.GetEntryAssembly());
-            if (string.IsNullOrEmpty(this.FileName))
-                throw new ArgumentException("Property FileName is <empty>");
-            bool flag = false;
+            //if (this.FileName == null)
+            //    this.FileName = ConfigurationFile.GetDefaultConfigFileName_OLD(Assembly.GetEntryAssembly());
+            //if (string.IsNullOrEmpty(this.FileName))
+            //    throw new ArgumentException("Property FileName is <empty>");
+            //bool flag = false;
             XmlDocument xmlDocument = new XmlDocument();
             switch (accessMode) {
-                case ConfigurationFile.FileAccessMode.OpenExisting:
-                    if (!File.Exists(this.FileName))
-                        throw new FileNotFoundException("Config file {0} does not exist");
-                    xmlDocument.Load(this.FileName);
-                    break;
-                case ConfigurationFile.FileAccessMode.Create:
-                    if (File.Exists(this.FileName))
-                        throw new IOException(string.Format("Config file {0} already exists.", (object)this.FileName));
-                    flag = true;
-                    break;
+                //case ConfigurationFile.FileAccessMode.OpenExisting:
+                //    if (!File.Exists(this.FileName))
+                //        throw new FileNotFoundException("Config file {0} does not exist");
+                //    xmlDocument.Load(this.FileName);
+                //    break;
+                //case ConfigurationFile.FileAccessMode.Create:
+                //    if (File.Exists(this.FileName))
+                //        throw new IOException(string.Format("Config file {0} already exists.", (object)this.FileName));
+                //    flag = true;
+                //    break;
                 case ConfigurationFile.FileAccessMode.CreateIfNotExists:
                     if (File.Exists(this.FileName)) {
                         xmlDocument.Load(this.FileName);
+
+                        string json = Path.Combine(Path.GetDirectoryName(FileName), Path.GetFileNameWithoutExtension(FileName) + ".json");
+                        using (StreamReader sr = new StreamReader(json))
+                        using (JsonTextReader jr = new JsonTextReader(sr)) {
+                            _root = JObject.Load(jr);
+                        }
                         break;
                     }
-                    flag = true;
+                    //flag = true;
                     break;
-                case ConfigurationFile.FileAccessMode.CreateWithOverwrite:
-                    if (File.Exists(this.FileName))
-                        File.Delete(this.FileName);
-                    flag = true;
-                    break;
+                //case ConfigurationFile.FileAccessMode.CreateWithOverwrite:
+                //    if (File.Exists(this.FileName))
+                //        File.Delete(this.FileName);
+                //    flag = true;
+                //    break;
             }
-            if (flag) {
-                this._root = xmlDocument.CreateElement("Configuration");
-                xmlDocument.AppendChild((XmlNode)this._root);
-                xmlDocument.Save(this.FileName);
-            }
-            this._root = xmlDocument.DocumentElement;
+            //if (flag) {
+            //    this.RootElement = xmlDocument.CreateElement("Configuration");
+            //    xmlDocument.AppendChild((XmlNode)this.RootElement);
+            //    xmlDocument.Save(this.FileName);
+            //}
+            this.RootElement = xmlDocument.DocumentElement;
         }
 
-        public string FileName {
-            get => this._fileName;
-            set => this._fileName = value;
-        }
+        public string FileName { get; set; } = string.Empty;
 
         internal XmlDocument Dom => this.RootElement.OwnerDocument;
 
-        internal XmlElement RootElement => this._root;
+        internal XmlElement RootElement { get; }
 
         public ConfigurationFileProperty RootProperty {
             get {
@@ -93,33 +93,25 @@ namespace FR.Configuration {
             }
         }
 
-        public CultureInfo FormatCulture {
-            get => this._formatCulture;
-            set => this._formatCulture = value;
-        }
+        public CultureInfo FormatCulture { get; set; }
 
-        public bool AutoSave {
-            get => this._bAutoSave;
-            set => this._bAutoSave = value;
-        }
+        public bool AutoSave { get; set; }
 
-        public string DateTimeFormat {
-            get => this._dateTimeFormat;
-            set => this._dateTimeFormat = value;
-        }
+        public string DateTimeFormat { get; set; } = "yyyyMMdd HH:mm:ss.FFFF";
 
-        public bool WriteType {
-            get => this._writeCollectionItemType;
-            set => this._writeCollectionItemType = value;
-        }
+        public bool WriteType { get; set; }
 
-        public static ConfigurationFile GetAssemblyConfigurationFile(
-          Assembly asm,
-          ConfigurationFile.FileAccessMode accessMode) {
-            return new ConfigurationFile(ConfigurationFile.GetDefaultConfigFileName(asm), accessMode);
-        }
+        public static string GetDefaultConfigFileName_OLD(Assembly asm) => asm.Location + ".cfg";
 
-        public static string GetDefaultConfigFileName(Assembly asm) => asm.Location + ".cfg";
+        public static string GetDefaultConfigFileName(Assembly asm) => asm.Location + ".json";
+
+        public static bool TryGetConfigFile(Assembly asm, out ConfigurationFile config) {
+            config = null;
+            if (File.Exists(ConfigurationFile.GetDefaultConfigFileName_OLD(asm))) {
+                config = new ConfigurationFile();
+            }
+            return config != null;
+        }
 
         public void Save() {
             if (this.FileName == null)
@@ -130,6 +122,31 @@ namespace FR.Configuration {
         public void Save(string fileName) {
             this.FileName = fileName;
             this.Save();
+        }
+
+        public T TryGetConfig<T>(string path) where T : class {
+            var token = _root.SelectToken(path);
+            if (token == null) {
+                return null;
+            }
+
+            using (var jr = token.CreateReader()) {
+                var serializer = new JsonSerializer();
+                return serializer.Deserialize<T>(jr);
+            }
+        }
+
+        public bool TryGetConfig<T>(string path, out T config) where T : class {
+            config = TryGetConfig<T>(path);
+            return config != null;
+        }
+
+        public T GetConfig<T>(string path) where T : class {
+            var config = TryGetConfig<T>(path);
+            if (config == null) {
+                throw new ArgumentException($"unknown config path '{path}'");
+            }
+            return config;
         }
 
         public void Save(XmlWriter writer) => this.Dom.Save(writer);
@@ -150,62 +167,62 @@ namespace FR.Configuration {
 
         public void SetProperty(string path, string name, object value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, string value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, bool value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, int value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, long value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, float value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, double value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, DateTime value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, Array value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, Hashtable value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, IDictionary value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public void SetProperty(string path, string name, XmlElement value) {
             this.GetProperty(path, name, true).Set(value);
-            this.autoSave();
+            this.AutoSaveInternal();
         }
 
         public ConfigurationFileProperty GetProperty(
@@ -223,14 +240,14 @@ namespace FR.Configuration {
                         XmlElement element2 = this.Dom.CreateElement(name);
                         pathElement.AppendChild((XmlNode)element2);
                         element1 = (XmlElement)pathElement.SelectSingleNode(xpath);
-                        this.setChanged();
+                        this.SetChanged();
                     }
                 }
             }
             if (element1 == null)
                 throw new ConfigurationFilePropertyDoesNotExistException(path, name);
             ConfigurationFileProperty property = new ConfigurationFileProperty(this, element1, path, index);
-            this.autoSave();
+            this.AutoSaveInternal();
             return property;
         }
 
@@ -342,13 +359,13 @@ namespace FR.Configuration {
             return this.GetProperty(path, name, true).ToXmlElement(defaultValue);
         }
 
-        internal void autoSave() {
+        internal void AutoSaveInternal() {
             if (!this.AutoSave || !this._changed)
                 return;
             this.Save();
         }
 
-        internal void setChanged() => this._changed = true;
+        internal void SetChanged() => this._changed = true;
 
         private XmlElement GetPathElement(string path, bool autoCreate) {
             path = path.Replace("//", "\0");
@@ -363,7 +380,7 @@ namespace FR.Configuration {
                     if (autoCreate) {
                         newChild = this.Dom.CreateElement(strArray[index]);
                         pathElement.AppendChild((XmlNode)newChild);
-                        this.setChanged();
+                        this.SetChanged();
                     }
                     else {
                         pathElement = (XmlElement)null;

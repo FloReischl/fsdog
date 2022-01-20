@@ -9,6 +9,7 @@ using FR.Configuration;
 using FR.IO;
 using FR.Windows.Forms;
 using FsDog.Commands;
+using FsDog.Configuration;
 using FsDog.Dialogs;
 using System;
 using System.Collections;
@@ -17,6 +18,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -125,10 +127,13 @@ namespace FsDog.Detail {
             return selectedSystemInfos;
         }
 
-        public void ReadFromConfig(IConfigurationProperty root, bool isFirst) {
+        public void ReadFromConfig(DetailViewStateConfig config, bool isFirst) {
             FsApp instance = FsApp.Instance;
-            foreach (IConfigurationProperty subProperty in root.GetSubProperty("Columns", true).GetSubProperties("Column"))
-                this._columnWidths.Add(subProperty["Name"].ToString(), subProperty["Width"].ToInt32());
+
+            foreach (var column in config.Columns) {
+                this._columnWidths.Add(column.Name, column.Width);
+            }
+
             if (this._columnWidths.Count == 0) {
                 this._columnWidths.Add("Image", 24);
                 this._columnWidths.Add("Name", 300);
@@ -137,7 +142,7 @@ namespace FsDog.Detail {
                 this._columnWidths.Add("DateModified", 150);
             }
             try {
-                string treePath = root.GetSubProperty("Path", true).ToString("");
+                string treePath = config.Path;
                 if (!string.IsNullOrEmpty(treePath) && treePath.StartsWith("\\\\") && instance.Config.Options.General.RestoreNetworkDirectories)
                     this.OnRequestParentDirectory(treePath);
                 else if (!string.IsNullOrEmpty(treePath) && instance.Config.Options.General.RestoreDirectories)
@@ -319,16 +324,24 @@ namespace FsDog.Detail {
             }
         }
 
-        public void SetToConfig(IConfigurationProperty root, bool isFirst) {
-            root.GetSubProperty("Path", true).Set(this.TreePath);
-            IConfigurationProperty subProperty = root.GetSubProperty("Columns");
-            while (subProperty.ExistsSubProperty("Column"))
-                subProperty.GetSubProperty("Column").Delete();
-            foreach (KeyValuePair<string, int> columnWidth in this._columnWidths) {
-                IConfigurationProperty configurationProperty = subProperty.AddSubProperty("Column");
-                configurationProperty.GetSubProperty("Name", true).Set(columnWidth.Key);
-                configurationProperty.GetSubProperty("Width", true).Set(columnWidth.Value);
-            }
+        //public void SetToConfig(IConfigurationProperty root, bool isFirst) {
+        //    root.GetSubProperty("Path", true).Set(this.TreePath);
+        //    IConfigurationProperty subProperty = root.GetSubProperty("Columns");
+        //    while (subProperty.ExistsSubProperty("Column"))
+        //        subProperty.GetSubProperty("Column").Delete();
+        //    foreach (KeyValuePair<string, int> columnWidth in this._columnWidths) {
+        //        IConfigurationProperty configurationProperty = subProperty.AddSubProperty("Column");
+        //        configurationProperty.GetSubProperty("Name", true).Set(columnWidth.Key);
+        //        configurationProperty.GetSubProperty("Width", true).Set(columnWidth.Value);
+        //    }
+        //}
+
+        public void SetToConfig(DetailViewStateConfig config) {
+            config.Path = this.TreePath;
+            config.Columns = _columnWidths.Select(kvp => new ColumnConfig {
+                Name = kvp.Key,
+                Width = kvp.Value
+            }).ToList();
         }
 
         protected override void InitLayout() {

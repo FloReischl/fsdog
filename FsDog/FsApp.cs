@@ -11,6 +11,7 @@ using FR.IO;
 using FR.Logging;
 using FR.Windows.Forms;
 using FsDog.Commands;
+using FsDog.Configuration;
 using FsDog.Dialogs;
 using FsDog.Properties;
 using System;
@@ -155,45 +156,45 @@ namespace FsDog {
             if (!directoryInfo.Exists)
                 directoryInfo.Create();
             FileInfo configFile = new FileInfo(Path.Combine(directoryInfo.FullName, Path.GetFileName(this.GetType().Assembly.Location + ".cfg")));
-            if (!configFile.Exists) {
-                AssemblyName name = this.GetType().Assembly.GetName();
-                string path = Application.LocalUserAppDataPath.Replace(name.Version.ToString(), "").TrimEnd('\\');
-                Version version1 = (Version)null;
-                ShellDirectory shellDirectory = (ShellDirectory)null;
-                foreach (string directory in Directory.GetDirectories(path)) {
-                    try {
-                        Version version2 = new Version(Path.GetFileName(directory));
-                        if (!(version1 == (Version)null)) {
-                            if (!(version1 < version2))
-                                continue;
-                        }
-                        if (version2 < name.Version) {
-                            version1 = version2;
-                            shellDirectory = new ShellDirectory(directory);
-                        }
-                    }
-                    catch {
-                    }
-                }
-                if (shellDirectory != null) {
-                    foreach (ShellDirectory directory in shellDirectory.GetDirectories())
-                        directory.CopyTo(Path.Combine(directoryInfo.FullName, directory.Name), false);
-                    foreach (ShellFile file in shellDirectory.GetFiles())
-                        file.CopyTo(Path.Combine(directoryInfo.FullName, file.Name), false);
-                }
-                else {
-                    string str = Path.Combine(Path.Combine(Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FR Solutions"), this.Information.ProductName), this.Information.Version.ToString()), Path.GetFileName(this.GetType().Assembly.Location) + ".cfg");
-                    if (File.Exists(str)) {
-                        File.Copy(str, configFile.FullName);
-                        try {
-                            File.Delete(str);
-                            Directory.Delete(Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FR Solutions"), this.Information.ProductName), true);
-                        }
-                        catch {
-                        }
-                    }
-                }
-            }
+            //if (!configFile.Exists) {
+            //    AssemblyName name = this.GetType().Assembly.GetName();
+            //    string path = Application.LocalUserAppDataPath.Replace(name.Version.ToString(), "").TrimEnd('\\');
+            //    Version version1 = (Version)null;
+            //    ShellDirectory shellDirectory = (ShellDirectory)null;
+            //    foreach (string directory in Directory.GetDirectories(path)) {
+            //        try {
+            //            Version version2 = new Version(Path.GetFileName(directory));
+            //            if (!(version1 == (Version)null)) {
+            //                if (!(version1 < version2))
+            //                    continue;
+            //            }
+            //            if (version2 < name.Version) {
+            //                version1 = version2;
+            //                shellDirectory = new ShellDirectory(directory);
+            //            }
+            //        }
+            //        catch {
+            //        }
+            //    }
+            //    if (shellDirectory != null) {
+            //        foreach (ShellDirectory directory in shellDirectory.GetDirectories())
+            //            directory.CopyTo(Path.Combine(directoryInfo.FullName, directory.Name), false);
+            //        foreach (ShellFile file in shellDirectory.GetFiles())
+            //            file.CopyTo(Path.Combine(directoryInfo.FullName, file.Name), false);
+            //    }
+            //    else {
+            //        string str = Path.Combine(Path.Combine(Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FR Solutions"), this.Information.ProductName), this.Information.Version.ToString()), Path.GetFileName(this.GetType().Assembly.Location) + ".cfg");
+            //        if (File.Exists(str)) {
+            //            File.Copy(str, configFile.FullName);
+            //            try {
+            //                File.Delete(str);
+            //                Directory.Delete(Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FR Solutions"), this.Information.ProductName), true);
+            //            }
+            //            catch {
+            //            }
+            //        }
+            //    }
+            //}
             return configFile;
         }
 

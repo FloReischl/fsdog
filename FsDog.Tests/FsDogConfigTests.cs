@@ -1,4 +1,5 @@
 ﻿using System;
+using FsDog.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FsDog.Tests {

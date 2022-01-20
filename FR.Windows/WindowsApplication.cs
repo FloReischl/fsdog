@@ -74,15 +74,15 @@ namespace FR.Windows.Forms {
             base.Start();
         }
 
-        public override void Initialize() {
-            base.Initialize();
-            if (this._mainForm != null || this._mainFormType != null)
-                return;
-            string typeName = this.ConfigurationRoot.GetSubProperty("MainForm").ToString();
-            this._mainFormType = System.Type.GetType(typeName);
-            if (this._mainFormType == null)
-                throw new InvalidCastException(string.Format("Cannot find type of MainForm by name '{0}'", (object)typeName));
-        }
+        //public override void Initialize() {
+        //    base.Initialize();
+        //    if (this._mainForm != null || this._mainFormType != null)
+        //        return;
+        //    string typeName = this.ConfigurationRoot.GetSubProperty("MainForm").ToString();
+        //    this._mainFormType = System.Type.GetType(typeName);
+        //    if (this._mainFormType == null)
+        //        throw new InvalidCastException(string.Format("Cannot find type of MainForm by name '{0}'", (object)typeName));
+        //}
 
         public override void Run() {
             if (Application.VisualStyleState != VisualStyleState.NoneEnabled)

@@ -15,13 +15,16 @@ namespace FR.Logging {
     public class LoggingManager {
         private int _bufferedLines;
         private int _indention;
-        private List<ILoggingDevice> _devices;
-        private int _flushLines;
         private bool _isClosed;
 
-        public LoggingManager(IConfigurationProperty loggingConfiguration) {
-            this.FlushLines = loggingConfiguration.GetSubProperty(nameof(FlushLines), true).ToInt32(5);
-            this._devices = new List<ILoggingDevice>();
+        public LoggingManager() {
+            this.FlushLines = 5;
+            this.Devices = new List<ILoggingDevice>();
+        }
+
+        public LoggingManager(IConfigurationProperty loggingConfiguration)
+            : this() {
+            this.FlushLines = loggingConfiguration.GetSubProperty(nameof(FlushLines), true).ToInt32(FlushLines);
             foreach (IConfigurationProperty subProperty in loggingConfiguration.GetSubProperties("Device")) {
                 string typeName = subProperty.GetSubProperty("ClassName").ToString();
                 Type type = Type.GetType(typeName);
@@ -33,12 +36,9 @@ namespace FR.Logging {
             }
         }
 
-        public List<ILoggingDevice> Devices => this._devices;
+        public List<ILoggingDevice> Devices { get; }
 
-        public int FlushLines {
-            get => this._flushLines;
-            set => this._flushLines = value;
-        }
+        public int FlushLines { get; set; }
 
         public bool IsClosed => this._isClosed;
 
@@ -156,8 +156,8 @@ namespace FR.Logging {
         [DebuggerNonUserCode]
         private bool CheckWrite(LogLevel logLevel) {
             bool flag = false;
-            if (this._devices != null) {
-                foreach (ILoggingDevice device in this._devices) {
+            if (this.Devices != null) {
+                foreach (ILoggingDevice device in this.Devices) {
                     if ((device.LogLevel & logLevel) != LogLevel.None) {
                         flag = true;
                         break;

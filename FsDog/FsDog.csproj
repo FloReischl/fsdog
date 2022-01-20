@@ -79,6 +79,27 @@
     <Compile Include="Commands\CmdToolsClearImageCache.cs" />
     <Compile Include="Commands\CmdToolsOpenConfigFile.cs" />
     <Compile Include="Commands\CmdToolsOptions.cs" />
+    <Compile Include="Configuration\AppearanceConfig.cs" />
+    <Compile Include="Configuration\ApplicationsConfig.cs" />
+    <Compile Include="Configuration\ColumnConfig.cs" />
+    <Compile Include="Configuration\CommandConfig.cs" />
+    <Compile Include="Configuration\CommandsAppsConfig.cs" />
+    <Compile Include="Configuration\DetailViewConfig.cs" />
+    <Compile Include="Configuration\DetailViewStateConfig.cs" />
+    <Compile Include="Configuration\FileViewConfig.cs" />
+    <Compile Include="Configuration\FormMainConfig.cs" />
+    <Compile Include="Configuration\FsAppConfig.cs" />
+    <Compile Include="Configuration\GeneralConfig.cs" />
+    <Compile Include="Configuration\HostsConfig.cs" />
+    <Compile Include="Configuration\MainConfig.cs" />
+    <Compile Include="Configuration\MenusConfig.cs" />
+    <Compile Include="Configuration\NavigationConfig.cs" />
+    <Compile Include="Configuration\OptionsConfig.cs" />
+    <Compile Include="Configuration\PreviewConfig.cs" />
+    <Compile Include="Configuration\ScriptingConfig.cs" />
+    <Compile Include="Configuration\ScriptsConfig.cs" />
+    <Compile Include="Configuration\ToolStripConfig.cs" />
+    <Compile Include="Configuration\ToolStripsConfig.cs" />
     <Compile Include="Detail\DiskItem.cs" />
     <Compile Include="Detail\GridColumnFactory.cs" />
     <Compile Include="Dialogs\FormCommands.cs">
@@ -107,7 +128,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="FsDogConfig.cs" />
+    <Compile Include="Configuration\FsDogConfig.cs" />
     <Compile Include="Search\FormSearch.cs">
       <SubType>Form</SubType>
     </Compile>

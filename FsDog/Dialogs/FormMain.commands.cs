@@ -149,16 +149,16 @@ namespace FsDog.Dialogs {
             _menuStrip.Dock = DockStyle.Top;
             Controls.Add((Control)this._menuStrip);
             PointConverter pointConverter = new PointConverter();
-            IConfigurationProperty subProperty = this.ConfigurationRoot.GetSubProperty("ToolStrips", true);
+            //IConfigurationProperty subProperty = this.ConfigurationRoot.GetSubProperty("ToolStrips", true);
             _menu.Items.Remove(applicationsParent);
             _menu.Items.Remove(scriptsParent);
             _menu.Items.Remove(favoritesParent);
             ToolStrip toolStrip = this._menu.CreateToolStrip();
             AppearanceProvider appearance = new AppearanceProvider();
             appearance.ApplyToToolStrip(toolStrip);
-            Point location = new Point(toolStrip.Location.X, toolStrip.Location.Y);
-            if (subProperty.ExistsSubProperty(toolStrip.Name))
-                location = (Point)pointConverter.ConvertFrom((object)subProperty[toolStrip.Name]["Location"].ToString(pointConverter.ConvertToString((object)location)));
+            Point location = _config.ToolStrips.ToolStrip(toolStrip.Name)?.Location ?? new Point(toolStrip.Location.X, toolStrip.Location.Y);
+            //if (subProperty.ExistsSubProperty(toolStrip.Name))
+            //    location = (Point)pointConverter.ConvertFrom((object)subProperty[toolStrip.Name]["Location"].ToString(pointConverter.ConvertToString((object)location)));
             tscMain.TopToolStripPanel.Join(toolStrip, location);
             _toolStrips.Add(toolStrip.Name, toolStrip);
         }

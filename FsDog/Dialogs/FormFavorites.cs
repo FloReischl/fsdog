@@ -7,15 +7,19 @@
 using FR.Configuration;
 using FR.Windows.Forms;
 using FsDog.Commands;
+using FsDog.Configuration;
 using FsDog.Properties;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace FsDog {
     public class FormFavorites : FormBase {
+        private FsDogConfig _config;
         //private IContainer components;
         private ListView lvwFavorites;
         private ColumnHeader columnHeader1;
@@ -206,20 +210,29 @@ namespace FsDog {
 
         private void FormFavorites_Load(object sender, EventArgs e) {
             this.Icon = Icon.FromHandle(new Bitmap((Image)Resources.FavoritesEdit).GetHicon());
-            this.ConfigurationRoot = this.ConfigurationSource.GetProperty(".", "Favorites", true);
+
+            _config = FsApp.Instance.Config;
+            //this.ConfigurationRoot = FsApp.Instance.ConfigurationSource.GetProperty(".", "Favorites", true);
+
             foreach (FavoriteInfo info in CmdFavorite.GetInfos())
                 this.lvwFavorites.Items.Add(new ListViewItem(info.DirectoryName));
+
             this.txtFavorite.Text = this.StartupFavorite;
         }
 
         private void FormFavorites_FormClosing(object sender, FormClosingEventArgs e) {
             if (this.DialogResult != DialogResult.OK)
                 return;
-            foreach (IConfigurationProperty subProperty in this.ConfigurationRoot.GetSubProperties("Item"))
-                subProperty.Delete();
-            foreach (ListViewItem listViewItem in this.lvwFavorites.Items)
-                this.ConfigurationRoot.AddSubProperty("Item").GetSubProperty("Directory", true).Set(listViewItem.Text);
-            this.ConfigurationSource.Save();
+
+            _config.Favorites = lvwFavorites.Items.Cast<ListViewItem>().Select(lvi => lvi.Text).ToList();
+            _config.Save();
+            //foreach (IConfigurationProperty subProperty in this.ConfigurationRoot.GetSubProperties("Item"))
+            //    subProperty.Delete();
+
+            //foreach (ListViewItem listViewItem in this.lvwFavorites.Items)
+            //    this.ConfigurationRoot.AddSubProperty("Item").GetSubProperty("Directory", true).Set(listViewItem.Text);
+
+            //FsApp.Instance.ConfigurationSource.Save();
         }
 
         private void lvwFavorites_SelectedIndexChanged(object sender, EventArgs e) {
