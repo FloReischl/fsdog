@@ -4,12 +4,10 @@
 // MVID: E4325E6A-7973-47D1-9B4E-B328A6EAD270
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Base.dll
 
-namespace FR.Configuration
-{
-  public interface IConfigurable
-  {
-    IConfigurationSource ConfigurationSource { get; set; }
+//namespace FR.Configuration {
+//    public interface IConfigurable {
+//        IConfigurationSource ConfigurationSource { get; set; }
 
-    IConfigurationProperty ConfigurationRoot { get; set; }
-  }
-}
+//        IConfigurationProperty ConfigurationRoot { get; set; }
+//    }
+//}

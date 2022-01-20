@@ -19,7 +19,7 @@ namespace FR.Configuration {
     [DebuggerDisplay("FileName: {FileName}")]
     public class ConfigurationFile : IConfigurationSource {
         private bool _changed;
-        private ConfigurationFileProperty _rootProperty;
+        //private ConfigurationFileProperty _rootProperty;
         private JObject _root;
 
         public ConfigurationFile()
@@ -85,13 +85,13 @@ namespace FR.Configuration {
 
         internal XmlElement RootElement { get; }
 
-        public ConfigurationFileProperty RootProperty {
-            get {
-                if (this._rootProperty == null)
-                    this._rootProperty = new ConfigurationFileProperty(this, this.RootElement, "//", 0);
-                return this._rootProperty;
-            }
-        }
+        //public ConfigurationFileProperty RootProperty {
+        //    get {
+        //        if (this._rootProperty == null)
+        //            this._rootProperty = new ConfigurationFileProperty(this, this.RootElement, "//", 0);
+        //        return this._rootProperty;
+        //    }
+        //}
 
         public CultureInfo FormatCulture { get; set; }
 
@@ -159,7 +159,7 @@ namespace FR.Configuration {
         [DebuggerNonUserCode]
         public bool ExistsProperty(string path, string name, int index) => this.GetProperties(path, name).Length > index;
 
-        public int GetCount(string path, string name) => this.GetProperties(path, name).Length;
+        //public int GetCount(string path, string name) => this.GetProperties(path, name).Length;
 
         public int GetCount(ConfigurationFileProperty parent, string name) => this.GetProperties(parent.GetSubPropertyPath(), name).Length;
 
@@ -447,20 +447,20 @@ namespace FR.Configuration {
         //  return (IConfigurationProperty) this.GetProperty(path, name, index, autoCreate);
         //}
 
-        [DebuggerNonUserCode]
-        IConfigurationProperty IConfigurationSource.GetProperty(
-          string path,
-          string name,
-          bool autoCreate) {
-            return (IConfigurationProperty)this.GetProperty(path, name, autoCreate);
-        }
+        //[DebuggerNonUserCode]
+        //IConfigurationProperty IConfigurationSource.GetProperty(
+        //  string path,
+        //  string name,
+        //  bool autoCreate) {
+        //    return (IConfigurationProperty)this.GetProperty(path, name, autoCreate);
+        //}
 
-        [DebuggerNonUserCode]
-        IConfigurationProperty IConfigurationSource.GetProperty(
-          string path,
-          string name) {
-            return (IConfigurationProperty)this.GetProperty(path, name);
-        }
+        //[DebuggerNonUserCode]
+        //IConfigurationProperty IConfigurationSource.GetProperty(
+        //  string path,
+        //  string name) {
+        //    return (IConfigurationProperty)this.GetProperty(path, name);
+        //}
 
         //[DebuggerNonUserCode]
         //string IConfigurationSource.GetPropertyString(

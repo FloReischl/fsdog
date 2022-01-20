@@ -26,12 +26,12 @@ namespace FR.Configuration {
         //  int index,
         //  bool autoCreate);
 
-        IConfigurationProperty GetProperty(
-          string path,
-          string name,
-          bool autoCreate);
+        //IConfigurationProperty GetProperty(
+        //  string path,
+        //  string name,
+        //  bool autoCreate);
 
-        IConfigurationProperty GetProperty(string path, string name);
+        //IConfigurationProperty GetProperty(string path, string name);
 
         //string GetPropertyString(string path, string name, string defaultValue);
 

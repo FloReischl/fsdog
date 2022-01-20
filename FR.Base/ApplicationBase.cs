@@ -16,30 +16,22 @@ using System.Reflection;
 using System.Xml;
 
 namespace FR {
-    public abstract class ApplicationBase :
-      LoggingProvider,
-      IDisposable,
-      ICommandHandler,
-      IConfigurable {
+    public abstract class ApplicationBase : LoggingProvider, IDisposable, ICommandHandler/*, IConfigurable */{
         //private XmlDocument _fallbackLoggingDom;
         //private ConfigurationFile _fallbackLoggingConfigurationSource;
         //private bool _fallbackLoggerCreated;
-        private static ApplicationBase _instance;
+        //private static ApplicationBase _instance;
         private IConfigurationSource _configurationSource;
-        private IConfigurationProperty _configurationRoot;
-        private CommandLineArgs _commandLineArgs;
+        //private IConfigurationProperty _configurationRoot;
 
         protected ApplicationBase() {
-            ApplicationBase._instance = this;
+            ApplicationBase.Instance = this;
             this.Information = new ApplicationInformation();
         }
 
-        public event EventHandler Disposing;
+        //public event EventHandler Disposing;
 
-        public static ApplicationBase Instance {
-            [DebuggerNonUserCode]
-            get => ApplicationBase._instance;
-        }
+        public static ApplicationBase Instance { get; private set; }
 
         public DirectoryInfo ExecutableDirectory => new FileInfo(Assembly.GetEntryAssembly().Location).Directory;
 
@@ -61,14 +53,14 @@ namespace FR {
             }
         }
 
-        public IConfigurationProperty ConfigurationRoot {
-            get {
-                if (this._configurationRoot == null && this.ConfigurationSource != null)
-                    this._configurationRoot = this.ConfigurationSource.GetProperty(".", this.GetType().Name, true);
-                return this._configurationRoot;
-            }
-            set => this._configurationRoot = value;
-        }
+        //public IConfigurationProperty ConfigurationRoot {
+        //    get {
+        //        if (this._configurationRoot == null && this.ConfigurationSource != null)
+        //            this._configurationRoot = this.ConfigurationSource.GetProperty(".", this.GetType().Name, true);
+        //        return this._configurationRoot;
+        //    }
+        //    set => this._configurationRoot = value;
+        //}
 
         public override LoggingManager Logger {
             [DebuggerNonUserCode]
@@ -112,7 +104,7 @@ namespace FR {
             }
         }
 
-        public CommandLineArgs CommandLineArgs => this._commandLineArgs;
+        public CommandLineArgs CommandLineArgs { get; private set; }
 
         public abstract void Run();
 
@@ -123,7 +115,7 @@ namespace FR {
         }
 
         public virtual void Initialize() {
-            this._commandLineArgs = new CommandLineArgs(Environment.GetCommandLineArgs());
+            this.CommandLineArgs = new CommandLineArgs(Environment.GetCommandLineArgs());
             //CommandLineArg byArgument = this.CommandLineArgs.FindByArgument("config", false);
             //if (byArgument != null)
             //    this.ConfigurationSource = (IConfigurationSource)new ConfigurationFile(byArgument.Value, ConfigurationFile.FileAccessMode.CreateIfNotExists);
@@ -133,12 +125,12 @@ namespace FR {
             //    this.Logger = new LoggingManager(this.ConfigurationSource.GetProperty(".", "Logging", false));
             //if (this.ConfigurationSource == null || !this.ConfigurationSource.ExistsProperty(".", this.GetType().Name))
             //    return;
-            this.ConfigurationRoot = this.ConfigurationSource?.GetProperty(".", this.GetType().Name, true);
+            //this.ConfigurationRoot = this.ConfigurationSource?.GetProperty(".", this.GetType().Name, true);
         }
 
         public virtual void Dispose() {
-            if (this.Disposing != null)
-                Disposing((object)this, EventArgs.Empty);
+            //if (this.Disposing != null)
+            //    Disposing(this, EventArgs.Empty);
             if (this.Logger == null || this.Logger.IsClosed)
                 return;
             this.Logger.Flush();
@@ -252,14 +244,14 @@ namespace FR {
         [DebuggerNonUserCode]
         void ICommandHandler.ExecuteCommand(ICommand command, DataContext context) => this.ExecuteCommand(command, context);
 
-        IConfigurationSource IConfigurable.ConfigurationSource {
-            get => this.ConfigurationSource;
-            set => this.ConfigurationSource = value;
-        }
+        //IConfigurationSource IConfigurable.ConfigurationSource {
+        //    get => this.ConfigurationSource;
+        //    set => this.ConfigurationSource = value;
+        //}
 
-        IConfigurationProperty IConfigurable.ConfigurationRoot {
-            get => this.ConfigurationRoot;
-            set => this.ConfigurationRoot = value;
-        }
+        //IConfigurationProperty IConfigurable.ConfigurationRoot {
+        //    get => this.ConfigurationRoot;
+        //    set => this.ConfigurationRoot = value;
+        //}
     }
 }

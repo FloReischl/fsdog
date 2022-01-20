@@ -60,23 +60,23 @@ namespace FR.Logging {
             get => this._isDisposed;
         }
 
-        public void Open(IConfigurationProperty deviceConfiguration) {
-            FileInfo fileInfo = new FileInfo(Assembly.GetEntryAssembly().Location);
-            string str1 = deviceConfiguration.GetSubProperty("Directory", true).ToString(fileInfo.DirectoryName);
-            str1.TrimEnd('\\');
-            string defaultValue = fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length);
-            string str2 = deviceConfiguration.GetSubProperty("FileName", true).ToString(defaultValue);
-            this.LogLevel = (LogLevel)deviceConfiguration.GetSubProperty("LogLevel", true).ToUInt32(7U);
-            this.StackTraceLevel = (LogLevel)deviceConfiguration.GetSubProperty("StackTrace", true).ToUInt32(1U);
-            int num = 0;
-            do {
-                ++num;
-                this._fileName = string.Format("{0}\\{1}_{2}.log", (object)str1, (object)str2, (object)num.ToString("000"));
-            }
-            while (System.IO.File.Exists(this.FileName));
-            this._file = new StreamWriter(this.FileName);
-            this._file.AutoFlush = false;
-        }
+        //public void Open(IConfigurationProperty deviceConfiguration) {
+        //    FileInfo fileInfo = new FileInfo(Assembly.GetEntryAssembly().Location);
+        //    string str1 = deviceConfiguration.GetSubProperty("Directory", true).ToString(fileInfo.DirectoryName);
+        //    str1.TrimEnd('\\');
+        //    string defaultValue = fileInfo.Name.Substring(0, fileInfo.Name.Length - fileInfo.Extension.Length);
+        //    string str2 = deviceConfiguration.GetSubProperty("FileName", true).ToString(defaultValue);
+        //    this.LogLevel = (LogLevel)deviceConfiguration.GetSubProperty("LogLevel", true).ToUInt32(7U);
+        //    this.StackTraceLevel = (LogLevel)deviceConfiguration.GetSubProperty("StackTrace", true).ToUInt32(1U);
+        //    int num = 0;
+        //    do {
+        //        ++num;
+        //        this._fileName = string.Format("{0}\\{1}_{2}.log", (object)str1, (object)str2, (object)num.ToString("000"));
+        //    }
+        //    while (System.IO.File.Exists(this.FileName));
+        //    this._file = new StreamWriter(this.FileName);
+        //    this._file.AutoFlush = false;
+        //}
 
         [DebuggerNonUserCode]
         public void Close() {

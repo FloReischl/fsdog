@@ -51,7 +51,7 @@ namespace FR.Configuration {
 
         public int Index => this._index;
 
-        public ConfigurationFileProperty Parent => new ConfigurationFileProperty(this.ConfigurationSource, (XmlElement)this.Element.ParentNode, this.Path.Substring(0, this.Path.LastIndexOf('/')), 0);
+        public IConfigurationProperty Parent => new ConfigurationFileProperty(this.ConfigurationSource, (XmlElement)this.Element.ParentNode, this.Path.Substring(0, this.Path.LastIndexOf('/')), 0);
 
         public void Delete() => this.Element.ParentNode.RemoveChild((XmlNode)this.Element);
 
@@ -712,15 +712,15 @@ namespace FR.Configuration {
 
         IConfigurationSource IConfigurationProperty.ConfigurationSource => (IConfigurationSource)this.ConfigurationSource;
 
-        string IConfigurationProperty.Name => this.Name;
+        //string IConfigurationProperty.Name => this.Name;
 
-        int IConfigurationProperty.Index => this.Index;
+        //int IConfigurationProperty.Index => this.Index;
 
-        string IConfigurationProperty.Path => this.Path;
+        //string IConfigurationProperty.Path => this.Path;
 
-        IConfigurationProperty IConfigurationProperty.Parent => (IConfigurationProperty)this.Parent;
+        //IConfigurationProperty IConfigurationProperty.Parent => (IConfigurationProperty)this.Parent;
 
-        void IConfigurationProperty.Delete() => this.Delete();
+        //void IConfigurationProperty.Delete() => this.Delete();
 
         IConfigurationProperty IConfigurationProperty.GetSubProperty(
           string name) {
@@ -752,258 +752,258 @@ namespace FR.Configuration {
             return (IConfigurationProperty)this.AddSubProperty(name);
         }
 
-        bool IConfigurationProperty.ExistsSubProperty(string name) => this.ExistsSubProperty(name);
+        //bool IConfigurationProperty.ExistsSubProperty(string name) => this.ExistsSubProperty(name);
 
-        int IConfigurationProperty.GetCount(string name) => this.GetCount(name);
+        //int IConfigurationProperty.GetCount(string name) => this.GetCount(name);
 
-        bool IConfigurationProperty.ToBoolean() => this.ToBoolean();
+        //bool IConfigurationProperty.ToBoolean() => this.ToBoolean();
 
-        bool IConfigurationProperty.ToBoolean(bool defaultValue) => this.ToBoolean(defaultValue);
+        //bool IConfigurationProperty.ToBoolean(bool defaultValue) => this.ToBoolean(defaultValue);
 
-        bool IConfigurationProperty.ToBoolean(
-          string subProperty,
-          bool defaultValue) {
-            return this.ToBoolean(subProperty, defaultValue);
-        }
+        //bool IConfigurationProperty.ToBoolean(
+        //  string subProperty,
+        //  bool defaultValue) {
+        //    return this.ToBoolean(subProperty, defaultValue);
+        //}
 
-        byte IConfigurationProperty.ToByte() => this.ToByte();
+        //byte IConfigurationProperty.ToByte() => this.ToByte();
 
-        byte IConfigurationProperty.ToByte(byte defaultValue) => this.ToByte(defaultValue);
+        //byte IConfigurationProperty.ToByte(byte defaultValue) => this.ToByte(defaultValue);
 
-        byte IConfigurationProperty.ToByte(string subProperty, byte defaultValue) => this.ToByte(subProperty, defaultValue);
+        //byte IConfigurationProperty.ToByte(string subProperty, byte defaultValue) => this.ToByte(subProperty, defaultValue);
 
-        short IConfigurationProperty.ToInt16() => this.ToInt16();
+        //short IConfigurationProperty.ToInt16() => this.ToInt16();
 
-        short IConfigurationProperty.ToInt16(short defaultValue) => this.ToInt16(defaultValue);
+        //short IConfigurationProperty.ToInt16(short defaultValue) => this.ToInt16(defaultValue);
 
-        short IConfigurationProperty.ToInt16(
-          string subProperty,
-          short defaultValue) {
-            return this.ToInt16(subProperty, defaultValue);
-        }
+        //short IConfigurationProperty.ToInt16(
+        //  string subProperty,
+        //  short defaultValue) {
+        //    return this.ToInt16(subProperty, defaultValue);
+        //}
 
-        int IConfigurationProperty.ToInt32() => this.ToInt32();
+        //int IConfigurationProperty.ToInt32() => this.ToInt32();
 
-        int IConfigurationProperty.ToInt32(int defaultValue) => this.ToInt32(defaultValue);
+        //int IConfigurationProperty.ToInt32(int defaultValue) => this.ToInt32(defaultValue);
 
-        int IConfigurationProperty.ToInt32(string subProperty, int defaultValue) => this.ToInt32(subProperty, defaultValue);
+        //int IConfigurationProperty.ToInt32(string subProperty, int defaultValue) => this.ToInt32(subProperty, defaultValue);
 
-        long IConfigurationProperty.ToInt64() => this.ToInt64();
+        //long IConfigurationProperty.ToInt64() => this.ToInt64();
 
-        long IConfigurationProperty.ToInt64(long defaultValue) => this.ToInt64(defaultValue);
+        //long IConfigurationProperty.ToInt64(long defaultValue) => this.ToInt64(defaultValue);
 
-        long IConfigurationProperty.ToInt64(string subProperty, long defaultValue) => this.ToInt64(subProperty, defaultValue);
+        //long IConfigurationProperty.ToInt64(string subProperty, long defaultValue) => this.ToInt64(subProperty, defaultValue);
 
-        DateTime IConfigurationProperty.ToDateTime() => this.ToDateTime();
+        //DateTime IConfigurationProperty.ToDateTime() => this.ToDateTime();
 
-        DateTime IConfigurationProperty.ToDateTime(DateTime defaultValue) => this.ToDateTime(defaultValue);
+        //DateTime IConfigurationProperty.ToDateTime(DateTime defaultValue) => this.ToDateTime(defaultValue);
 
-        DateTime IConfigurationProperty.ToDateTime(
-          string subProperty,
-          DateTime defaultValue) {
-            return this.ToDateTime(subProperty, defaultValue);
-        }
+        //DateTime IConfigurationProperty.ToDateTime(
+        //  string subProperty,
+        //  DateTime defaultValue) {
+        //    return this.ToDateTime(subProperty, defaultValue);
+        //}
 
-        double IConfigurationProperty.ToDouble() => this.ToDouble();
+        //double IConfigurationProperty.ToDouble() => this.ToDouble();
 
-        double IConfigurationProperty.ToDouble(double defaultValue) => this.ToDouble(defaultValue);
+        //double IConfigurationProperty.ToDouble(double defaultValue) => this.ToDouble(defaultValue);
 
-        double IConfigurationProperty.ToDouble(
-          string subProperty,
-          double defaultValue) {
-            return this.ToDouble(subProperty, defaultValue);
-        }
+        //double IConfigurationProperty.ToDouble(
+        //  string subProperty,
+        //  double defaultValue) {
+        //    return this.ToDouble(subProperty, defaultValue);
+        //}
 
-        sbyte IConfigurationProperty.ToSByte() => this.ToSByte();
+        //sbyte IConfigurationProperty.ToSByte() => this.ToSByte();
 
-        sbyte IConfigurationProperty.ToSByte(sbyte defaultValue) => this.ToSByte(defaultValue);
+        //sbyte IConfigurationProperty.ToSByte(sbyte defaultValue) => this.ToSByte(defaultValue);
 
-        sbyte IConfigurationProperty.ToSByte(
-          string subProperty,
-          sbyte defaultValue) {
-            return this.ToSByte(subProperty, defaultValue);
-        }
+        //sbyte IConfigurationProperty.ToSByte(
+        //  string subProperty,
+        //  sbyte defaultValue) {
+        //    return this.ToSByte(subProperty, defaultValue);
+        //}
 
-        float IConfigurationProperty.ToSingle() => this.ToSingle();
+        //float IConfigurationProperty.ToSingle() => this.ToSingle();
 
-        float IConfigurationProperty.ToSingle(float defaultValue) => this.ToSingle(defaultValue);
+        //float IConfigurationProperty.ToSingle(float defaultValue) => this.ToSingle(defaultValue);
 
-        float IConfigurationProperty.ToSingle(
-          string subProperty,
-          float defaultValue) {
-            return this.ToSingle(subProperty, defaultValue);
-        }
+        //float IConfigurationProperty.ToSingle(
+        //  string subProperty,
+        //  float defaultValue) {
+        //    return this.ToSingle(subProperty, defaultValue);
+        //}
 
-        string IConfigurationProperty.ToString() => this.ToString();
+        //string IConfigurationProperty.ToString() => this.ToString();
 
-        string IConfigurationProperty.ToString(string defaultValue) => this.ToString(defaultValue);
+        //string IConfigurationProperty.ToString(string defaultValue) => this.ToString(defaultValue);
 
-        string IConfigurationProperty.ToString(
-          string subProperty,
-          string defaultValue) {
-            return this.ToString(subProperty, defaultValue);
-        }
+        //string IConfigurationProperty.ToString(
+        //  string subProperty,
+        //  string defaultValue) {
+        //    return this.ToString(subProperty, defaultValue);
+        //}
 
-        ushort IConfigurationProperty.ToUInt16() => this.ToUInt16();
+        //ushort IConfigurationProperty.ToUInt16() => this.ToUInt16();
 
-        ushort IConfigurationProperty.ToUInt16(ushort defaultValue) => this.ToUInt16(defaultValue);
+        //ushort IConfigurationProperty.ToUInt16(ushort defaultValue) => this.ToUInt16(defaultValue);
 
-        ushort IConfigurationProperty.ToUInt16(
-          string subProperty,
-          ushort defaultValue) {
-            return this.ToUInt16(subProperty, defaultValue);
-        }
+        //ushort IConfigurationProperty.ToUInt16(
+        //  string subProperty,
+        //  ushort defaultValue) {
+        //    return this.ToUInt16(subProperty, defaultValue);
+        //}
 
-        uint IConfigurationProperty.ToUInt32() => this.ToUInt32();
+        //uint IConfigurationProperty.ToUInt32() => this.ToUInt32();
 
-        uint IConfigurationProperty.ToUInt32(uint defaultValue) => this.ToUInt32(defaultValue);
+        //uint IConfigurationProperty.ToUInt32(uint defaultValue) => this.ToUInt32(defaultValue);
 
-        uint IConfigurationProperty.ToUInt32(
-          string subProperty,
-          uint defaultValue) {
-            return this.ToUInt32(subProperty, defaultValue);
-        }
+        //uint IConfigurationProperty.ToUInt32(
+        //  string subProperty,
+        //  uint defaultValue) {
+        //    return this.ToUInt32(subProperty, defaultValue);
+        //}
 
-        ulong IConfigurationProperty.ToUInt64() => (ulong)this.ToUInt32();
+        //ulong IConfigurationProperty.ToUInt64() => (ulong)this.ToUInt32();
 
-        ulong IConfigurationProperty.ToUInt64(ulong defaultValue) => this.ToUInt64(defaultValue);
+        //ulong IConfigurationProperty.ToUInt64(ulong defaultValue) => this.ToUInt64(defaultValue);
 
-        ulong IConfigurationProperty.ToUInt64(
-          string subProperty,
-          ulong defaultValue) {
-            return this.ToUInt64(subProperty, defaultValue);
-        }
+        //ulong IConfigurationProperty.ToUInt64(
+        //  string subProperty,
+        //  ulong defaultValue) {
+        //    return this.ToUInt64(subProperty, defaultValue);
+        //}
 
-        Array IConfigurationProperty.ToArray(bool fallbackToString) => this.ToArray(fallbackToString);
+        //Array IConfigurationProperty.ToArray(bool fallbackToString) => this.ToArray(fallbackToString);
 
-        Array IConfigurationProperty.ToArray(
-          bool fallbackToString,
-          Array defaultValue) {
-            return this.ToArray(fallbackToString, defaultValue);
-        }
+        //Array IConfigurationProperty.ToArray(
+        //  bool fallbackToString,
+        //  Array defaultValue) {
+        //    return this.ToArray(fallbackToString, defaultValue);
+        //}
 
-        Array IConfigurationProperty.ToArray(
-          string subProperty,
-          bool fallbackToString,
-          Array defaultValue) {
-            return this.ToArray(subProperty, fallbackToString, defaultValue);
-        }
+        //Array IConfigurationProperty.ToArray(
+        //  string subProperty,
+        //  bool fallbackToString,
+        //  Array defaultValue) {
+        //    return this.ToArray(subProperty, fallbackToString, defaultValue);
+        //}
 
-        Hashtable IConfigurationProperty.ToHashtable(
-          bool fallbackToString) {
-            return this.ToHashtable(fallbackToString);
-        }
+        //Hashtable IConfigurationProperty.ToHashtable(
+        //  bool fallbackToString) {
+        //    return this.ToHashtable(fallbackToString);
+        //}
 
-        Hashtable IConfigurationProperty.ToHashtable(
-          bool fallbackToString,
-          Hashtable defaultValue) {
-            return this.ToHashtable(fallbackToString, defaultValue);
-        }
+        //Hashtable IConfigurationProperty.ToHashtable(
+        //  bool fallbackToString,
+        //  Hashtable defaultValue) {
+        //    return this.ToHashtable(fallbackToString, defaultValue);
+        //}
 
-        Hashtable IConfigurationProperty.ToHashtable(
-          string subProperty,
-          bool fallbackToString,
-          Hashtable defaultValue) {
-            return this.ToHashtable(subProperty, fallbackToString, defaultValue);
-        }
+        //Hashtable IConfigurationProperty.ToHashtable(
+        //  string subProperty,
+        //  bool fallbackToString,
+        //  Hashtable defaultValue) {
+        //    return this.ToHashtable(subProperty, fallbackToString, defaultValue);
+        //}
 
-        IDictionary IConfigurationProperty.ToDictionary(
-          bool fallbackToString) {
-            return this.ToDictionary(fallbackToString);
-        }
+        //IDictionary IConfigurationProperty.ToDictionary(
+        //  bool fallbackToString) {
+        //    return this.ToDictionary(fallbackToString);
+        //}
 
-        IDictionary IConfigurationProperty.ToDictionary(
-          bool fallbackToString,
-          IDictionary defaultValue) {
-            return this.ToDictionary(fallbackToString, defaultValue);
-        }
+        //IDictionary IConfigurationProperty.ToDictionary(
+        //  bool fallbackToString,
+        //  IDictionary defaultValue) {
+        //    return this.ToDictionary(fallbackToString, defaultValue);
+        //}
 
-        IDictionary IConfigurationProperty.ToDictionary(
-          string subProperty,
-          bool fallbackToString,
-          IDictionary defaultValue) {
-            return this.ToDictionary(subProperty, fallbackToString, defaultValue);
-        }
+        //IDictionary IConfigurationProperty.ToDictionary(
+        //  string subProperty,
+        //  bool fallbackToString,
+        //  IDictionary defaultValue) {
+        //    return this.ToDictionary(subProperty, fallbackToString, defaultValue);
+        //}
 
-        XmlElement IConfigurationProperty.ToXmlElement() => this.ToXmlElement();
+        //XmlElement IConfigurationProperty.ToXmlElement() => this.ToXmlElement();
 
-        XmlElement IConfigurationProperty.ToXmlElement(
-          XmlElement defaultValue) {
-            return this.ToXmlElement(defaultValue);
-        }
+        //XmlElement IConfigurationProperty.ToXmlElement(
+        //  XmlElement defaultValue) {
+        //    return this.ToXmlElement(defaultValue);
+        //}
 
-        XmlElement IConfigurationProperty.ToXmlElement(
-          string subProperty,
-          XmlElement defaultValue) {
-            return this.ToXmlElement(subProperty, defaultValue);
-        }
+        //XmlElement IConfigurationProperty.ToXmlElement(
+        //  string subProperty,
+        //  XmlElement defaultValue) {
+        //    return this.ToXmlElement(subProperty, defaultValue);
+        //}
 
-        void IConfigurationProperty.Set(bool value) => this.Set(value);
+        //void IConfigurationProperty.Set(bool value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, bool value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, bool value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(byte value) => this.Set(value);
+        //void IConfigurationProperty.Set(byte value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, byte value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, byte value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(DateTime value) => this.Set(value);
+        //void IConfigurationProperty.Set(DateTime value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, DateTime value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, DateTime value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(double value) => this.Set(value);
+        //void IConfigurationProperty.Set(double value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, double value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, double value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(short value) => this.Set(value);
+        //void IConfigurationProperty.Set(short value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, short value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, short value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(int value) => this.Set(value);
+        //void IConfigurationProperty.Set(int value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, int value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, int value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(long value) => this.Set(value);
+        //void IConfigurationProperty.Set(long value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, long value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, long value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(sbyte value) => this.Set(value);
+        //void IConfigurationProperty.Set(sbyte value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, sbyte value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, sbyte value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(float value) => this.Set(value);
+        //void IConfigurationProperty.Set(float value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, float value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, float value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(string value) => this.Set(value);
+        //void IConfigurationProperty.Set(string value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, string value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, string value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(ushort value) => this.Set(value);
+        //void IConfigurationProperty.Set(ushort value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, ushort value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, ushort value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(uint value) => this.Set(value);
+        //void IConfigurationProperty.Set(uint value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, uint value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, uint value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(ulong value) => this.Set(value);
+        //void IConfigurationProperty.Set(ulong value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, ulong value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, ulong value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(Array value) => this.Set(value);
+        //void IConfigurationProperty.Set(Array value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, Array value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, Array value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(IDictionary value) => this.Set(value);
+        //void IConfigurationProperty.Set(IDictionary value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, IDictionary value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, IDictionary value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(Hashtable value) => this.Set(value);
+        //void IConfigurationProperty.Set(Hashtable value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, Hashtable value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, Hashtable value) => this.Set(subProperty, value);
 
-        void IConfigurationProperty.Set(XmlElement value) => this.Set(value);
+        //void IConfigurationProperty.Set(XmlElement value) => this.Set(value);
 
-        void IConfigurationProperty.Set(string subProperty, XmlElement value) => this.Set(subProperty, value);
+        //void IConfigurationProperty.Set(string subProperty, XmlElement value) => this.Set(subProperty, value);
     }
 }
