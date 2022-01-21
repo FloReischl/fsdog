@@ -138,7 +138,14 @@ namespace FR.Configuration {
             if (this.FileName == null)
                 throw new NullReferenceException("No output file name defined.");
             //this.Dom.Save(this.FileName);
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            using (var sr = new StreamWriter(FileName))
+            using (var jw = new JsonTextWriter(sr)) {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Formatting = Newtonsoft.Json.Formatting.Indented;
+                serializer.Serialize(jw, _root);
+            }
         }
 
         //public void Save(string fileName) {
@@ -170,6 +177,10 @@ namespace FR.Configuration {
                 throw new ArgumentException($"unknown config path '{path}'");
             }
             return config;
+        }
+
+        public void SetRoot<T>(T config) {
+            _root = (JObject)SerializeInternal<T>(config);
         }
 
         public void Set<T>(string path, string name, T value, int? index = null) {
