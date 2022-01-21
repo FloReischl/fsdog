@@ -11,35 +11,35 @@ using System.Diagnostics;
 
 namespace FR.Windows.Forms {
     public class ConfigurationOptionsTree : ConfigurationOptionsNode, IOptionsTree, IOptionsNode {
-        private readonly Dictionary<string, List<IConfigurationProperty>> _shownProperties;
+        //private readonly Dictionary<string, List<IConfigurationProperty>> _shownProperties;
 
         public ConfigurationOptionsTree(string caption, string rootName)
           : base(rootName) {
             this.Caption = caption;
             this._nodes = new List<ConfigurationOptionsNode>();
-            this._shownProperties = new Dictionary<string, List<IConfigurationProperty>>();
+            //this._shownProperties = new Dictionary<string, List<IConfigurationProperty>>();
         }
 
         public string Caption { get; }
 
         public void ClearOptions() => this._nodes.Clear();
 
-        public ConfigurationOptionsProperty AddOption(
-          IConfigurationProperty property,
-          string shownPath,
-          string text) {
-            return this.AddOption(property, shownPath, text, null);
-        }
+        //public ConfigurationOptionsProperty AddOption(
+        //  IConfigurationProperty property,
+        //  string shownPath,
+        //  string text) {
+        //    return this.AddOption(property, shownPath, text, null);
+        //}
 
-        public ConfigurationOptionsProperty AddOption(
-          IConfigurationProperty property,
-          string shownPath,
-          string text,
-          string description) {
-            ConfigurationOptionsProperty configurationOptionsProperty = new ConfigurationOptionsProperty(property, text, description);
-            AddOption(configurationOptionsProperty, shownPath);
-            return configurationOptionsProperty;
-        }
+        //public ConfigurationOptionsProperty AddOption(
+        //  IConfigurationProperty property,
+        //  string shownPath,
+        //  string text,
+        //  string description) {
+        //    ConfigurationOptionsProperty configurationOptionsProperty = new ConfigurationOptionsProperty(property, text, description);
+        //    AddOption(configurationOptionsProperty, shownPath);
+        //    return configurationOptionsProperty;
+        //}
 
         public void AddOption(ConfigurationOptionsProperty option, string shownPath) {
             ConfigurationOptionsNode nodeForPath = this.GetNodeForPath(shownPath);

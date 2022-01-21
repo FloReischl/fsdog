@@ -39,13 +39,13 @@ namespace FR.Configuration {
 
         void Save();
 
-        bool ExistsProperty(string path, string name);
+        //bool ExistsProperty(string path, string name);
 
-        T TryGetConfig<T>(string path) where T : class;
+        T TryGet<T>(string path, string name, int? index = null) where T : class;
 
-        bool TryGetConfig<T>(string path, out T config) where T : class;
+        bool TryGet<T>(string path, string name, out T config, int? index = null) where T : class;
 
-        T GetConfig<T>(string path) where T : class;
+        T Get<T>(string path, string name, int? index = null) where T : class;
 
         //bool ExistsProperty(string path, string name, int index);
 

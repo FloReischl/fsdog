@@ -37,21 +37,23 @@ namespace FR {
 
         public FileInfo ExecutableFile => new FileInfo(Assembly.GetEntryAssembly().Location);
 
-        public IConfigurationSource ConfigurationSource {
-            get {
-                if (_configurationSource == null) {
-                    ConfigurationFile.TryGetConfigFile(GetType().Assembly, out ConfigurationFile config);
-                    _configurationSource = config;
-                }
-                //if (this._configurationSource == null && File.Exists(ConfigurationFile.GetDefaultConfigFileName(this.GetType().Assembly)))
-                //    this._configurationSource = (IConfigurationSource)new ConfigurationFile();
-                return this._configurationSource;
-            }
-            set {
-                //this.ResetFallbackLogger();
-                this._configurationSource = value;
-            }
-        }
+        public IConfigurationSource ConfigurationSource { get; set; }
+
+        //public IConfigurationSource ConfigurationSource {
+        //    get {
+        //        if (_configurationSource == null) {
+        //            ConfigurationFile.TryGetUserConfigFile(GetType().Assembly, out ConfigurationFile config);
+        //            _configurationSource = config;
+        //        }
+        //        //if (this._configurationSource == null && File.Exists(ConfigurationFile.GetDefaultConfigFileName(this.GetType().Assembly)))
+        //        //    this._configurationSource = (IConfigurationSource)new ConfigurationFile();
+        //        return this._configurationSource;
+        //    }
+        //    set {
+        //        //this.ResetFallbackLogger();
+        //        this._configurationSource = value;
+        //    }
+        //}
 
         //public IConfigurationProperty ConfigurationRoot {
         //    get {

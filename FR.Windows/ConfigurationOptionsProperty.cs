@@ -25,21 +25,21 @@ namespace FR.Windows.Forms {
             Description = description;
         }
 
-        public ConfigurationOptionsProperty(
-          IConfigurationProperty configurationProperty,
-          string text,
-          string description) {
-            this.ConfigurationProperty = configurationProperty;
-            this.Description = description;
-            this.PropertyType = typeof(string);
-            this.Text = text;
-        }
+        //public ConfigurationOptionsProperty(
+        //  IConfigurationProperty configurationProperty,
+        //  string text,
+        //  string description) {
+        //    this.ConfigurationProperty = configurationProperty;
+        //    this.Description = description;
+        //    this.PropertyType = typeof(string);
+        //    this.Text = text;
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public object[] AllowedValues { get; set; }
 
-        public IConfigurationProperty ConfigurationProperty { get; }
+        //public IConfigurationProperty ConfigurationProperty { get; }
 
         public string Description { get; set; }
 

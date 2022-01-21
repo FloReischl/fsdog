@@ -62,7 +62,8 @@ namespace FsDog {
 
         public override void Initialize() {
             Application.ThreadException += new ThreadExceptionEventHandler(this.Application_ThreadException);
-            ConfigurationSource = new ConfigurationFile(this.GetConfigFile().FullName, ConfigurationFile.FileAccessMode.CreateIfNotExists);
+
+            ConfigurationSource = ConfigurationFile.TryGetUserConfigFile(GetType().Assembly);
             base.Initialize();
             //Options = new FsOptions();
             Config = FsDogConfig.Load();
