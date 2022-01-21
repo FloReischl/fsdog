@@ -51,7 +51,7 @@ namespace FsDog {
 
         public void ClearImageCache() => this._fileImages.Clear();
 
-        public ILogger CreateLogger() => new Logger(Logger);
+        public ILogger CreateLogger() => LoggingProvider.CreateLogger();
 
         public override void Initialize() {
             Application.ThreadException += new ThreadExceptionEventHandler(this.Application_ThreadException);

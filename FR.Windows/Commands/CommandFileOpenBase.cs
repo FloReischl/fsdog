@@ -5,65 +5,54 @@
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Windows.dll
 
 using FR.Commands;
+using FR.Logging;
 using System;
 using System.Windows.Forms;
 
-namespace FR.Windows.Forms.Commands
-{
-  public class CommandFileOpenBase : StandardCommandBase
-  {
-    public string FileName
-    {
-      get => this.Context.ContainsKey((object) nameof (FileName)) ? this.Context.GetAsString((object) nameof (FileName)) : (string) null;
-      set => this.Context.Add((object) nameof (FileName), (object) value);
-    }
+namespace FR.Windows.Forms.Commands {
+    public class CommandFileOpenBase : StandardCommandBase {
+        public string FileName {
+            get => this.Context.ContainsKey((object)nameof(FileName)) ? this.Context.GetAsString((object)nameof(FileName)) : (string)null;
+            set => this.Context.Add((object)nameof(FileName), (object)value);
+        }
 
-    public override void Execute()
-    {
-      this.CallEntry(FR.Logging.LogLevel.Info);
-      try
-      {
-        if (this.AlternateExecute != null)
-        {
-          this.Log(FR.Logging.LogLevel.Info, "Executing alternate command", new object[0]);
-          this.ExecutionState = this.AlternateExecute((ICommand) this);
-        }
-        else
-        {
-          OpenFileDialog openFileDialog = new OpenFileDialog();
-          if (!string.IsNullOrEmpty(this.FileName))
-            openFileDialog.FileName = this.FileName;
-          Form owner = (Form) null;
-          if (this.ApplicationInstance != null)
-            owner = ((WindowsApplication) this.ApplicationInstance).MainForm;
-          if (owner != null)
-          {
-            if (openFileDialog.ShowDialog((IWin32Window) owner) == DialogResult.OK)
-            {
-              this.FileName = openFileDialog.FileName;
-              this.ExecutionState = CommandExecutionState.Ok;
+        public override void Execute() {
+            Log.CallEntry(FR.Logging.LogLevel.Info);
+            try {
+                if (this.AlternateExecute != null) {
+                    Log.Info("Executing alternate command");
+                    this.ExecutionState = this.AlternateExecute((ICommand)this);
+                }
+                else {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    if (!string.IsNullOrEmpty(this.FileName))
+                        openFileDialog.FileName = this.FileName;
+                    Form owner = (Form)null;
+                    if (this.Application != null)
+                        owner = ((WindowsApplication)this.Application).MainForm;
+                    if (owner != null) {
+                        if (openFileDialog.ShowDialog((IWin32Window)owner) == DialogResult.OK) {
+                            this.FileName = openFileDialog.FileName;
+                            this.ExecutionState = CommandExecutionState.Ok;
+                        }
+                        else
+                            this.ExecutionState = CommandExecutionState.Canceled;
+                    }
+                    else if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                        this.FileName = openFileDialog.FileName;
+                        this.ExecutionState = CommandExecutionState.Ok;
+                    }
+                    else
+                        this.ExecutionState = CommandExecutionState.Canceled;
+                }
             }
-            else
-              this.ExecutionState = CommandExecutionState.Canceled;
-          }
-          else if (openFileDialog.ShowDialog() == DialogResult.OK)
-          {
-            this.FileName = openFileDialog.FileName;
-            this.ExecutionState = CommandExecutionState.Ok;
-          }
-          else
-            this.ExecutionState = CommandExecutionState.Canceled;
+            catch (Exception ex) {
+                this.Log.Ex(ex);
+                this.ExecutionState = CommandExecutionState.Error;
+            }
+            finally {
+                Log.CallLeave(LogLevel.Info);
+            }
         }
-      }
-      catch (Exception ex)
-      {
-        this.LogEx(ex);
-        this.ExecutionState = CommandExecutionState.Error;
-      }
-      finally
-      {
-        this.CallLeave(FR.Logging.LogLevel.Info);
-      }
     }
-  }
 }

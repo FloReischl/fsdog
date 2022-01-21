@@ -9,7 +9,9 @@ namespace FR.Logging {
         void Info(string message);
         void Warn(string message);
         void Error(string message);
-        void Exception(Exception ex);
+        void Ex(Exception ex);
         void Debug(string message);
+        void CallEntry(LogLevel logLevel);
+        void CallLeave(LogLevel logLevel);
     }
 }

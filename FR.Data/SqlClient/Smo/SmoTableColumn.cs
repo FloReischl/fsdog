@@ -35,7 +35,7 @@ namespace FR.Data.SqlClient.Smo
         if (!(this._name != value))
           return;
         this._name = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -51,7 +51,7 @@ namespace FR.Data.SqlClient.Smo
         if (this._dataType == value)
           return;
         this._dataType = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -69,7 +69,7 @@ namespace FR.Data.SqlClient.Smo
         if (this._maxSize == value)
           return;
         this._maxSize = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -83,7 +83,7 @@ namespace FR.Data.SqlClient.Smo
         if (!(this._collationName != value))
           return;
         this._collationName = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -95,7 +95,7 @@ namespace FR.Data.SqlClient.Smo
         if (value == this._isNullable)
           return;
         this._isNullable = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -107,7 +107,7 @@ namespace FR.Data.SqlClient.Smo
         if (value == this._precision)
           return;
         this._precision = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -119,7 +119,7 @@ namespace FR.Data.SqlClient.Smo
       this._maxSize = (int) (short) this._infoRow["max_length"];
       this._isNullable = (bool) this._infoRow["is_nullable"];
       this._precision = (int) (byte) this._infoRow["precision"];
-      this.setState(SmoObjectState.Original);
+      this.SetState(SmoObjectState.Original);
     }
 
     public SmoTableColumn(SmoTable table)
@@ -130,13 +130,13 @@ namespace FR.Data.SqlClient.Smo
       this._maxSize = 50;
       this._isNullable = true;
       this._precision = 0;
-      this.setState(SmoObjectState.New);
+      this.SetState(SmoObjectState.New);
     }
 
     public override void Delete()
     {
       if (this.State == SmoObjectState.New)
-        this.Table.Columns.remove(this);
+        this.Table.Columns.Remove(this);
       base.Delete();
     }
 
@@ -199,12 +199,12 @@ namespace FR.Data.SqlClient.Smo
       return stringBuilder.ToString();
     }
 
-    internal override void setState(SmoObjectState state)
+    internal override void SetState(SmoObjectState state)
     {
-      base.setState(state);
+      base.SetState(state);
       if (!BaseHelper.InList((object) state, (object) SmoObjectState.Changed, (object) SmoObjectState.Deleted, (object) SmoObjectState.New))
         return;
-      this.Table.setState(SmoObjectState.Changed);
+      this.Table.SetState(SmoObjectState.Changed);
     }
   }
 }

@@ -30,14 +30,14 @@ namespace FR.Data.SqlClient.Smo
       : base((SmoObject) index, (DataRow) null)
     {
       this._tableColumn = tableColumn;
-      this.setState(SmoObjectState.New);
+      this.SetState(SmoObjectState.New);
     }
 
     public SmoIndexColumn(SmoIndex index, ref SmoViewColumn viewColumn)
       : base((SmoObject) index, (DataRow) null)
     {
       this._viewColumn = viewColumn;
-      this.setState(SmoObjectState.New);
+      this.SetState(SmoObjectState.New);
     }
 
     public SmoTableColumn TableColumn
@@ -47,7 +47,7 @@ namespace FR.Data.SqlClient.Smo
       {
         if (object.Equals((object) value, (object) this._tableColumn))
           return;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
         this._tableColumn = value;
       }
     }
@@ -59,7 +59,7 @@ namespace FR.Data.SqlClient.Smo
       {
         if (object.Equals((object) value, (object) this._viewColumn))
           return;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
         this._viewColumn = value;
       }
     }
@@ -77,7 +77,7 @@ namespace FR.Data.SqlClient.Smo
       {
         if (value == this._isDecending)
           return;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
         this._isDecending = value;
       }
     }
@@ -89,7 +89,7 @@ namespace FR.Data.SqlClient.Smo
       {
         if (value == this._isIncluded)
           return;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
         this._isIncluded = value;
       }
     }

@@ -42,7 +42,7 @@ namespace FR.Data.SqlClient.Smo
       }
       else
       {
-        string str = this.IsSystemProcedure ? this.Database.getSystemRoutineStatement((SmoObject) this) : this.Database.getRoutineStatement((SmoObject) this);
+        string str = this.IsSystemProcedure ? this.Database.GetSystemRoutineStatement((SmoObject) this) : this.Database.GetRoutineStatement((SmoObject) this);
         if (options.CheckExists)
         {
           stringBuilder.AppendFormat("IF (OBJECT_ID('{0}') IS NOT NULL)\r\n", (object) name);

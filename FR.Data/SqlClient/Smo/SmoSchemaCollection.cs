@@ -27,10 +27,10 @@ namespace FR.Data.SqlClient.Smo
     {
     }
 
-    public int Add(SmoSchema schema)
+    public new int Add(SmoSchema schema)
     {
-      this._parent.setState(SmoObjectState.Changed);
-      this.add(schema);
+      this._parent.SetState(SmoObjectState.Changed);
+      this.Add(schema);
       return this.Count;
     }
   }

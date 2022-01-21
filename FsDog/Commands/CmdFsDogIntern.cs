@@ -33,7 +33,7 @@ namespace FsDog.Commands {
             set => this._activeFileControl = value;
         }
 
-        public FsApp Application => (FsApp)this.ApplicationInstance;
+        public new FsApp Application => (FsApp)this.Application;
 
         public DetailView DetailView1 {
             [DebuggerNonUserCode]

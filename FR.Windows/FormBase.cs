@@ -34,28 +34,6 @@ namespace FR.Windows.Forms {
             get => WindowsApplication.Instance;
         }
 
-        [Browsable(false)]
-        public LoggingManager Logger {
-            [DebuggerNonUserCode]
-            get => this.ApplicationInstance != null ? this.ApplicationInstance.Logger : (LoggingManager)null;
-            set {
-                if (this.ApplicationInstance == null)
-                    return;
-                this.ApplicationInstance.Logger = value;
-            }
-        }
-
-        public FR.Logging.LogLevel LogLevel {
-            [DebuggerNonUserCode]
-            get => this.ApplicationInstance != null ? this.ApplicationInstance.LogLevel : FR.Logging.LogLevel.Default;
-            [DebuggerNonUserCode]
-            set {
-                if (this.ApplicationInstance == null)
-                    return;
-                this.ApplicationInstance.LogLevel = value;
-            }
-        }
-
         [Description("The left side gradient color")]
         [Category("Appearance")]
         [DefaultValue("White")]

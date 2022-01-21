@@ -130,12 +130,12 @@ namespace FR.Windows.Forms {
             this._buffer.Clear();
         }
 
-        public new FR.Logging.LogLevel LogLevel {
+        public LogLevel LogLevel {
             get => this._logLevel;
             set => this._logLevel = value;
         }
 
-        public FR.Logging.LogLevel StackTraceLevel {
+        public LogLevel StackTraceLevel {
             get => this._stackTrace;
             set => this._stackTrace = value;
         }
@@ -143,7 +143,7 @@ namespace FR.Windows.Forms {
         public new bool IsDisposed => this._isDisposed;
 
         public void Log(
-          FR.Logging.LogLevel logLevel,
+          LogLevel logLevel,
           string message,
           DateTime dateTime,
           string className,
@@ -180,7 +180,7 @@ namespace FR.Windows.Forms {
         }
 
         public void ForceLog(
-          FR.Logging.LogLevel logLevel,
+          LogLevel logLevel,
           string message,
           DateTime dateTime,
           string className,

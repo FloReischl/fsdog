@@ -28,7 +28,7 @@ namespace FR.Data.SqlClient.Smo
       }
     }
 
-    public override string GetCreateStatement(object scriptOptions) => this.Database.getRoutineStatement((SmoObject) this);
+    public override string GetCreateStatement(object scriptOptions) => this.Database.GetRoutineStatement((SmoObject) this);
 
     private void getFunctionType()
     {

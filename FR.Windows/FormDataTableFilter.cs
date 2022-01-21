@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace FR.Windows.Forms {
     public class FormDataTableFilter : FormBase {
-        private ILogger _logger;
+        private ILogger _log;
         private IContainer components;
         private DataGridView dgvResult;
         private RichTextBox txtFilter;
@@ -150,12 +150,14 @@ namespace FR.Windows.Forms {
         public FormDataTableFilter() => this.InitializeComponent();
 
         private void FormDataTableFilter_Load(object sender, EventArgs e) {
-            _logger = new Logger(ApplicationBase.Instance.Logger);
+            _log = LoggingProvider.CreateLogger();
+
             if (this.DataSource == null) {
                 Exception ex = (Exception)new NullReferenceException("DataSource property cannot be null");
-                _logger.Exception(ex);
+                _log.Ex(ex);
                 throw ex;
             }
+
             if (this._filter != null)
                 this.txtFilter.Text = this._filter;
             this.tipTest.SetToolTip((Control)this.btnTest, "CTRL + Enter");

@@ -5,31 +5,26 @@
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Windows.dll
 
 using FR.Commands;
+using FR.Logging;
 using System;
 
-namespace FR.Windows.Forms.Commands
-{
-  public class CommandFileExitBase : StandardCommandBase
-  {
-    public override void Execute()
-    {
-      this.CallEntry(FR.Logging.LogLevel.Info);
-      try
-      {
-        if (this.HandleAlternate())
-          return;
-        WindowsApplication.Exit();
-        this.ExecutionState = CommandExecutionState.Ok;
-      }
-      catch (Exception ex)
-      {
-        this.LogEx(ex);
-        this.ExecutionState = CommandExecutionState.Error;
-      }
-      finally
-      {
-        this.CallLeave(FR.Logging.LogLevel.Info);
-      }
+namespace FR.Windows.Forms.Commands {
+    public class CommandFileExitBase : StandardCommandBase {
+        public override void Execute() {
+            Log.CallEntry(LogLevel.Info);
+            try {
+                if (this.HandleAlternate())
+                    return;
+                WindowsApplication.Exit();
+                this.ExecutionState = CommandExecutionState.Ok;
+            }
+            catch (Exception ex) {
+                this.Log.Ex(ex);
+                this.ExecutionState = CommandExecutionState.Error;
+            }
+            finally {
+                Log.CallLeave(LogLevel.Info);
+            }
+        }
     }
-  }
 }

@@ -4,39 +4,31 @@
 // MVID: 73A11F4D-1B6A-4A84-B1D3-AD1912A96D1C
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Data.dll
 
-namespace FR.Data.SqlClient.Smo
-{
-  public class SmoIndexCollection : SmoCollection<SmoIndex>
-  {
-    internal SmoIndexCollection(SmoTable table)
-      : base((SmoObject) table)
-    {
-    }
+namespace FR.Data.SqlClient.Smo {
+    public class SmoIndexCollection : SmoCollection<SmoIndex> {
+        internal SmoIndexCollection(SmoTable table)
+          : base((SmoObject)table) {
+        }
 
-    internal SmoIndexCollection(SmoView view)
-      : base((SmoObject) view)
-    {
-    }
+        internal SmoIndexCollection(SmoView view)
+          : base((SmoObject)view) {
+        }
 
-    public int Add(SmoIndex index)
-    {
-      this.add(index);
-      return this.Count;
-    }
+        public new int Add(SmoIndex index) {
+            this.Add(index);
+            return this.Count;
+        }
 
-    public void Remove(SmoIndex index)
-    {
-      foreach (SmoIndex smoIndex in (SmoCollection<SmoIndex>) this)
-      {
-        if (smoIndex.Equals((object) index))
-          smoIndex.setState(SmoObjectState.Deleted);
-      }
-    }
+        public new void Remove(SmoIndex index) {
+            foreach (SmoIndex smoIndex in (SmoCollection<SmoIndex>)this) {
+                if (smoIndex.Equals((object)index))
+                    smoIndex.SetState(SmoObjectState.Deleted);
+            }
+        }
 
-    public override SmoIndex FindByName(string name, SmoScriptOptions options)
-    {
-      SmoIndex byName = base.FindByName(name, options);
-      return byName != null && byName.State != SmoObjectState.Deleted ? byName : (SmoIndex) null;
+        public override SmoIndex FindByName(string name, SmoScriptOptions options) {
+            SmoIndex byName = base.FindByName(name, options);
+            return byName != null && byName.State != SmoObjectState.Deleted ? byName : (SmoIndex)null;
+        }
     }
-  }
 }

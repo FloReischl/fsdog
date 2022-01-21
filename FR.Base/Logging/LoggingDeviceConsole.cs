@@ -12,9 +12,9 @@ using System.Text;
 
 namespace FR.Logging {
     public class LoggingDeviceConsole : ILoggingDevice, IDisposable {
-        public LogLevel LogLevel { get; set; }
+        public LogLevel LogLevel { get; set; } = LogLevel.Default;
 
-        public LogLevel StackTraceLevel { get; set; }
+        public LogLevel StackTraceLevel { get; set; } = LogLevel.Exception;
 
         public bool IsDisposed { get; private set; }
 

@@ -22,7 +22,7 @@ namespace FR.Data.SqlClient.Smo
       {
         if (object.Equals((object) value, (object) this._name))
           return;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
         this._name = value;
       }
     }
@@ -36,7 +36,7 @@ namespace FR.Data.SqlClient.Smo
       {
         if (this._type == value)
           return;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
         this._type = value;
       }
     }

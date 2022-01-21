@@ -65,7 +65,7 @@ namespace FR.Data.SqlClient.Smo
       }
       else
       {
-        string str = this.IsSystemTrigger ? ((SmoDatabaseObject) this.ParentObject).Database.getSystemRoutineStatement((SmoObject) this) : ((SmoDatabaseObject) this.ParentObject).Database.getRoutineStatement((SmoObject) this);
+        string str = this.IsSystemTrigger ? ((SmoDatabaseObject) this.ParentObject).Database.GetSystemRoutineStatement((SmoObject) this) : ((SmoDatabaseObject) this.ParentObject).Database.GetRoutineStatement((SmoObject) this);
         if (options.CheckExists)
         {
           stringBuilder.AppendFormat("IF (OBJECT_ID('{0}') IS NOT NULL)\r\n", (object) name);

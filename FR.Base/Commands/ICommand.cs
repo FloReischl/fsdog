@@ -6,20 +6,16 @@
 
 using FR.Collections;
 
-namespace FR.Commands
-{
-  public interface ICommand
-  {
-    ICommandReceiver Receiver { get; set; }
+namespace FR.Commands {
+    public interface ICommand {
+        ICommandReceiver Receiver { get; set; }
 
-    CommandExecutionState ExecutionState { get; }
+        CommandExecutionState ExecutionState { get; }
 
-    CommandInstanceState InstanceState { get; set; }
+        CommandInstanceState InstanceState { get; set; }
 
-    DataContext Context { get; }
+        DataContext Context { get; set; }
 
-    void Execute();
-
-    void SetContext(DataContext context);
-  }
+        void Execute();
+    }
 }

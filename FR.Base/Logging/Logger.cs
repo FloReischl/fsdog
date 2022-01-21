@@ -20,7 +20,7 @@ namespace FR.Logging {
             _manager.Write(LogLevel.Error, 0, message);
         }
 
-        public void Exception(Exception ex) {
+        public void Ex(Exception ex) {
             _manager.WriteEx(ex, 0);
         }
 
@@ -30,6 +30,13 @@ namespace FR.Logging {
 
         public void Warn(string message) {
             _manager.Write(LogLevel.Warning, 0, message);
+        }
+        public void CallEntry(LogLevel logLevel) {
+            _manager.CallEntry(logLevel, 1);
+        }
+
+        public void CallLeave(LogLevel logLevel) {
+            _manager.CallLeave(logLevel, 1);
         }
     }
 }

@@ -6,44 +6,37 @@
 
 using System.Data;
 
-namespace FR.Data.SqlClient.Smo
-{
-  public class SmoTableColumnCollection : SmoCollection<SmoTableColumn>
-  {
-    internal SmoTableColumnCollection(SmoTable table)
-      : base((SmoObject) table)
-    {
-    }
+namespace FR.Data.SqlClient.Smo {
+    public class SmoTableColumnCollection : SmoCollection<SmoTableColumn> {
+        internal SmoTableColumnCollection(SmoTable table)
+          : base((SmoObject)table) {
+        }
 
-    public int Add(SmoTableColumn column)
-    {
-      this.add(column);
-      this._parent.setState(SmoObjectState.Changed);
-      return this.Count;
-    }
+        public new int Add(SmoTableColumn column) {
+            this.Add(column);
+            this._parent.SetState(SmoObjectState.Changed);
+            return this.Count;
+        }
 
-    public SmoTableColumn Add(string name, SqlDbType sqlType, int maximalSize)
-    {
-      SmoTableColumn column = new SmoTableColumn((SmoTable) this._parent);
-      column.SqlDbType = sqlType;
-      column.MaximumSize = maximalSize;
-      this.Add(column);
-      return column;
-    }
+        public SmoTableColumn Add(string name, SqlDbType sqlType, int maximalSize) {
+            SmoTableColumn column = new SmoTableColumn((SmoTable)this._parent) {
+                SqlDbType = sqlType,
+                MaximumSize = maximalSize
+            };
+            this.Add(column);
+            return column;
+        }
 
-    public void Remove(SmoTableColumn column)
-    {
-      foreach (SmoTableColumn smoTableColumn in (SmoCollection<SmoTableColumn>) this)
-      {
-        if (smoTableColumn.Equals((object) column))
-          smoTableColumn.setState(SmoObjectState.Deleted);
-      }
-    }
+        public new void Remove(SmoTableColumn column) {
+            foreach (SmoTableColumn smoTableColumn in (SmoCollection<SmoTableColumn>)this) {
+                if (smoTableColumn.Equals((object)column))
+                    smoTableColumn.SetState(SmoObjectState.Deleted);
+            }
+        }
 
-    public override SmoTableColumn FindByName(string name, SmoScriptOptions options)
-    {
-      SmoTableColumn byName = base.FindByName(name, options);
-      return byName != null && byName.State != SmoObjectState.Deleted ? byName : (SmoTableColumn) null;
+        public override SmoTableColumn FindByName(string name, SmoScriptOptions options) {
+            SmoTableColumn byName = base.FindByName(name, options);
+            return byName != null && byName.State != SmoObjectState.Deleted ? byName : (SmoTableColumn)null;
+        }
     }
-  }
 }

@@ -27,7 +27,7 @@ namespace FR.Data.SqlClient.Smo
       set
       {
         this._schema = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -57,7 +57,7 @@ namespace FR.Data.SqlClient.Smo
           this._schema = schema;
           this._name = str;
         }
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -70,7 +70,7 @@ namespace FR.Data.SqlClient.Smo
         this._id = (int) this._infoRow["object_id"];
       this._name = (string) this._infoRow["name"];
       this._schema = this.Database.Schemas.FindById((int) this._infoRow["schema_id"]);
-      this.setState(SmoObjectState.Original);
+      this.SetState(SmoObjectState.Original);
     }
 
     public SmoDatabaseObject(SmoDatabase database)
@@ -79,7 +79,7 @@ namespace FR.Data.SqlClient.Smo
       this._id = 0;
       this._name = "";
       this._schema = this.Database.Schemas.DefaultSchema;
-      this.setState(SmoObjectState.New);
+      this.SetState(SmoObjectState.New);
     }
 
     public override string GetName() => this.GetName((SmoScriptOptions) null);

@@ -16,7 +16,7 @@ using System.Reflection;
 using System.Xml;
 
 namespace FR {
-    public abstract class ApplicationBase : LoggingProvider, IDisposable, ICommandHandler/*, IConfigurable */{
+    public abstract class ApplicationBase : /*LoggingProvider,*/ IDisposable, ICommandHandler/*, IConfigurable */{
         protected ApplicationBase() {
             ApplicationBase.Instance = this;
             this.Information = new ApplicationInformation();
@@ -24,24 +24,7 @@ namespace FR {
 
         public static ApplicationBase Instance { get; private set; }
 
-        public DirectoryInfo ExecutableDirectory => new FileInfo(Assembly.GetEntryAssembly().Location).Directory;
-
-        public FileInfo ExecutableFile => new FileInfo(Assembly.GetEntryAssembly().Location);
-
-        public override LoggingManager Logger {
-            [DebuggerNonUserCode]
-            get {
-                if (base.Logger == null) {
-                    base.Logger = new LoggingManager();
-                    base.Logger.Devices.Add(new LoggingDeviceConsole() { LogLevel = LogLevel.Default });
-                }
-                return base.Logger;
-            }
-            [DebuggerNonUserCode]
-            set {
-                base.Logger = value;
-            }
-        }
+        public ILogger Log { get; } = LoggingProvider.CreateLogger();
 
         public FileInfo ApplicationFileInfo => new FileInfo(this.GetType().Assembly.Location);
 
@@ -71,9 +54,7 @@ namespace FR {
         }
 
         public virtual void Dispose() {
-            if (this.Logger == null || this.Logger.IsClosed)
-                return;
-            this.Logger.Flush();
+            LoggingProvider.Flush();
         }
 
         [DebuggerNonUserCode]
@@ -97,7 +78,7 @@ namespace FR {
                     throw ExceptionHelper.GetArgumentNull(nameof(command));
                 command.InstanceState = CommandInstanceState.Initializing;
                 if (context != null)
-                    command.SetContext(context);
+                    command.Context = context;
                 this.InitializeCommand(command);
                 if (command.Receiver == null)
                     return;
@@ -108,7 +89,7 @@ namespace FR {
                 command.InstanceState = CommandInstanceState.Finished;
             }
             catch (Exception ex) {
-                this.LogEx(ex);
+                this.Log.Ex(ex);
                 throw ex;
             }
         }
@@ -131,7 +112,7 @@ namespace FR {
             }
             else {
                 Exception ex = (Exception)new MissingMethodException(string.Format("Type '{0}' does not have an empty constructor to invoke", (object)commandType));
-                this.LogEx(ex);
+                this.Log.Ex(ex);
                 throw ex;
             }
         }

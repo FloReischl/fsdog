@@ -76,7 +76,7 @@ namespace FR.Data.SqlClient.Smo
       }
       else
       {
-        string str = this.IsSystemView ? this.Database.getSystemRoutineStatement((SmoObject) this) : this.Database.getRoutineStatement((SmoObject) this);
+        string str = this.IsSystemView ? this.Database.GetSystemRoutineStatement((SmoObject) this) : this.Database.GetRoutineStatement((SmoObject) this);
         if (options.CheckExists)
         {
           stringBuilder.AppendFormat("IF (OBJECT_ID('{0}') IS NOT NULL)\r\n", (object) name);
@@ -95,7 +95,7 @@ namespace FR.Data.SqlClient.Smo
       this._columns = new SmoViewColumnCollection(this);
       DataTable dataTable = this.GetDataTable(CommandType.Text, "USE {0} SELECT *, COLUMNPROPERTY(object_id, Name, 'Ordinal') Ordinal FROM sys.columns WHERE object_id = '{1}' ORDER BY column_id", (object) this.Database.Name, (object) this.Id);
       foreach (DataRow row in (InternalDataCollectionBase) dataTable.Rows)
-        this._columns.add(new SmoViewColumn(this, row));
+        this._columns.Add(new SmoViewColumn(this, row));
       dataTable.Dispose();
     }
 
@@ -104,7 +104,7 @@ namespace FR.Data.SqlClient.Smo
       this._indexes = new SmoIndexCollection(this);
       DataTable dataTable = this.GetDataTable(CommandType.Text, "USE {0} SELECT * FROM sys.indexes WHERE object_id = {1} AND Name IS NOT NULL", (object) this.Database.Name, (object) this.Id);
       foreach (DataRow row in (InternalDataCollectionBase) dataTable.Rows)
-        this._indexes.add(new SmoIndex(this, row));
+        this._indexes.Add(new SmoIndex(this, row));
       dataTable.Dispose();
     }
 
@@ -113,7 +113,7 @@ namespace FR.Data.SqlClient.Smo
       this._statistics = new SmoStatisticCollection(this);
       DataTable dataTable = this.GetDataTable(CommandType.Text, Statements.ObjectStatistics, (object) this.Database.Name, (object) this.Id);
       foreach (DataRow row in (InternalDataCollectionBase) dataTable.Rows)
-        this._statistics.add(new SmoStatistic(this, row));
+        this._statistics.Add(new SmoStatistic(this, row));
       dataTable.Dispose();
     }
   }

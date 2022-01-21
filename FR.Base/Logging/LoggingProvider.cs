@@ -6,85 +6,24 @@
 
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace FR.Logging {
-    public class LoggingProvider : ILoggingProvider {
-        private LoggingManager _logger;
-        private LogLevel _logLevel;
+    public static class LoggingProvider {
+        private static readonly LoggingManager _manager = new LoggingManager() {
+            Devices = { new LoggingDeviceConsole() }
+        };
 
-        public virtual LoggingManager Logger {
-            [DebuggerNonUserCode]
-            get => this._logger;
-            [DebuggerNonUserCode]
-            set => this._logger = value;
-        }
+        public static LoggingManager Manager { get; set; } = _manager;
 
-        public LogLevel LogLevel {
-            [DebuggerNonUserCode]
-            get => this._logLevel;
-            [DebuggerNonUserCode]
-            set => this._logLevel = value;
-        }
+        public static ILogger CreateLogger() => new Logger(_manager);
 
-        [DebuggerNonUserCode]
-        public void SetLoggingProvider(ILoggingProvider loggingProvider) {
-            if (loggingProvider != null) {
-                this._logger = loggingProvider.Logger;
-                if (this.LogLevel != LogLevel.None)
-                    return;
-                this._logLevel = loggingProvider.LogLevel;
+        public static void Flush() {
+            var devices = _manager?.Devices ?? new List<ILoggingDevice>();
+
+            foreach (var device in devices) {
+                device.Flush();
             }
-            else
-                this._logger = (LoggingManager)null;
-        }
-
-        [DebuggerNonUserCode]
-        public void Log(LogLevel logLevel, string message, params object[] args) {
-            if (this.Logger == null || (this.LogLevel & logLevel) == LogLevel.None)
-                return;
-            this.Logger.Write(logLevel, 1, message, args);
-        }
-
-        [DebuggerNonUserCode]
-        public void LogEx(Exception ex) {
-            if (this.Logger == null)
-                return;
-            this.Logger.WriteEx(ex, 1);
-        }
-
-        [DebuggerNonUserCode]
-        public void LogObject(LogLevel logLevel, object obj) {
-            if (this.Logger == null || (this.LogLevel & logLevel) == LogLevel.None)
-                return;
-            this.Logger.WriteObject(logLevel, 1, obj);
-        }
-
-        [DebuggerNonUserCode]
-        public void ForceLog(LogLevel logLevel, string message, params object[] args) {
-            if (this.Logger == null)
-                return;
-            this.Logger.ForceLog(logLevel, 1, message, args);
-        }
-
-        [DebuggerNonUserCode]
-        public void ForceLog(Exception ex) {
-            if (this.Logger == null)
-                return;
-            this.Logger.ForceLog(ex, 1);
-        }
-
-        [DebuggerNonUserCode]
-        public void CallEntry(LogLevel logLevel) {
-            if (this.Logger == null || (this.LogLevel & logLevel) == LogLevel.None)
-                return;
-            this.Logger.CallEntry(logLevel, 1);
-        }
-
-        [DebuggerNonUserCode]
-        public void CallLeave(LogLevel logLevel) {
-            if (this.Logger == null || (this.LogLevel & logLevel) == LogLevel.None)
-                return;
-            this.Logger.CallLeave(logLevel, 1);
         }
     }
 }

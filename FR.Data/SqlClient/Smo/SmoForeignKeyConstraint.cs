@@ -113,11 +113,11 @@ namespace FR.Data.SqlClient.Smo
       this._referencedColumns = new SmoCollection<SmoTableColumn>((SmoObject) this.ReferencedTable);
       foreach (DataRow row in (InternalDataCollectionBase) this.GetDataTable(CommandType.Text, "USE {0} SELECT * FROM sys.foreign_key_columns WHERE constraint_object_id = {1}", (object) this.Table.Database.GetName((SmoScriptOptions) null), (object) this.Id).Rows)
       {
-        this._columns.add(this.Table.Columns.FindById((int) row["parent_column_id"]));
-        this._referencedColumns.add(this.ReferencedTable.Columns.FindById((int) row["referenced_column_id"]));
+        this._columns.Add(this.Table.Columns.FindById((int) row["parent_column_id"]));
+        this._referencedColumns.Add(this.ReferencedTable.Columns.FindById((int) row["referenced_column_id"]));
       }
-      this._columns.setReadOnly(true);
-      this._referencedColumns.setReadOnly(true);
+      this._columns.SetReadOnly(true);
+      this._referencedColumns.SetReadOnly(true);
     }
   }
 }

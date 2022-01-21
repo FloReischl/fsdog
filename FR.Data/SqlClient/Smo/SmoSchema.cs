@@ -22,7 +22,7 @@ namespace FR.Data.SqlClient.Smo
       set
       {
         this._name = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -34,7 +34,7 @@ namespace FR.Data.SqlClient.Smo
       set
       {
         this._owner = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -49,7 +49,7 @@ namespace FR.Data.SqlClient.Smo
       : base((SmoObject) database, (DataRow) null)
     {
       this._owner = this.Database.Principals.FindByName((string) this.GetDataTable(CommandType.Text, "SELECT CURRENT_USER Name").Rows[0][nameof (Name)]);
-      this.setState(SmoObjectState.New);
+      this.SetState(SmoObjectState.New);
     }
 
     public override string GetCreateStatement(object scriptOptions)

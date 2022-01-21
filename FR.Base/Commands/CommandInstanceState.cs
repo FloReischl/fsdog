@@ -4,14 +4,12 @@
 // MVID: E4325E6A-7973-47D1-9B4E-B328A6EAD270
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FR.Base.dll
 
-namespace FR.Commands
-{
-  public enum CommandInstanceState
-  {
-    None,
-    Initializing,
-    Executing,
-    Finishing,
-    Finished,
-  }
+namespace FR.Commands {
+    public enum CommandInstanceState {
+        None,
+        Initializing,
+        Executing,
+        Finishing,
+        Finished,
+    }
 }

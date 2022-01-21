@@ -26,7 +26,7 @@ namespace FR.Data.SqlClient.Smo
         if (object.Equals((object) this._index, (object) value))
           return;
         this._index = value;
-        this.setState(SmoObjectState.Changed);
+        this.SetState(SmoObjectState.Changed);
       }
     }
 
@@ -38,7 +38,7 @@ namespace FR.Data.SqlClient.Smo
     public SmoKeyConstraint(SmoTable table)
       : base(table, (DataRow) null)
     {
-      this.setState(SmoObjectState.New);
+      this.SetState(SmoObjectState.New);
     }
 
     public override string GetCreateStatement(object scriptOptions)

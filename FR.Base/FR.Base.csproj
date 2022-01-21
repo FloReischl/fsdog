@@ -139,12 +139,10 @@
     <Compile Include="Configuration\IConfigurationSource.cs" />
     <Compile Include="Configuration\ConfigurationFile.cs" />
     <Compile Include="CommandLineParser.cs" />
-    <Compile Include="Logging\ILoggingProvider.cs" />
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Logging\ILoggingDevice.cs" />
     <Compile Include="Logging\LoggingProvider.cs" />
     <Compile Include="Logging\LoggingDeviceConsole.cs" />
-    <Compile Include="Logging\LoggingDeviceFlatFile.cs" />
     <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Commands\ICommandReceiver.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
