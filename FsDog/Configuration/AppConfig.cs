@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FsDog.Configuration {
-    public class FsAppConfig {
+    public class AppConfig {
         public FormMainConfig FormMain { get; set; }
     }
 }

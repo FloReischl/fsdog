@@ -11,12 +11,9 @@ using System.Windows.Forms;
 
 namespace FsDog.Detail {
     public class PreviewImage : UserControl, IPreviewControl {
-        //private IContainer components;
         private PictureBox picContent;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    components.Dispose();
             base.Dispose(disposing);
         }
 
@@ -62,7 +59,6 @@ namespace FsDog.Detail {
                 graphics.Dispose();
             }
             picContent.SizeMode = PictureBoxSizeMode.Zoom;
-            //this.picContent.Size = image.Size;
             picContent.Size = Parent.Size;
             picContent.Image = image;
         }

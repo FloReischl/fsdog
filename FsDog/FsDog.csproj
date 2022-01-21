@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppearanceProvider.cs" />
+    <Compile Include="Commands\CmdAppSaveConfig.cs" />
     <Compile Include="Commands\CommandHelper.cs" />
     <Compile Include="Commands\CommandType.cs" />
     <Compile Include="Commands\CommandInfo.cs" />
@@ -84,11 +85,12 @@
     <Compile Include="Configuration\ColumnConfig.cs" />
     <Compile Include="Configuration\CommandConfig.cs" />
     <Compile Include="Configuration\CommandsAppsConfig.cs" />
+    <Compile Include="Configuration\ConfigConverter.cs" />
     <Compile Include="Configuration\DetailViewConfig.cs" />
     <Compile Include="Configuration\DetailViewStateConfig.cs" />
     <Compile Include="Configuration\FileViewConfig.cs" />
     <Compile Include="Configuration\FormMainConfig.cs" />
-    <Compile Include="Configuration\FsAppConfig.cs" />
+    <Compile Include="Configuration\AppConfig.cs" />
     <Compile Include="Configuration\GeneralConfig.cs" />
     <Compile Include="Configuration\HostsConfig.cs" />
     <Compile Include="Configuration\MainConfig.cs" />

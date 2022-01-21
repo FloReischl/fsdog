@@ -13,7 +13,6 @@ using System.Windows.Forms;
 
 namespace FR.Windows.Forms {
     public class SqlConnectionDialog : Form {
-        //private IContainer components;
         private Label label1;
         private GroupBox groupBox1;
         private TextBox txtServer;
@@ -31,8 +30,6 @@ namespace FR.Windows.Forms {
         private SqlConnectionStringBuilder _connectionBuilder;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //  this.components.Dispose();
             base.Dispose(disposing);
         }
 

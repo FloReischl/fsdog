@@ -22,20 +22,6 @@ namespace FR.Logging {
             this.Devices = new List<ILoggingDevice>();
         }
 
-        //public LoggingManager(IConfigurationProperty loggingConfiguration)
-        //    : this() {
-        //    this.FlushLines = loggingConfiguration.GetSubProperty(nameof(FlushLines), true).ToInt32(FlushLines);
-        //    foreach (IConfigurationProperty subProperty in loggingConfiguration.GetSubProperties("Device")) {
-        //        string typeName = subProperty.GetSubProperty("ClassName").ToString();
-        //        Type type = Type.GetType(typeName);
-        //        if (type == null)
-        //            throw ExceptionHelper.GetArgument("Cannot load logging device type '{0}'", (object)typeName);
-        //        ILoggingDevice loggingDevice = (ILoggingDevice)((type.GetInterface(typeof(ILoggingDevice).FullName) != null ? type.GetConstructor(new Type[0]) : throw ExceptionHelper.GetNotImplemented("Logging device type '{0}' does not implement interface '{1}'", (object)type, (object)typeof(ILoggingDevice))) ?? throw ExceptionHelper.GetNotImplemented("Logging device type '{0}' does not implement an empty constructor", (object)type)).Invoke(new object[0]);
-        //        loggingDevice.Open(subProperty);
-        //        this.Devices.Add(loggingDevice);
-        //    }
-        //}
-
         public List<ILoggingDevice> Devices { get; }
 
         public int FlushLines { get; set; }

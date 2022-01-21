@@ -20,13 +20,13 @@ namespace FsDog.Configuration {
         public string WindowStateName { get; set; }
         [JsonIgnore]
         public Size Size {
-            get => FsDogConfig.SizeFromString(SizeName);
-            set => SizeName = FsDogConfig.SizeToString(value);
+            get => ConfigConverter.SizeFromString(SizeName);
+            set => SizeName = ConfigConverter.SizeToString(value);
         }
         [JsonIgnore]
         public Point Location {
-            get => FsDogConfig.PointFromString(LocationName);
-            set => LocationName = FsDogConfig.PointToString(value);
+            get => ConfigConverter.PointFromString(LocationName);
+            set => LocationName = ConfigConverter.PointToString(value);
         }
         [JsonIgnore]
         public FormWindowState WindowState {

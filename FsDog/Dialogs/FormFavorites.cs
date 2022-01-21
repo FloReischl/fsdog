@@ -20,7 +20,6 @@ using System.Windows.Forms;
 namespace FsDog {
     public class FormFavorites : FormBase {
         private FsDogConfig _config;
-        //private IContainer components;
         private ListView lvwFavorites;
         private ColumnHeader columnHeader1;
         private Label label1;
@@ -36,8 +35,6 @@ namespace FsDog {
         private LinkLabel btnDown;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 
@@ -212,7 +209,6 @@ namespace FsDog {
             this.Icon = Icon.FromHandle(new Bitmap((Image)Resources.FavoritesEdit).GetHicon());
 
             _config = FsApp.Instance.Config;
-            //this.ConfigurationRoot = FsApp.Instance.ConfigurationSource.GetProperty(".", "Favorites", true);
 
             foreach (FavoriteInfo info in CmdFavorite.GetInfos())
                 this.lvwFavorites.Items.Add(new ListViewItem(info.DirectoryName));
@@ -226,13 +222,6 @@ namespace FsDog {
 
             _config.Favorites = lvwFavorites.Items.Cast<ListViewItem>().Select(lvi => lvi.Text).ToList();
             _config.Save();
-            //foreach (IConfigurationProperty subProperty in this.ConfigurationRoot.GetSubProperties("Item"))
-            //    subProperty.Delete();
-
-            //foreach (ListViewItem listViewItem in this.lvwFavorites.Items)
-            //    this.ConfigurationRoot.AddSubProperty("Item").GetSubProperty("Directory", true).Set(listViewItem.Text);
-
-            //FsApp.Instance.ConfigurationSource.Save();
         }
 
         private void lvwFavorites_SelectedIndexChanged(object sender, EventArgs e) {

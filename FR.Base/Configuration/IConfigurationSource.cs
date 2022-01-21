@@ -6,49 +6,12 @@
 
 namespace FR.Configuration {
     public interface IConfigurationSource {
-        //bool AutoSave { get; set; }
-
-        //bool WriteType { get; set; }
-
-        //IConfigurationProperty RootProperty { get; }
-
-        //int GetCount(string path, string name);
-
-        //int GetCount(IConfigurationProperty parent, string name);
-
-        //IConfigurationProperty[] GetProperties(string path);
-
-        //IConfigurationProperty[] GetProperties(string path, string name);
-
-        //IConfigurationProperty GetProperty(
-        //  string path,
-        //  string name,
-        //  int index,
-        //  bool autoCreate);
-
-        //IConfigurationProperty GetProperty(
-        //  string path,
-        //  string name,
-        //  bool autoCreate);
-
-        //IConfigurationProperty GetProperty(string path, string name);
-
-        //string GetPropertyString(string path, string name, string defaultValue);
-
-        //string GetPropertyString(string path, string name);
-
         void Save();
-
-        //bool ExistsProperty(string path, string name);
 
         T TryGet<T>(string path, string name, int? index = null) where T : class;
 
         bool TryGet<T>(string path, string name, out T config, int? index = null) where T : class;
 
         T Get<T>(string path, string name, int? index = null) where T : class;
-
-        //bool ExistsProperty(string path, string name, int index);
-
-        //void SetProperty(string path, string name, string value);
     }
 }

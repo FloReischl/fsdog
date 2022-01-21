@@ -10,23 +10,12 @@ using System.IO;
 
 namespace FsDogBase {
     public abstract class CmdFsDog : StandardCommandBase {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private FileSystemInfo[] _selectedItems;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private DirectoryInfo _parentDirectory;
+        public FileSystemInfo[] SelectedItems { [DebuggerNonUserCode]
+            get; [DebuggerNonUserCode]
+            set; }
 
-        public FileSystemInfo[] SelectedItems {
-            [DebuggerNonUserCode]
-            get => this._selectedItems;
-            [DebuggerNonUserCode]
-            set => this._selectedItems = value;
-        }
-
-        public DirectoryInfo ParentDirectory {
-            [DebuggerNonUserCode]
-            get => this._parentDirectory;
-            [DebuggerNonUserCode]
-            set => this._parentDirectory = value;
-        }
+        public DirectoryInfo ParentDirectory { [DebuggerNonUserCode]
+            get; [DebuggerNonUserCode]
+            set; }
     }
 }

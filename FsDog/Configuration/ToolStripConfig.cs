@@ -12,8 +12,8 @@ namespace FsDog.Configuration {
         public string LocationName { get; set; }
         [JsonIgnore]
         public Point Location {
-            get => FsDogConfig.PointFromString(LocationName);
-            set => LocationName = FsDogConfig.PointToString(value);
+            get => ConfigConverter.PointFromString(LocationName);
+            set => LocationName = ConfigConverter.PointToString(value);
         }
     }
 }

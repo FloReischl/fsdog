@@ -37,7 +37,8 @@ namespace FsDog.Dialogs {
         private Dictionary<string, ToolStrip> _toolStrips;
         private Point _location;
         private Size _size;
-        private FormMainConfig _config;
+        private FormMainConfig _formConfig;
+        private OptionsConfig _optionsConfig;
         private static readonly HashSet<Type> MyCommands = new HashSet<Type> {
                 typeof(CmdFileNewFile), typeof(CmdFileNewFile), typeof(CmdFileNewDirectory), typeof(CmdFileRenameMulti), typeof(CmdFileOpen), typeof(CmdFileOpenWith), typeof(CmdFileRunAs), typeof(CmdFileProperties), typeof(CmdFileDosShell), typeof(CmdFilePowerShell), typeof(CommandFileExitBase), typeof(CommandEditCutBase), typeof(CommandEditCopyBase), typeof(CommandEditPasteBase), typeof(CmdEditCopyToOtherView), typeof(CmdEditMoveToOtherView), typeof(CmdEditCopyFileNames), typeof(CmdEditDelete), typeof(CmdEditSelectAll), typeof(CmdEditInvertSelection), typeof(CmdViewFind), typeof(CmdViewPreview), typeof(CmdViewGotoFavorite), typeof(CmdViewDirectorySizes), typeof(CmdViewRefresh), typeof(CmdFavorite), typeof(CmdFavoritesEdit), typeof(CmdCommandsEdit), typeof(CmdApplicationExecute), typeof(CmdScriptExecute), typeof(CmdScriptConfigureHosts), typeof(CmdToolsClearImageCache), typeof(CmdToolsOpenConfigFile), typeof(CmdToolsOptions), typeof(CmdHelpAbout)
             };
@@ -220,7 +221,7 @@ namespace FsDog.Dialogs {
         }
 
         private void CreateCommandsToolStrips() {
-            var config = _config.ToolStrips;
+            var config = _formConfig.ToolStrips;
             ToolStripLocationsToConfig();
 
             void AddToolStrip(ToolStrip toolStrip, ToolStripConfig toolConfig) {
@@ -239,28 +240,6 @@ namespace FsDog.Dialogs {
             CommandHelper.GetScriptsToolStrips(out shift, out ctrl);
             AddToolStrip(ctrl, config.ScriptsCtrl);
             AddToolStrip(shift, config.ScriptsShift);
-
-
-
-            //IConfigurationProperty subProperty = this.ConfigurationRoot.GetSubProperty("ToolStrips", true);
-            //foreach (ToolStrip applicationsToolStrip in CommandHelper.GetApplicationsToolStrips()) {
-            //    Point location = new Point(applicationsToolStrip.Location.X, applicationsToolStrip.Location.Y);
-            //    if (subProperty.ExistsSubProperty(applicationsToolStrip.Name))
-            //        location = (Point)pointConverter.ConvertFromString(subProperty[applicationsToolStrip.Name]["Location"].ToString(pointConverter.ConvertToString((object)location)));
-            //    tscMain.TopToolStripPanel.Join(applicationsToolStrip, location);
-            //    if (this._toolStrips.ContainsKey(applicationsToolStrip.Name))
-            //        _toolStrips.Remove(applicationsToolStrip.Name);
-            //    _toolStrips.Add(applicationsToolStrip.Name, applicationsToolStrip);
-            //}
-            //foreach (ToolStrip scriptsToolStrip in CommandHelper.GetScriptsToolStrips()) {
-            //    Point location = new Point(scriptsToolStrip.Location.X, scriptsToolStrip.Location.Y);
-            //    if (subProperty.ExistsSubProperty(scriptsToolStrip.Name))
-            //        location = (Point)pointConverter.ConvertFromString(subProperty[scriptsToolStrip.Name]["Location"].ToString(pointConverter.ConvertToString((object)location)));
-            //    tscMain.TopToolStripPanel.Join(scriptsToolStrip, location);
-            //    if (this._toolStrips.ContainsKey(scriptsToolStrip.Name))
-            //        _toolStrips.Remove(scriptsToolStrip.Name);
-            //    _toolStrips.Add(scriptsToolStrip.Name, scriptsToolStrip);
-            //}
         }
 
         private NodeDrive GetDriveNode(StringComparer sc, ref string path, ref bool handled) {
@@ -407,13 +386,9 @@ namespace FsDog.Dialogs {
         }
 
         private void ToolStripLocationsToConfig() {
-            var config = _config.ToolStrips;
+            var config = _formConfig.ToolStrips;
             foreach (ToolStrip toolStrip in this._toolStrips.Values)
                 config.ToolStrip(toolStrip.Name).Location = toolStrip.Location;
-
-            //IConfigurationProperty subProperty = this.ConfigurationRoot.GetSubProperty("ToolStrips", true);
-            //foreach (ToolStrip toolStrip in this._toolStrips.Values)
-            //    subProperty.GetSubProperty(toolStrip.Name, true).GetSubProperty("Location", true).Set(pointConverter.ConvertToString((object)toolStrip.Location));
         }
 
         private void UpdateDevices() {
@@ -456,36 +431,33 @@ namespace FsDog.Dialogs {
                 return;
             FsApp instance = FsApp.Instance;
             Icon = this.ApplicationInstance.GetAppIcon();
-            //_config = FsApp.Instance.ConfigurationSource.GetConfig<FormMainConfig>("FsApp.Dialogs.FormMain");
-            _config = FsApp.Instance.Config.FsApp.FormMain;
+            _formConfig = FsApp.Instance.Config.FsApp.FormMain;
+            _optionsConfig = FsApp.Instance.Config.Options;
             _toolStrips = new Dictionary<string, ToolStrip>();
             CreateMenu();
             CreateCommandsToolStrips();
-            if (!instance.Config.Options.Appearance.Main.ShowStatusbar)
+            if (!_optionsConfig.Appearance.Main.ShowStatusbar)
                 statMain.Visible = false;
             sptDetailView.BackColor = SystemColors.Control;
             _currentDetailView = this.detailView1;
             detailView1.SetActive(true);
             detailView2.SetActive(false);
-            detailView1.ReadFromConfig(_config.DetailView1, true);
-            detailView2.ReadFromConfig(_config.DetailView2, true);
-            //detailView1.ReadFromConfig(this.ConfigurationRoot.GetSubProperty("DetailView1", true), true);
-            //detailView2.ReadFromConfig(this.ConfigurationRoot.GetSubProperty("DetailView2", true), false);
+            detailView1.ReadFromConfig(_formConfig.DetailView1, true);
+            detailView2.ReadFromConfig(_formConfig.DetailView2, true);
             tslMainInfo.Text = string.Empty;
             SizeConverter sizeConverter = new SizeConverter();
             PointConverter pointConverter = new PointConverter();
-            _size = _config.Size;
+            _size = _formConfig.Size;
 
-            if (instance.Config.Options.Appearance.Main.RememberSize)
+            if (_optionsConfig.Appearance.Main.RememberSize)
                 Size = this._size;
 
-            _location = _config.Location;
-            if (instance.Config.Options.Appearance.Main.RememberLocation)
+            _location = _formConfig.Location;
+            if (_optionsConfig.Appearance.Main.RememberLocation)
                 Location = this._location;
 
-            if (instance.Config.Options.Appearance.Main.RememberWindowState)
-                WindowState = _config.WindowState;
-                //WindowState = (FormWindowState)Enum.Parse(typeof(FormWindowState), this.ConfigurationRoot.GetSubProperty("WindowState", true).ToString(this.WindowState.ToString()));
+            if (_optionsConfig.Appearance.Main.RememberWindowState)
+                WindowState = _formConfig.WindowState;
             
             AppearanceProvider appearance = new AppearanceProvider();
             appearance.ApplyToForm(this);
@@ -494,17 +466,12 @@ namespace FsDog.Dialogs {
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e) {
             SizeConverter sizeConverter = new SizeConverter();
             PointConverter pointConverter = new PointConverter();
-            _config.Size = _size;
-            _config.Location = _location;
-            _config.WindowState = (FormWindowState)(this.WindowState != FormWindowState.Minimized ? (int)this.WindowState : 0);
-            //ConfigurationRoot["Size"].Set(sizeConverter.ConvertToString((object)this._size));
-            //ConfigurationRoot["Location"].Set(pointConverter.ConvertToString((object)this._location));
-            //ConfigurationRoot["WindowState"].Set(((FormWindowState)(this.WindowState != FormWindowState.Minimized ? (int)this.WindowState : 0)).ToString());
+            _formConfig.Size = _size;
+            _formConfig.Location = _location;
+            _formConfig.WindowState = (FormWindowState)(this.WindowState != FormWindowState.Minimized ? (int)this.WindowState : 0);
             ToolStripLocationsToConfig();
-            detailView1.SetToConfig(_config.DetailView1);
-            detailView2.SetToConfig(_config.DetailView2);
-            //detailView1.SetToConfig(this.ConfigurationRoot.GetSubProperty("DetailView1", true), true);
-            //detailView2.SetToConfig(this.ConfigurationRoot.GetSubProperty("DetailView2", true), false);
+            detailView1.SetToConfig(_formConfig.DetailView1);
+            detailView2.SetToConfig(_formConfig.DetailView2);
         }
 
         private void FormMain_Move(object sender, EventArgs e) {
@@ -561,7 +528,7 @@ namespace FsDog.Dialogs {
                     tvwMain.SelectedNode = nodeFromTreePath;
                     _currentDetailView.SetParentDirectory(directoryInfo, treePath2, true);
                 }
-                if (instance.Config.Options.Appearance.Main.FullPathInTitle)
+                if (_optionsConfig.Appearance.Main.FullPathInTitle)
                     Text = string.Format("{0} - {1}", instance.Information.Title, directoryInfo.FullName);
                 else
                     Text = instance.Information.Title;
@@ -650,7 +617,7 @@ namespace FsDog.Dialogs {
         }
 
         private void detailView_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e) {
-            if (!FsApp.Instance.Config.Options.DetailView.SynchronizeColumnWidths)
+            if (!_optionsConfig.DetailView.SynchronizeColumnWidths)
                 return;
             if ((DetailView)sender == this.detailView1)
                 detailView2.SetColumnWidth(e.Column.Name, e.Column.Width);

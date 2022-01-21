@@ -12,7 +12,6 @@ using System.Windows.Forms;
 
 namespace FsDog {
     public class FormAbout : Form {
-        //private IContainer components;
         private PictureBox picDog;
         private Label lblProductName;
         private Label lblVersion;
@@ -21,8 +20,6 @@ namespace FsDog {
         private Label lblDescription;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 

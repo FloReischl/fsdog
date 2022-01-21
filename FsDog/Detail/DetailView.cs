@@ -50,6 +50,7 @@ namespace FsDog.Detail {
         private ComboBox cboPath;
         private ContextMenuStrip ctxCboPath;
         private ToolStripMenuItem ctxCboPathAddToFavorites;
+        private OptionsConfig _optionsConfig;
 
         public DetailView() {
             this.InitializeComponent();
@@ -71,6 +72,10 @@ namespace FsDog.Detail {
             this.dgvFiles.KeyDown += new KeyEventHandler(this.dgvFiles_KeyDown);
             this.dgvFiles.KeyPress += new KeyPressEventHandler(this.dgvFiles_KeyPress);
             this.dgvFiles.SelectionChanged += new EventHandler(this.dgvFiles_SelectionChanged);
+
+            if (!DesignMode) {
+                _optionsConfig = FsApp.Instance?.Config.Options;
+            }
         }
 
         public event DetailViewRequestParentDirectoryHandler RequestParentDirectory;
@@ -143,9 +148,9 @@ namespace FsDog.Detail {
             }
             try {
                 string treePath = config.Path;
-                if (!string.IsNullOrEmpty(treePath) && treePath.StartsWith("\\\\") && instance.Config.Options.General.RestoreNetworkDirectories)
+                if (!string.IsNullOrEmpty(treePath) && treePath.StartsWith("\\\\") && _optionsConfig.General.RestoreNetworkDirectories)
                     this.OnRequestParentDirectory(treePath);
-                else if (!string.IsNullOrEmpty(treePath) && instance.Config.Options.General.RestoreDirectories)
+                else if (!string.IsNullOrEmpty(treePath) && _optionsConfig.General.RestoreDirectories)
                     this.OnRequestParentDirectory(treePath);
                 else
                     this.OnRequestParentDirectory(instance.DefaultDirectoryName);
@@ -176,17 +181,18 @@ namespace FsDog.Detail {
 
         public void SetActive(bool active) {
             FsApp instance = FsApp.Instance;
+            var config = _optionsConfig.Appearance;
             if (active) {
-                this.txtSearch.BackColor = instance.Config.Options.Appearance.FileView.ActiveBackgroundColor;
-                this.txtSearch.ForeColor = instance.Config.Options.Appearance.FileView.ActiveForeColor;
-                this.cboPath.BackColor = instance.Config.Options.Appearance.FileView.ActiveBackgroundColor;
-                this.cboPath.ForeColor = instance.Config.Options.Appearance.FileView.ActiveForeColor;
+                this.txtSearch.BackColor = config.FileView.ActiveBackgroundColor;
+                this.txtSearch.ForeColor = config.FileView.ActiveForeColor;
+                this.cboPath.BackColor = config.FileView.ActiveBackgroundColor;
+                this.cboPath.ForeColor = config.FileView.ActiveForeColor;
             }
             else {
-                this.txtSearch.BackColor = instance.Config.Options.Appearance.FileView.InactiveBackgroundColor;
-                this.txtSearch.ForeColor = instance.Config.Options.Appearance.FileView.InactiveForeColor;
-                this.cboPath.BackColor = instance.Config.Options.Appearance.FileView.InactiveBackgroundColor;
-                this.cboPath.ForeColor = instance.Config.Options.Appearance.FileView.InactiveForeColor;
+                this.txtSearch.BackColor = config.FileView.InactiveBackgroundColor;
+                this.txtSearch.ForeColor = config.FileView.InactiveForeColor;
+                this.cboPath.BackColor = config.FileView.InactiveBackgroundColor;
+                this.cboPath.ForeColor = config.FileView.InactiveForeColor;
             }
         }
 
@@ -269,18 +275,9 @@ namespace FsDog.Detail {
                     this._fsw.EnableRaisingEvents = true;
                 }
                 this._files.EndLoadData();
-                //this.dgvFiles.AutoGenerateColumns = false;
-                this.dgvFiles.DataSource = (object)new DetailTableView(this._files, sortColumn, sortOrder);
-                //this.dgvFiles.Columns.Clear();
 
-                //foreach (DataColumn column in (InternalDataCollectionBase)this._files.Columns) {
-                //    DataGridViewColumn gridColumn = GridColumnFactory.CreateGridColumn(column);
-                //    if (gridColumn != null) {
-                //        if (this._columnWidths.TryGetValue(column.ColumnName, out int num))
-                //            gridColumn.Width = num;
-                //        this.dgvFiles.Columns.Add(gridColumn);
-                //    }
-                //}
+                this.dgvFiles.DataSource = (object)new DetailTableView(this._files, sortColumn, sortOrder);
+
                 if (dictionary != null) {
                     this.dgvFiles.ClearSelection();
                     foreach (DataGridViewRow row in (IEnumerable)this.dgvFiles.Rows) {
@@ -301,7 +298,7 @@ namespace FsDog.Detail {
                         }
                     }
                 }
-                if (instance.Config.Options.DetailView.ShowDirectorySize)
+                if (_optionsConfig.DetailView.ShowDirectorySize)
                     this.GetDirectorySizes();
                 if (this._historyDirection == 0) {
                     if (!string.IsNullOrEmpty(treePath1))
@@ -324,18 +321,6 @@ namespace FsDog.Detail {
             }
         }
 
-        //public void SetToConfig(IConfigurationProperty root, bool isFirst) {
-        //    root.GetSubProperty("Path", true).Set(this.TreePath);
-        //    IConfigurationProperty subProperty = root.GetSubProperty("Columns");
-        //    while (subProperty.ExistsSubProperty("Column"))
-        //        subProperty.GetSubProperty("Column").Delete();
-        //    foreach (KeyValuePair<string, int> columnWidth in this._columnWidths) {
-        //        IConfigurationProperty configurationProperty = subProperty.AddSubProperty("Column");
-        //        configurationProperty.GetSubProperty("Name", true).Set(columnWidth.Key);
-        //        configurationProperty.GetSubProperty("Width", true).Set(columnWidth.Value);
-        //    }
-        //}
-
         public void SetToConfig(DetailViewStateConfig config) {
             config.Path = this.TreePath;
             config.Columns = _columnWidths.Select(kvp => new ColumnConfig {
@@ -356,8 +341,8 @@ namespace FsDog.Detail {
             this._shellItems = new List<ShellItem>();
             this._files = new DetailTable();
             this._columnWidths = new Dictionary<string, int>();
-            this.BackColor = instance.Config.Options.Appearance.FileView.ActiveBackgroundColor;
-            this.dgvFiles.BackgroundColor = instance.Config.Options.Appearance.FileView.ActiveBackgroundColor;
+            this.BackColor = _optionsConfig.Appearance.FileView.ActiveBackgroundColor;
+            this.dgvFiles.BackgroundColor = _optionsConfig.Appearance.FileView.ActiveBackgroundColor;
 
             this.dgvFiles.AutoGenerateColumns = false;
 

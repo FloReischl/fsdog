@@ -17,7 +17,6 @@ using System.Windows.Forms;
 
 namespace FR.Windows.Forms {
     public class FormLoggingDevice : FormBase, ILoggingDevice, IDisposable {
-        //private IContainer components;
         private Button btnClose;
         private LinkLabel lnkCopyToClipboard;
         private LinkLabel lnkClear;
@@ -29,8 +28,6 @@ namespace FR.Windows.Forms {
         private bool _isDisposed;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 
@@ -144,18 +141,6 @@ namespace FR.Windows.Forms {
         }
 
         public new bool IsDisposed => this._isDisposed;
-
-        //public void Open(IConfigurationProperty deviceConfiguration) {
-        //    this.Show();
-        //    if (deviceConfiguration != null) {
-        //        this.LogLevel = (FR.Logging.LogLevel)deviceConfiguration.GetSubProperty("LogLevel", true).ToUInt32(7U);
-        //        this.StackTraceLevel = (FR.Logging.LogLevel)deviceConfiguration.GetSubProperty("StackTrace", true).ToUInt32(1U);
-        //    }
-        //    else {
-        //        this.LogLevel = FR.Logging.LogLevel.Default;
-        //        this.StackTraceLevel = FR.Logging.LogLevel.Exception;
-        //    }
-        //}
 
         public void Log(
           FR.Logging.LogLevel logLevel,

@@ -7,51 +7,36 @@
 using FR.Configuration;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace FR.Logging {
     public class LoggingDeviceConsole : ILoggingDevice, IDisposable {
-        private LogLevel _logLevel;
-        private LogLevel _stackTrace;
-        private bool _isDisposed;
+        public LogLevel LogLevel { get; set; }
 
-        public LogLevel LogLevel {
-            get => this._logLevel;
-            set => this._logLevel = value;
-        }
+        public LogLevel StackTraceLevel { get; set; }
 
-        public LogLevel StackTraceLevel {
-            get => this._stackTrace;
-            set => this._stackTrace = value;
-        }
+        public bool IsDisposed { get; private set; }
 
-        public bool IsDisposed => this._isDisposed;
+        public void Close() => this.IsDisposed = true;
 
-        //public void Open(IConfigurationProperty deviceConfiguration) {
-
-        //    this.LogLevel = LogLevel.Default; //(LogLevel)deviceConfiguration.GetSubProperty("LogLevel", true).ToUInt32(7U);
-        //    this.StackTraceLevel = (LogLevel)deviceConfiguration.GetSubProperty("StackTrace", true).ToUInt32(1U);
-        //}
-
-        public void Close() => this._isDisposed = true;
-
-        public void Log(
+        public async void Log(
           LogLevel logLevel,
           string message,
           DateTime dateTime,
           string className,
           string methodName,
           int skipFrames) {
-            string str = (string)null;
+            TextWriter stream = (logLevel & (LogLevel.Error | LogLevel.Exception)) != 0 ? Console.Error : Console.Out;
+            string str = null;
             if ((logLevel & this.LogLevel) == logLevel) {
-                str = LoggingDeviceConsole.getLinePrefix(logLevel, dateTime);
-                message = string.Format("{0}{1}\r\n", (object)str, (object)message);
-                Console.Write(message);
+                str = GetLinePrefix(logLevel, dateTime);
+                await stream.WriteLineAsync($"{str}{message}");
             }
             if ((logLevel & this.StackTraceLevel) != logLevel)
                 return;
             if (str == null)
-                str = LoggingDeviceConsole.getLinePrefix(logLevel, dateTime);
+                str = LoggingDeviceConsole.GetLinePrefix(logLevel, dateTime);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(str);
             stringBuilder.AppendLine("Stack Trace");
@@ -67,7 +52,7 @@ namespace FR.Logging {
                 stringBuilder.Append(" :: ");
                 stringBuilder.Append(frame.ToString());
             }
-            Console.Write((object)stringBuilder);
+            await stream.WriteLineAsync(stringBuilder.ToString());
         }
 
         public void ForceLog(
@@ -85,7 +70,7 @@ namespace FR.Logging {
 
         public void Flush() => Console.Out.Flush();
 
-        private static string getLinePrefix(LogLevel logLevel, DateTime dateTime) {
+        private static string GetLinePrefix(LogLevel logLevel, DateTime dateTime) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(dateTime.ToString("yyyyMMdd HHmmssfff"));
             stringBuilder.Append(";");

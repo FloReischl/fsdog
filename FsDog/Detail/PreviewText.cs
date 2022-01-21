@@ -12,12 +12,9 @@ using System.Windows.Forms;
 
 namespace FsDog.Detail {
     public class PreviewText : UserControl, IPreviewControl {
-        //private IContainer components;
         private RichTextBox txtContent;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 

@@ -7,13 +7,11 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace FR.Windows.Forms
-{
-  [Guid("F8383852-FCD3-11d1-A6B9-006097DF5BD4")]
-  [ComImport]
-  internal class ProgressDialogCom
-  {
-    //[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-    //public extern ProgressDialogCom();
-  }
+namespace FR.Windows.Forms {
+    [Guid("F8383852-FCD3-11d1-A6B9-006097DF5BD4")]
+    [ComImport]
+    internal class ProgressDialogCom {
+        //[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        //public extern ProgressDialogCom();
+    }
 }

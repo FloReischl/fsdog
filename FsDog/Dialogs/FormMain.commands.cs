@@ -38,14 +38,7 @@ namespace FsDog.Dialogs {
             });
             var commandToolItem2 = new CommandToolItem("Properties", typeof(CmdFileProperties), (Image)Resources.Properties, Keys.Return | Keys.Alt);
             fileParent.Items.Add(commandToolItem2);
-            //fileParent.Items.Add(new CommandToolItem("-"));
-            //var commandToolItem3 = new CommandToolItem("Open DOS Shell", typeof(CmdFileDosShell), (Image)Resources.DosShell, Keys.D | Keys.Control);
-            //fileParent.Items.Add(commandToolItem3);
-            //string str = (string)Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell", "Path", (object)null);
-            //if (!string.IsNullOrEmpty(str))
-            //    fileParent.Items.Add(new CommandToolItem("Open PowerShell", typeof(CmdFilePowerShell), (Image)Resources.PowerShell, Keys.D | Keys.Shift | Keys.Control) {
-            //        CommandContext = { { "PowerShell", str } }
-            //    });
+
             fileParent.Items.Add(new CommandToolItem("-"));
             var fileExit = CommandToolItem.CreateFileExit((System.Type)null);
             fileParent.Items.Add(fileExit);
@@ -149,16 +142,13 @@ namespace FsDog.Dialogs {
             _menuStrip.Dock = DockStyle.Top;
             Controls.Add((Control)this._menuStrip);
             PointConverter pointConverter = new PointConverter();
-            //IConfigurationProperty subProperty = this.ConfigurationRoot.GetSubProperty("ToolStrips", true);
             _menu.Items.Remove(applicationsParent);
             _menu.Items.Remove(scriptsParent);
             _menu.Items.Remove(favoritesParent);
             ToolStrip toolStrip = this._menu.CreateToolStrip();
             AppearanceProvider appearance = new AppearanceProvider();
             appearance.ApplyToToolStrip(toolStrip);
-            Point location = _config.ToolStrips.ToolStrip(toolStrip.Name)?.Location ?? new Point(toolStrip.Location.X, toolStrip.Location.Y);
-            //if (subProperty.ExistsSubProperty(toolStrip.Name))
-            //    location = (Point)pointConverter.ConvertFrom((object)subProperty[toolStrip.Name]["Location"].ToString(pointConverter.ConvertToString((object)location)));
+            Point location = _formConfig.ToolStrips.ToolStrip(toolStrip.Name)?.Location ?? new Point(toolStrip.Location.X, toolStrip.Location.Y);
             tscMain.TopToolStripPanel.Join(toolStrip, location);
             _toolStrips.Add(toolStrip.Name, toolStrip);
         }

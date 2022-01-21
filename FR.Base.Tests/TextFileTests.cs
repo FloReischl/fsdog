@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FR.Base.Tests {
     [TestClass]
-    //[DeploymentItem("Data/TextFileContains1.txt")]
     public class TextFileTests {
         private const string TestDataDir = @"C:\Users\flori\source\repos\FsDog\FR.Base.Tests\Data";
         [TestMethod]

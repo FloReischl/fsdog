@@ -7,14 +7,12 @@
 using FR.Collections;
 using System;
 
-namespace FR.Commands
-{
-  public interface ICommandHandler
-  {
-    bool CanExecuteCommand(Type commandType);
+namespace FR.Commands {
+    public interface ICommandHandler {
+        bool CanExecuteCommand(Type commandType);
 
-    void ExecuteCommand(Type commandType, DataContext context);
+        void ExecuteCommand(Type commandType, DataContext context);
 
-    void ExecuteCommand(ICommand command, DataContext context);
-  }
+        void ExecuteCommand(ICommand command, DataContext context);
+    }
 }

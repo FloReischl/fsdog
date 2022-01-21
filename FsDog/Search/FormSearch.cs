@@ -16,7 +16,6 @@ namespace FsDog.Search {
     public partial class FormSearch : Form {
         private bool _cancelSearch;
         private DirectoryInfo _root;
-        //private string _fileName;
         private Regex _fileName;
         private string _contained;
         private HashSet<string> _extensions;
@@ -81,8 +80,6 @@ namespace FsDog.Search {
 
             var fn = cboFileName.Text;
             fn = Regex.Escape(fn).Replace("\\*", ".*");
-            //if (!fn.EndsWith(".*")) fn += ".*";
-            //if (!fn.StartsWith(".*")) fn = ".*" + fn;
             _fileName = new Regex(fn, RegexOptions.Compiled);
             _contained = cboContains.Text;
             _contained = _contained.Replace("\\r", "\r").Replace("\\n", "\n").Replace("\\t", "\t");

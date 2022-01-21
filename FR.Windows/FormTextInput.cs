@@ -11,7 +11,6 @@ using System.Windows.Forms;
 
 namespace FR.Windows.Forms {
     public class FormTextInput : FormBase {
-        //private IContainer components;
         private TextBox TextBoxInput;
         private Label LabelDescription;
         private Button ButtonCancel;
@@ -20,8 +19,6 @@ namespace FR.Windows.Forms {
         private string _defaultText;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 

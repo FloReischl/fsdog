@@ -14,7 +14,6 @@ namespace FsDog.Detail {
     public class PreviewContainer : UserControl {
         private Dictionary<PreviewType, IPreviewControl> _loadedControls;
         private IPreviewControl _currentPreview;
-        //private IContainer components;
         private Panel panel1;
         private Label label1;
         private ComboBox cboType;
@@ -55,8 +54,6 @@ namespace FsDog.Detail {
         }
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //  this.components.Dispose();
             base.Dispose(disposing);
         }
 

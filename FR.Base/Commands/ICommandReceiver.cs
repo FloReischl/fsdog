@@ -6,14 +6,12 @@
 
 using System;
 
-namespace FR.Commands
-{
-  public interface ICommandReceiver
-  {
-    ICommandReceiver GetCommandReceiver(Type commandType);
+namespace FR.Commands {
+    public interface ICommandReceiver {
+        ICommandReceiver GetCommandReceiver(Type commandType);
 
-    void InitializeCommand(ICommand command);
+        void InitializeCommand(ICommand command);
 
-    void FinishCommand(ICommand command);
-  }
+        void FinishCommand(ICommand command);
+    }
 }

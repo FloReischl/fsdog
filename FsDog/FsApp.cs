@@ -27,21 +27,19 @@ namespace FsDog {
     public class FsApp : WindowsApplication {
         private Dictionary<string, Image> _fileImages;
         private Dictionary<string, string> _fileTypeNames;
+        private HashSet<Type> _myCommands = new HashSet<Type> { typeof(CmdAppSaveConfig) };
 
         [STAThread]
         private static void Main() {
             FsApp fsApp = new FsApp();
             fsApp.Start(typeof(FormMain));
             fsApp.Config.Save();
-            fsApp.ConfigurationSource.Save();
         }
 
         private FsApp() {
         }
 
         public static new FsApp Instance => (FsApp)WindowsApplication.Instance;
-
-        //public FsOptions Options { get; set; }
 
         public FsDogConfig Config { get; set; }
 
@@ -55,29 +53,25 @@ namespace FsDog {
 
         public ILogger CreateLogger() => new Logger(Logger);
 
-        public override void Dispose() {
-            ConfigurationSource.Save();
-            base.Dispose();
-        }
-
         public override void Initialize() {
             Application.ThreadException += new ThreadExceptionEventHandler(this.Application_ThreadException);
-
-            ConfigurationSource = ConfigurationFile.TryGetUserConfigFile(GetType().Assembly);
-            base.Initialize();
-            //Options = new FsOptions();
             Config = FsDogConfig.Load();
+            base.Initialize();
             _fileImages = new Dictionary<string, Image>();
             _fileTypeNames = new Dictionary<string, string>();
             ReloadScriptingHosts();
         }
 
+        public override bool CanExecuteCommand(Type commandType) {
+            return _myCommands.Contains(commandType) || base.CanExecuteCommand(commandType);
+        }
+
         public void ExecuteFile(FileInfo fi) => new Process() {
             StartInfo = {
-        WorkingDirectory = fi.DirectoryName,
-        FileName = fi.FullName,
-        UseShellExecute = true
-      }
+                WorkingDirectory = fi.DirectoryName,
+                FileName = fi.FullName,
+                UseShellExecute = true
+            }
         }.Start();
 
         public List<FileInfo> GetFiles(DirectoryInfo dir) {
@@ -151,53 +145,6 @@ namespace FsDog {
         }
 
         public void ShowInfoMessage(string format, params object[] args) => this.MainForm.ShowInfoMessage(format, args);
-
-        private FileInfo GetConfigFile() {
-            DirectoryInfo directoryInfo = new DirectoryInfo(Application.LocalUserAppDataPath);
-            if (!directoryInfo.Exists)
-                directoryInfo.Create();
-            FileInfo configFile = new FileInfo(Path.Combine(directoryInfo.FullName, Path.GetFileName(this.GetType().Assembly.Location + ".cfg")));
-            //if (!configFile.Exists) {
-            //    AssemblyName name = this.GetType().Assembly.GetName();
-            //    string path = Application.LocalUserAppDataPath.Replace(name.Version.ToString(), "").TrimEnd('\\');
-            //    Version version1 = (Version)null;
-            //    ShellDirectory shellDirectory = (ShellDirectory)null;
-            //    foreach (string directory in Directory.GetDirectories(path)) {
-            //        try {
-            //            Version version2 = new Version(Path.GetFileName(directory));
-            //            if (!(version1 == (Version)null)) {
-            //                if (!(version1 < version2))
-            //                    continue;
-            //            }
-            //            if (version2 < name.Version) {
-            //                version1 = version2;
-            //                shellDirectory = new ShellDirectory(directory);
-            //            }
-            //        }
-            //        catch {
-            //        }
-            //    }
-            //    if (shellDirectory != null) {
-            //        foreach (ShellDirectory directory in shellDirectory.GetDirectories())
-            //            directory.CopyTo(Path.Combine(directoryInfo.FullName, directory.Name), false);
-            //        foreach (ShellFile file in shellDirectory.GetFiles())
-            //            file.CopyTo(Path.Combine(directoryInfo.FullName, file.Name), false);
-            //    }
-            //    else {
-            //        string str = Path.Combine(Path.Combine(Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FR Solutions"), this.Information.ProductName), this.Information.Version.ToString()), Path.GetFileName(this.GetType().Assembly.Location) + ".cfg");
-            //        if (File.Exists(str)) {
-            //            File.Copy(str, configFile.FullName);
-            //            try {
-            //                File.Delete(str);
-            //                Directory.Delete(Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FR Solutions"), this.Information.ProductName), true);
-            //            }
-            //            catch {
-            //            }
-            //        }
-            //    }
-            //}
-            return configFile;
-        }
 
         private void Application_ThreadException(object sender, ThreadExceptionEventArgs e) {
             try {

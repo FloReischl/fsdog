@@ -38,10 +38,6 @@ namespace FsDog.Commands {
 
         public static ReadOnlyCollection<FavoriteInfo> GetInfos() {
             List<FavoriteInfo> list = FsApp.Instance.Config.Favorites.Select(s => new FavoriteInfo { DirectoryName = s }).ToList();
-            //foreach (IConfigurationProperty subProperty in FsApp.Instance.ConfigurationSource.GetProperty(".", "Favorites", true).GetSubProperties("Item"))
-            //    list.Add(new FavoriteInfo() {
-            //        DirectoryName = subProperty["Directory"].ToString()
-            //    });
             return new ReadOnlyCollection<FavoriteInfo>(list);
         }
 

@@ -13,7 +13,6 @@ using System.Windows.Forms;
 
 namespace FR.Windows.Forms {
     public class RichTextEditor : UserControl {
-        //private IContainer components;
         private ToolStrip toolStrip1;
         private ToolStripComboBox tsiFontName;
         private ToolStripComboBox tsiFontSize;
@@ -26,8 +25,6 @@ namespace FR.Windows.Forms {
         private Color _foreColor;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 

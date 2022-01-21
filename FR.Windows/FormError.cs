@@ -12,7 +12,6 @@ using System.Windows.Forms;
 
 namespace FR.Windows.Forms {
     public class FormError : FormBase {
-        //private IContainer components;
         private TextBox txtMessage;
         private Label label1;
         private Label label2;
@@ -77,8 +76,6 @@ namespace FR.Windows.Forms {
         private void btnOk_Click(object sender, EventArgs e) => this.Close();
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 

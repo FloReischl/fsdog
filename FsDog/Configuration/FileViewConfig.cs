@@ -26,20 +26,20 @@ namespace FsDog.Configuration {
         public string FontName { get; set; }
 
         [JsonIgnore()]
-        public Color ActiveForeColor => FsDogConfig.ColorFromString(ActiveForeColorName);
+        public Color ActiveForeColor => ConfigConverter.ColorFromString(ActiveForeColorName);
         [JsonIgnore()]
-        public Color ActiveBackgroundColor => FsDogConfig.ColorFromString(ActiveBackgroundColorName);
+        public Color ActiveBackgroundColor => ConfigConverter.ColorFromString(ActiveBackgroundColorName);
         [JsonIgnore()]
-        public Color InactiveForeColor => FsDogConfig.ColorFromString(InactiveForeColorName);
+        public Color InactiveForeColor => ConfigConverter.ColorFromString(InactiveForeColorName);
         [JsonIgnore()]
-        public Color InactiveBackgroundColor => FsDogConfig.ColorFromString(InactiveBackgroundColorName);
+        public Color InactiveBackgroundColor => ConfigConverter.ColorFromString(InactiveBackgroundColorName);
         [JsonIgnore()]
-        public Color HiddenForeColor => FsDogConfig.ColorFromString(HiddenForeColorName);
+        public Color HiddenForeColor => ConfigConverter.ColorFromString(HiddenForeColorName);
         [JsonIgnore()]
-        public Color SystemForeColor => FsDogConfig.ColorFromString(SystemForeColorName);
+        public Color SystemForeColor => ConfigConverter.ColorFromString(SystemForeColorName);
         [JsonIgnore()]
-        public Color CompressedForeColor => FsDogConfig.ColorFromString(CompressedForeColorName);
+        public Color CompressedForeColor => ConfigConverter.ColorFromString(CompressedForeColorName);
         [JsonIgnore()]
-        public Font Font => FsDogConfig.FontFromString(FontName);
+        public Font Font => ConfigConverter.FontFromString(FontName);
     }
 }

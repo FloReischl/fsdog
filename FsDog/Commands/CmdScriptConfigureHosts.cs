@@ -4,6 +4,7 @@
 // MVID: 86A1142D-AA42-437E-9D7A-2AF6376C2EE2
 // Assembly location: C:\Users\flori\OneDrive\utilities\FR Solutions\FsDog\FsDog.exe
 
+using FR.Configuration;
 using FR.Windows.Forms;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -16,7 +17,6 @@ namespace FsDog.Commands {
             if (hostConfiguration.ShowDialog((IWin32Window)this.Application.MainForm) != DialogResult.OK)
                 return;
             CommandHelper.SetScriptingHostsToConfig((IList<ScriptingHostConfiguration>)hostConfiguration.Hosts);
-            this.Application.ConfigurationSource.Save();
             this.Application.Config.Save();
             this.Application.ReloadScriptingHosts();
         }

@@ -17,7 +17,6 @@ namespace FR.Windows.Forms {
         private bool _startup;
         private DirectoryInfo[] _directories;
         private string _initialDirectory;
-        //private IContainer components;
         private TreeView tvwFolders;
         private Label lblDescription;
         private Button btnOk;
@@ -148,8 +147,6 @@ namespace FR.Windows.Forms {
         }
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 

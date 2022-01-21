@@ -13,7 +13,7 @@ namespace FsDog.Configuration {
         public List<string> TextExtensions { get; set; }
         public List<string> ImageExtensions { get; set; }
         [JsonIgnore()]
-        public Font TextFont => FsDogConfig.FontFromString(TextFontName);
+        public Font TextFont => ConfigConverter.FontFromString(TextFontName);
         public bool TextWrap { get; set; }
     }
 }

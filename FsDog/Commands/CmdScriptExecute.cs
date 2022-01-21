@@ -34,21 +34,6 @@ namespace FsDog.Commands {
         private void ExecuteScript(FsApp instance, CommandInfo info) {
             var process = CreateProcess(instance, info);
             process.Start();
-
-            //Process p = CreateProcess(instance, info);
-            //p.Start();
-
-            //string errorMessage = null;
-            //var errorHandler = new DataReceivedEventHandler((sender, e) => errorMessage = e.Data);
-            //p.ErrorDataReceived += errorHandler;
-
-            //p.WaitForExit();
-
-            //p.ErrorDataReceived -= errorHandler;
-
-            //if (!string.IsNullOrEmpty(errorMessage)) {
-            //    throw new ApplicationException($"Error while executing script {info.Command}:\r\n\r\n{errorMessage}");
-            //}
         }
 
         private Process CreateProcess(FsApp instance, CommandInfo info) {

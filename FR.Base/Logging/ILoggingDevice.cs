@@ -15,8 +15,6 @@ namespace FR.Logging {
 
         LogLevel StackTraceLevel { get; set; }
 
-        //void Open(IConfigurationProperty deviceConfiguration);
-
         void Close();
 
         void Log(

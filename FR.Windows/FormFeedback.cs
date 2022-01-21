@@ -12,14 +12,11 @@ using System.Windows.Forms;
 
 namespace FR.Windows.Forms {
     public class FormFeedback : FormBase {
-        //private IContainer components;
         private Button btnClose;
         private RichTextBox txtFeedback;
         private Label lblDescription;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 

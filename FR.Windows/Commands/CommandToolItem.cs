@@ -18,7 +18,6 @@ namespace FR.Windows.Forms.Commands {
     public class CommandToolItem {
         private static Dictionary<ToolStripItem, CommandToolItem> _toolItemToCommandItem;
         private static List<CommandToolItem> _temporaryNamed;
-        //private static ToolStripMenuItem _currentMenuItem;
 
         public CommandToolItem(string text)
           : this(text, (System.Type)null, (Image)null, (string)null, Shortcut.None) {
@@ -100,8 +99,6 @@ namespace FR.Windows.Forms.Commands {
             this.ShowNeverMenuStrip = true;
             this.ShowNeverToolStrip = true;
         }
-
-        //public static ToolStripMenuItem CurrentMenuItem => CommandToolItem._currentMenuItem;
 
         public virtual WindowsApplication ApplicationInstance {
             [DebuggerNonUserCode]
@@ -435,9 +432,7 @@ namespace FR.Windows.Forms.Commands {
             CommandToolItem commandItem = this.TagToCommandItem(toolStripMenuItem.Tag);
             if (commandItem == null || commandItem.CommandType == null)
                 return;
-            //CommandToolItem._currentMenuItem = toolStripMenuItem;
             this.ApplicationInstance.ExecuteCommand(commandItem.CommandType, commandItem.CommandContext);
-            //CommandToolItem._currentMenuItem = (ToolStripMenuItem)null;
         }
 
         private CommandToolItem TagToCommandItem(object tag) => tag as CommandToolItem;

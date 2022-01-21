@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
 using System.Linq;
+using FR.Configuration;
 
 namespace FsDog.Dialogs {
     public partial class FormCommands : Form {
@@ -45,17 +46,12 @@ namespace FsDog.Dialogs {
                 return false;
             }
 
-            //var ctype = (CommandType)cboScriptType.SelectedItem;
-
             if ((add || update) && string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtFileName.Text)) {
                 show("No name was specified.");
             }
             else if ((add || update) && string.IsNullOrEmpty(txtFileName.Text) && !string.IsNullOrEmpty(txtName.Text)) {
                 show("No command was specified.");
             }
-            //else if ((add || update) && string.IsNullOrEmpty(txtKeys.Text)) {
-            //    show("No shortcut specified.");
-            //}
             else if ((add || update) && cboType.SelectedText.Equals(CommandType.Script.ToString()) && cboScriptType.SelectedIndex == -1) {
                 show("No scripting host was specified.");
             }
@@ -120,8 +116,6 @@ namespace FsDog.Dialogs {
                 return;
             }
 
-            //cboType.SelectedIndexChanged += new EventHandler(cboType_SelectedIndexChanged);
-            //lvwCommands.KeyDown += new KeyEventHandler(lvwCommands_KeyDown);
             cboType.Items.Add(CommandType.Application);
             cboType.Items.Add(CommandType.Script);
             foreach (ScriptingHostConfiguration hostConfiguration in FsApp.Instance.ScriptingHosts.Values)
@@ -159,7 +153,7 @@ namespace FsDog.Dialogs {
                     infos.Add(tag);
             }
             CommandHelper.SetToConfig((IList<CommandInfo>)infos);
-            WindowsApplication.Instance.ConfigurationSource.Save();
+            FsApp.Instance.Config.Save();
         }
 
         private void lvwCommands_SelectedIndexChanged(object sender, EventArgs e) {

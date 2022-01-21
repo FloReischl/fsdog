@@ -12,7 +12,6 @@ using System.Windows.Forms;
 
 namespace FR.Windows.Forms {
     public class FormListSelect : FormBase {
-        //private IContainer components;
         private Label lblDescription;
         private ListView lvwList;
         private Button btnCancel;
@@ -21,8 +20,6 @@ namespace FR.Windows.Forms {
         private List<FormListSelectItem> _selectedItems;
 
         protected override void Dispose(bool disposing) {
-            //if (disposing && this.components != null)
-            //    this.components.Dispose();
             base.Dispose(disposing);
         }
 
