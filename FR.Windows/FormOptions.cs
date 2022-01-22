@@ -327,7 +327,7 @@ namespace FR.Windows.Forms {
             TextBox textBox = (TextBox)tag[(object)"EditControl"];
             IOptionsProperty optionsProperty = (IOptionsProperty)tag[(object)"Property"];
             FontConverter fontConverter = new FontConverter();
-            System.Type asType = tag.GetAsType((object)"Type");
+            System.Type asType = tag.GetValue<Type>("Type");
             Font font = (Font)tag[(object)"Font"];
             FontDialog fontDialog = new FontDialog {
                 Font = font

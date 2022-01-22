@@ -18,7 +18,6 @@ namespace FsDog.Commands {
             foreach (FileSystemInfo fileSystemInfo in selectedSystemInfos)
                 stringList.Add(fileSystemInfo.FullName);
             FileHelper.CopyTo(this.Application.MainForm.Handle, stringList.ToArray(), directoryInfo.FullName, false);
-            this.ExecutionState = CommandExecutionState.Ok;
         }
     }
 }

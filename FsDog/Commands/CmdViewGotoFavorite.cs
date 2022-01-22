@@ -20,18 +20,17 @@ namespace FsDog.Commands {
             formListSelect.SmallImageList = new ImageList();
             formListSelect.SmallImageList.Images.Add("Fav", (Image)Resources.FavoritesItem);
             formListSelect.MaximumSize = new Size(formListSelect.Width, this.Application.MainForm.Height);
+
             foreach (FavoriteInfo info in CmdFavorite.GetInfos()) {
                 FormListSelectItem formListSelectItem = formListSelect.AddItem((object)info.DirectoryName, info.DirectoryName);
                 formListSelectItem.ImageKey = "Fav";
                 if (formListSelect.SelectedItem == null)
                     formListSelect.SelectedItem = formListSelectItem;
             }
+
             if (formListSelect.ShowDialog((IWin32Window)this.Application.MainForm) == DialogResult.OK) {
                 this.CurrentDetailView.OnRequestParentDirectory(new DirectoryInfo(formListSelect.SelectedItem.Value.ToString()));
-                this.ExecutionState = CommandExecutionState.Ok;
             }
-            else
-                this.ExecutionState = CommandExecutionState.Canceled;
         }
     }
 }

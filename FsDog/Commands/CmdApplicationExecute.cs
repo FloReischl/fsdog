@@ -13,22 +13,17 @@ namespace FsDog.Commands {
         public override void Execute() {
             try {
                 CommandInfo info = (CommandInfo)this.Context[(object)"CommandInfo"];
-                if (!this.EnsureRequirements(info)) {
-                    this.ExecutionState = CommandExecutionState.Canceled;
-                }
-                else {
+                if (this.EnsureRequirements(info)) {
                     string arguments = this.GetArguments(info);
                     new Process() {
                         StartInfo = {
-              FileName = info.Command,
-              Arguments = arguments
-            }
+                            FileName = info.Command,
+                            Arguments = arguments
+                        }
                     }.Start();
-                    this.ExecutionState = CommandExecutionState.Ok;
                 }
             }
             catch (Exception ex) {
-                this.ExecutionState = CommandExecutionState.Error;
                 throw ex;
             }
         }

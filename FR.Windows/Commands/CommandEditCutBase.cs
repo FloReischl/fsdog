@@ -31,14 +31,11 @@ namespace FR.Windows.Forms.Commands {
                     this.Control = FormBase.GetActiveChildControl();
                 if (this.Control != null) {
                     SendMessageHelper.SendCut(this.Control);
-                    this.ExecutionState = CommandExecutionState.Ok;
                 }
-                else
-                    this.ExecutionState = CommandExecutionState.Canceled;
             }
             catch (Exception ex) {
                 Log.Ex(ex);
-                this.ExecutionState = CommandExecutionState.Error;
+                FormError.ShowException(ex);
             }
             finally {
                 Log.CallLeave(FR.Logging.LogLevel.Info);

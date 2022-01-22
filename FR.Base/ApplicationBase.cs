@@ -74,19 +74,28 @@ namespace FR {
 
         public virtual void ExecuteCommand(ICommand command, DataContext context) {
             try {
+                Log.Debug("Starting Execute Command");
                 if (command == null)
                     throw ExceptionHelper.GetArgumentNull(nameof(command));
-                command.InstanceState = CommandInstanceState.Initializing;
-                if (context != null)
+
+                Log.Info($"initializing command type {command.GetType()}");
+                if (context != null) {
                     command.Context = context;
+                }
+
                 this.InitializeCommand(command);
-                if (command.Receiver == null)
+                if (command.Receiver == null) {
+                    Log.Warn($"No receiver found for command {command.GetType()}");
                     return;
-                command.InstanceState = CommandInstanceState.Executing;
+                }
+
+                Log.Info($"executing command {command.GetType()}");
                 command.Execute();
-                command.InstanceState = CommandInstanceState.Finishing;
+
+                Log.Debug($"Completing command {command.GetType()}");
                 this.FinishCommand(command);
-                command.InstanceState = CommandInstanceState.Finished;
+
+                Log.Info($"Command {command.GetType()} completed");
             }
             catch (Exception ex) {
                 this.Log.Ex(ex);

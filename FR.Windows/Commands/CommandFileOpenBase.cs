@@ -12,16 +12,16 @@ using System.Windows.Forms;
 namespace FR.Windows.Forms.Commands {
     public class CommandFileOpenBase : StandardCommandBase {
         public string FileName {
-            get => this.Context.ContainsKey((object)nameof(FileName)) ? this.Context.GetAsString((object)nameof(FileName)) : (string)null;
-            set => this.Context.Add((object)nameof(FileName), (object)value);
+            get => this.Context.TryGetValue<string>(nameof(FileName));
+            set => this.Context.Add(nameof(FileName), value);
         }
 
         public override void Execute() {
-            Log.CallEntry(FR.Logging.LogLevel.Info);
+            Log.CallEntry(LogLevel.Info);
             try {
                 if (this.AlternateExecute != null) {
                     Log.Info("Executing alternate command");
-                    this.ExecutionState = this.AlternateExecute((ICommand)this);
+                    this.AlternateExecute((ICommand)this);
                 }
                 else {
                     OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -33,22 +33,16 @@ namespace FR.Windows.Forms.Commands {
                     if (owner != null) {
                         if (openFileDialog.ShowDialog((IWin32Window)owner) == DialogResult.OK) {
                             this.FileName = openFileDialog.FileName;
-                            this.ExecutionState = CommandExecutionState.Ok;
                         }
-                        else
-                            this.ExecutionState = CommandExecutionState.Canceled;
                     }
                     else if (openFileDialog.ShowDialog() == DialogResult.OK) {
                         this.FileName = openFileDialog.FileName;
-                        this.ExecutionState = CommandExecutionState.Ok;
                     }
-                    else
-                        this.ExecutionState = CommandExecutionState.Canceled;
                 }
             }
             catch (Exception ex) {
                 this.Log.Ex(ex);
-                this.ExecutionState = CommandExecutionState.Error;
+                FormError.ShowException(ex);
             }
             finally {
                 Log.CallLeave(LogLevel.Info);

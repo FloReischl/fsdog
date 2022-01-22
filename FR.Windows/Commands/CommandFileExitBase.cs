@@ -11,20 +11,11 @@ using System;
 namespace FR.Windows.Forms.Commands {
     public class CommandFileExitBase : StandardCommandBase {
         public override void Execute() {
-            Log.CallEntry(LogLevel.Info);
-            try {
-                if (this.HandleAlternate())
-                    return;
-                WindowsApplication.Exit();
-                this.ExecutionState = CommandExecutionState.Ok;
+            if (this.HandleAlternate()) {
+                return;
             }
-            catch (Exception ex) {
-                this.Log.Ex(ex);
-                this.ExecutionState = CommandExecutionState.Error;
-            }
-            finally {
-                Log.CallLeave(LogLevel.Info);
-            }
+
+            WindowsApplication.Exit();
         }
     }
 }

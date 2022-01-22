@@ -11,12 +11,9 @@ namespace FsDog.Commands {
     public class CmdFavoritesEdit : CmdFsDogIntern {
         public override void Execute() {
             FormFavorites formFavorites = new FormFavorites();
-            if (this.Context.ContainsKey((object)"Favorite"))
-                formFavorites.StartupFavorite = this.Context.GetAsString((object)"Favorite");
-            if (formFavorites.ShowDialog((IWin32Window)this.Application.MainForm) == DialogResult.OK)
-                this.ExecutionState = CommandExecutionState.Ok;
-            else
-                this.ExecutionState = CommandExecutionState.Canceled;
+
+            formFavorites.StartupFavorite = this.Context.TryGetValue<string>("Favorite");
+            formFavorites.ShowDialog((IWin32Window)this.Application.MainForm);
         }
     }
 }

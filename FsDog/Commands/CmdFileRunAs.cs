@@ -14,10 +14,7 @@ using System.Windows.Forms;
 namespace FsDog.Commands {
     public class CmdFileRunAs : CmdFsDogIntern {
         public override void Execute() {
-            if (this.SelectedItems == null || this.SelectedItems.Length == 0) {
-                this.ExecutionState = CommandExecutionState.Canceled;
-            }
-            else {
+            if (this.SelectedItems.Length != 0) {
                 if (this.SelectedItems.Length > 1 && MessageBox.Show((IWin32Window)this.Application.MainForm, string.Format("Are you sure to run all {0} selected items as another user?", (object)this.SelectedItems.Length), "Execute multiple", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
                     return;
                 foreach (FileSystemInfo selectedItem in this.SelectedItems) {

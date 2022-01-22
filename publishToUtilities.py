@@ -29,7 +29,7 @@ try:
     c = msvcrt.getch()
     if c.lower() == b'y':
         exe = os.path.join(root_dst_dir, 'FsDog.exe')
-        os.system(f'START "{exe}"')
+        os.system(f'START "" "{exe}"')
  
 except BaseException as err:
     print(f"ERROR {err=}, {type(err)=}")

@@ -9,10 +9,9 @@ using FR.Commands;
 namespace FsDog.Commands {
     internal class CmdEditInvertSelection : CmdFsDogIntern {
         public override void Execute() {
-            if (this.CurrentDetailView == null)
-                this.ExecutionState = CommandExecutionState.Canceled;
-            else
+            if (this.CurrentDetailView != null) {
                 this.CurrentDetailView.InvertSelection();
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace FR.Windows.Forms {
             }
         }
 
-        public static void ShowException(Exception ex, IWin32Window parent) {
+        public static void ShowException(Exception ex, IWin32Window parent = null) {
             if (ex == null)
                 ex = new Exception("No Exception");
             FormError formError = new FormError();

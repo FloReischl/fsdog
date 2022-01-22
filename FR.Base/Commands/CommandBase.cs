@@ -11,7 +11,8 @@ using System.Diagnostics;
 
 namespace FR.Commands {
     public abstract class CommandBase : ICommand {
-        public CommandBase() => this.ExecutionState = CommandExecutionState.None;
+        public CommandBase() {
+        }
 
         public abstract void Execute();
 
@@ -21,12 +22,8 @@ namespace FR.Commands {
 
         public ICommandReceiver Receiver { get; set; }
 
-        public DataContext Context { get; set; } = new DataContext(true);
+        public DataContext Context { get; set; } = new DataContext();
 
         protected ILogger Log { get; } = LoggingProvider.CreateLogger();
-
-        public CommandExecutionState ExecutionState { get; set; }
-
-        public CommandInstanceState InstanceState { get; set; }
     }
 }

@@ -18,32 +18,27 @@ namespace FsDog.Commands {
         }
 
         public override void Execute() {
-            if (this.CurrentDetailView != null) {
-                if (this.CopyType == CmdEditCopyFileNames.CopyNameType.ParentDirectory) {
-                    Clipboard.Clear();
-                    Clipboard.SetText(this.CurrentDetailView.ParentDirectory.FullName);
-                }
-                else {
-                    List<FileSystemInfo> selectedSystemInfos = this.CurrentDetailView.GetSelectedSystemInfos();
-                    StringWriter stringWriter = new StringWriter();
-                    bool flag = true;
-                    foreach (FileSystemInfo fileSystemInfo in selectedSystemInfos) {
-                        if (flag)
-                            flag = false;
-                        else
-                            stringWriter.WriteLine();
-                        if (this.CopyType == CmdEditCopyFileNames.CopyNameType.FullName)
-                            stringWriter.Write(fileSystemInfo.FullName);
-                        else if (this.CopyType == CmdEditCopyFileNames.CopyNameType.Name)
-                            stringWriter.Write(fileSystemInfo.Name);
-                    }
-                    Clipboard.Clear();
-                    Clipboard.SetText(stringWriter.GetStringBuilder().ToString());
-                }
-                this.ExecutionState = CommandExecutionState.Ok;
+            if (this.CopyType == CmdEditCopyFileNames.CopyNameType.ParentDirectory) {
+                Clipboard.Clear();
+                Clipboard.SetText(this.CurrentDetailView.ParentDirectory.FullName);
             }
-            else
-                this.ExecutionState = CommandExecutionState.Canceled;
+            else {
+                List<FileSystemInfo> selectedSystemInfos = this.CurrentDetailView.GetSelectedSystemInfos();
+                StringWriter stringWriter = new StringWriter();
+                bool flag = true;
+                foreach (FileSystemInfo fileSystemInfo in selectedSystemInfos) {
+                    if (flag)
+                        flag = false;
+                    else
+                        stringWriter.WriteLine();
+                    if (this.CopyType == CmdEditCopyFileNames.CopyNameType.FullName)
+                        stringWriter.Write(fileSystemInfo.FullName);
+                    else if (this.CopyType == CmdEditCopyFileNames.CopyNameType.Name)
+                        stringWriter.Write(fileSystemInfo.Name);
+                }
+                Clipboard.Clear();
+                Clipboard.SetText(stringWriter.GetStringBuilder().ToString());
+            }
         }
 
         public enum CopyNameType {

@@ -10,10 +10,6 @@ namespace FR.Commands {
     public interface ICommand {
         ICommandReceiver Receiver { get; set; }
 
-        CommandExecutionState ExecutionState { get; }
-
-        CommandInstanceState InstanceState { get; set; }
-
         DataContext Context { get; set; }
 
         void Execute();

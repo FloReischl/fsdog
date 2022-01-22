@@ -17,16 +17,11 @@ namespace FsDog.Commands {
             try {
                 FsApp instance = FsApp.Instance;
                 CommandInfo info = (CommandInfo)Context[(object)"CommandInfo"];
-                if (!EnsureRequirements(info)) {
-                    ExecutionState = CommandExecutionState.Canceled;
-                }
-                else {
+                if (EnsureRequirements(info)) {
                     ExecuteScript(instance, info);
-                    ExecutionState = CommandExecutionState.Ok;
                 }
             }
             catch (Exception ex) {
-                ExecutionState = CommandExecutionState.Error;
                 throw ex;
             }
         }

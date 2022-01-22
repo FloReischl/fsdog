@@ -25,20 +25,21 @@ namespace FR.Windows.Forms.Commands {
         public override void Execute() {
             Log.CallEntry(FR.Logging.LogLevel.Info);
             try {
-                if (this.HandleAlternate())
+                if (this.HandleAlternate()) {
                     return;
-                if (this.Control == null)
+                }
+
+                if (this.Control == null) {
                     this.Control = FormBase.GetActiveChildControl();
+                }
+
                 if (this.Control != null) {
                     SendMessageHelper.SendPaste(this.Control);
-                    this.ExecutionState = CommandExecutionState.Ok;
                 }
-                else
-                    this.ExecutionState = CommandExecutionState.Canceled;
             }
             catch (Exception ex) {
                 Log.Ex(ex);
-                this.ExecutionState = CommandExecutionState.Error;
+                FormError.ShowException(ex);
             }
             finally {
                 Log.CallLeave(LogLevel.Info);

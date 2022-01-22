@@ -187,8 +187,6 @@
     <Compile Include="Commands\CmdFileRunAs.cs" />
     <Compile Include="Commands\CmdFileProperties.cs" />
     <Compile Include="Commands\CmdFileRenameMulti.cs" />
-    <Compile Include="Commands\CmdFileDosShell.cs" />
-    <Compile Include="Commands\CmdFilePowerShell.cs" />
     <Compile Include="CopyErrorType.cs" />
     <Compile Include="CopyErrorHandling.cs" />
     <Compile Include="CopyItem.cs" />

@@ -11,10 +11,7 @@ using System.Windows.Forms;
 namespace FsDog.Commands {
     public class CmdCommandsEdit : CmdFsDogIntern {
         public override void Execute() {
-            if (new FormCommands().ShowDialog((IWin32Window)this.Application.MainForm) == DialogResult.OK)
-                this.ExecutionState = CommandExecutionState.Ok;
-            else
-                this.ExecutionState = CommandExecutionState.Canceled;
+            new FormCommands().ShowDialog();
         }
     }
 }

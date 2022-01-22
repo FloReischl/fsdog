@@ -16,8 +16,6 @@ using System.Linq;
 
 namespace FsDog.Commands {
     public class CmdFavorite : CmdFsDogIntern {
-        public const string FavoritesMenuName = "F&avorites";
-
         public static CommandToolItem GetFavoritesToolItem() {
             FsApp instance = FsApp.Instance;
             CommandToolItem favoritesToolItem = new CommandToolItem("F&avorites");
@@ -45,10 +43,7 @@ namespace FsDog.Commands {
             FavoriteInfo favoriteInfo = (FavoriteInfo)this.Context[(object)"FavoriteInfo"];
             if (this.CurrentDetailView != null && Directory.Exists(favoriteInfo.DirectoryName)) {
                 this.CurrentDetailView.OnRequestParentDirectory(new DirectoryInfo(favoriteInfo.DirectoryName));
-                this.ExecutionState = CommandExecutionState.Ok;
             }
-            else
-                this.ExecutionState = CommandExecutionState.Canceled;
         }
     }
 }

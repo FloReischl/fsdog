@@ -10,7 +10,6 @@ namespace FsDog.Commands {
     public class CmdToolsClearImageCache : CmdFsDogIntern {
         public override void Execute() {
             this.Application.ClearImageCache();
-            this.ExecutionState = CommandExecutionState.Ok;
         }
     }
 }

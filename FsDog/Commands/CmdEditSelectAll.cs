@@ -13,10 +13,7 @@ namespace FsDog.Commands {
             base.Execute();
             if (this.ActiveFileControl is DetailView) {
                 this.CurrentDetailView.SelectAll();
-                this.ExecutionState = CommandExecutionState.Ok;
             }
-            else
-                this.ExecutionState = CommandExecutionState.Canceled;
         }
     }
 }

@@ -10,64 +10,38 @@ using System.Diagnostics;
 
 namespace FR.Commands {
     public abstract class StandardCommandBase : CommandBase {
-        private ICommand _command;
-        private CommandExecuteHandler _alternateExecute;
-        private bool _forceAlternateExecution;
+        public ICommand AlternateCommand { get; set; }
 
-        public ICommand AlternateCommand {
-            [DebuggerNonUserCode]
-            get => this._command;
-            [DebuggerNonUserCode]
-            set => this._command = value;
-        }
+        public Action<ICommand> AlternateExecute { get; set; }
 
-        public CommandExecuteHandler AlternateExecute {
-            [DebuggerNonUserCode]
-            get => this._alternateExecute;
-            [DebuggerNonUserCode]
-            set => this._alternateExecute = value;
-        }
-
-        protected virtual bool ForceAlternateExecution {
-            get => this._forceAlternateExecution;
-            set => this._forceAlternateExecution = value;
-        }
+        protected virtual bool ForceAlternateExecution { get; set; }
 
         public override void Execute() {
-            try {
-                if (this.HandleAlternate())
-                    return;
-                if (this.ForceAlternateExecution) {
-                    this.Log.Error("No alternate command was defined");
-                    this.ExecutionState = CommandExecutionState.Error;
-                }
-                else {
-                    this.Log.Error("Execute was not overridden");
-                    this.ExecutionState = CommandExecutionState.Error;
-                }
+            if (this.HandleAlternate()) {
+                return;
             }
-            catch (Exception ex) {
-                this.Log.Ex(ex);
-                this.ExecutionState = CommandExecutionState.Error;
+
+            if (this.ForceAlternateExecution) {
+                throw new NotImplementedException("No alternate command was defined.");
+            }
+            else {
+                throw new NotImplementedException("Execute was not overridden");
             }
         }
 
         protected bool HandleAlternate() {
-            if (this.AlternateCommand != null) {
-                if (this.AlternateCommand.InstanceState != CommandInstanceState.Executing) {
-                    this.Receiver.InitializeCommand(this.AlternateCommand);
-                }
-                this.AlternateCommand.Execute();
-                this.ExecutionState = this.AlternateCommand.ExecutionState;
-                if (this.AlternateCommand.InstanceState != CommandInstanceState.Finished)
-                    this.Receiver.FinishCommand(this.AlternateCommand);
+            var altCmd = AlternateCommand;
+            if (altCmd != null) {
+                Receiver.InitializeCommand(altCmd);
+                altCmd.Execute();
+                Receiver.FinishCommand(altCmd);
                 return true;
             }
             if (this.AlternateExecute == null) {
                 return false;
             }
             this.Log.Info("Executing alternate command");
-            this.ExecutionState = this.AlternateExecute((ICommand)this);
+            this.AlternateExecute((ICommand)this);
             return true;
         }
     }

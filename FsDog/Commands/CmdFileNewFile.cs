@@ -17,7 +17,6 @@ namespace FsDog.Commands {
                 str = Path.Combine(parentDirectory.FullName, string.Format("New File ({0}).txt", (object)num++));
             File.Create(str).Close();
             this.CurrentDetailView.BeginEditItem(str);
-            this.ExecutionState = CommandExecutionState.Ok;
         }
     }
 }

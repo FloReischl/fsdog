@@ -9,12 +9,8 @@ using FR.Commands;
 namespace FsDog.Commands {
     public class CmdViewDirectorySizes : CmdFsDogIntern {
         public override void Execute() {
-            if (this.CurrentDetailView == null) {
-                this.ExecutionState = CommandExecutionState.Canceled;
-            }
-            else {
+            if (this.CurrentDetailView != null) {
                 this.CurrentDetailView.GetDirectorySizes();
-                this.ExecutionState = CommandExecutionState.Ok;
             }
         }
     }

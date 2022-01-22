@@ -10,12 +10,8 @@ using FR.IO;
 namespace FsDog.Commands {
     public class CmdFileProperties : CmdFsDogIntern {
         public override void Execute() {
-            if (this.SelectedItems == null || this.SelectedItems.Length == 0) {
-                this.ExecutionState = CommandExecutionState.Canceled;
-            }
-            else {
+            if (this.SelectedItems?.Length != 0) {
                 FileHelper.ShowPropertiesDialog(this.SelectedItems[0].FullName);
-                this.ExecutionState = CommandExecutionState.Ok;
             }
         }
     }

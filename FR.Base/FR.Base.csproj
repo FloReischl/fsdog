@@ -146,11 +146,8 @@
     <Compile Include="Logging\LoggingManager.cs" />
     <Compile Include="Commands\ICommandReceiver.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
-    <Compile Include="Commands\CommandExecutionState.cs" />
-    <Compile Include="Commands\CommandInstanceState.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
-    <Compile Include="Commands\CommandExecuteHandler.cs" />
     <Compile Include="Commands\StandardCommandBase.cs" />
     <Compile Include="IO\SLR_FLAGS.cs" />
     <Compile Include="IO\SLGP_FLAGS.cs" />

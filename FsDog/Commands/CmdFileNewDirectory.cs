@@ -17,7 +17,6 @@ namespace FsDog.Commands {
                 str = Path.Combine(parentDirectory.FullName, string.Format("New Directory ({0})", (object)num++));
             Directory.CreateDirectory(str);
             this.CurrentDetailView.BeginEditItem(str);
-            this.ExecutionState = CommandExecutionState.Ok;
         }
     }
 }

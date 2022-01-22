@@ -40,8 +40,14 @@ namespace FsDog.Dialogs {
         private FormMainConfig _formConfig;
         private OptionsConfig _optionsConfig;
         private static readonly HashSet<Type> MyCommands = new HashSet<Type> {
-                typeof(CmdFileNewFile), typeof(CmdFileNewFile), typeof(CmdFileNewDirectory), typeof(CmdFileRenameMulti), typeof(CmdFileOpen), typeof(CmdFileOpenWith), typeof(CmdFileRunAs), typeof(CmdFileProperties), typeof(CmdFileDosShell), typeof(CmdFilePowerShell), typeof(CommandFileExitBase), typeof(CommandEditCutBase), typeof(CommandEditCopyBase), typeof(CommandEditPasteBase), typeof(CmdEditCopyToOtherView), typeof(CmdEditMoveToOtherView), typeof(CmdEditCopyFileNames), typeof(CmdEditDelete), typeof(CmdEditSelectAll), typeof(CmdEditInvertSelection), typeof(CmdViewFind), typeof(CmdViewPreview), typeof(CmdViewGotoFavorite), typeof(CmdViewDirectorySizes), typeof(CmdViewRefresh), typeof(CmdFavorite), typeof(CmdFavoritesEdit), typeof(CmdCommandsEdit), typeof(CmdApplicationExecute), typeof(CmdScriptExecute), typeof(CmdScriptConfigureHosts), typeof(CmdToolsClearImageCache), typeof(CmdToolsOpenConfigFile), typeof(CmdToolsOptions), typeof(CmdHelpAbout)
-            };
+            typeof(CmdFileNewFile), typeof(CmdFileNewFile), typeof(CmdFileNewDirectory), typeof(CmdFileRenameMulti), typeof(CmdFileOpen), typeof(CmdFileOpenWith), typeof(CmdFileRunAs), typeof(CmdFileProperties), typeof(CommandFileExitBase),
+            typeof(CommandEditCutBase), typeof(CommandEditCopyBase), typeof(CommandEditPasteBase), typeof(CmdEditCopyToOtherView), typeof(CmdEditMoveToOtherView), typeof(CmdEditCopyFileNames), typeof(CmdEditDelete), typeof(CmdEditSelectAll), typeof(CmdEditInvertSelection),
+            typeof(CmdViewFind), typeof(CmdViewPreview), typeof(CmdViewGotoFavorite), typeof(CmdViewDirectorySizes), typeof(CmdViewRefresh),
+            typeof(CmdFavorite), typeof(CmdFavoritesEdit),
+            typeof(CmdCommandsEdit), typeof(CmdApplicationExecute), typeof(CmdScriptExecute), typeof(CmdScriptConfigureHosts),
+            typeof(CmdToolsClearImageCache), typeof(CmdToolsOpenConfigFile), typeof(CmdToolsOptions),
+            typeof(CmdHelpAbout)
+        };
 
 
         public FormMain() {
@@ -141,8 +147,6 @@ namespace FsDog.Dialogs {
 
         public override void FinishCommand(ICommand command) {
             base.FinishCommand(command);
-            if (command.ExecutionState != CommandExecutionState.Ok)
-                return;
             switch (command) {
                 case CmdCommandsEdit _:
                     CreateCommandsToolStrips();
@@ -458,7 +462,7 @@ namespace FsDog.Dialogs {
 
             if (_optionsConfig.Appearance.Main.RememberWindowState)
                 WindowState = _formConfig.WindowState;
-            
+
             AppearanceProvider appearance = new AppearanceProvider();
             appearance.ApplyToForm(this);
         }

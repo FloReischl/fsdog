@@ -19,11 +19,8 @@ namespace FsDog.Commands {
                     ParentDirectory = this.ParentDirectory,
                     FileItems = ((IList<FileSystemInfo>)this.SelectedItems)
                 }.ShowDialog((IWin32Window)this.Application.MainForm) == DialogResult.OK) {
-                    this.ExecutionState = CommandExecutionState.Ok;
                     this.CurrentDetailView.Refresh();
                 }
-                else
-                    this.ExecutionState = CommandExecutionState.Canceled;
             }
             catch (Exception ex) {
                 FormError.ShowException(ex, (IWin32Window)null);

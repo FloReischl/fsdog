@@ -40,10 +40,7 @@ namespace FsDog.Commands {
                 }
                 FsApp.Instance.Config.Save();
                 PreviewInfo.RefreshExtensions();
-                this.ExecutionState = CommandExecutionState.Ok;
             }
-            else
-                this.ExecutionState = CommandExecutionState.Canceled;
         }
 
         private void BuildTree() {
