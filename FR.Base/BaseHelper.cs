@@ -6,19 +6,15 @@
 
 using System.Diagnostics;
 
-namespace FR
-{
-  public static class BaseHelper
-  {
-    [DebuggerNonUserCode]
-    public static bool InList(object find, params object[] args)
-    {
-      foreach (object obj in args)
-      {
-        if (find == null && obj == null || find != null && obj != null && find.Equals(obj))
-          return true;
-      }
-      return false;
+namespace FR {
+    public static class BaseHelper {
+        [DebuggerNonUserCode]
+        public static bool InList<T>(T find, params T[] args) {
+            foreach (T obj in args) {
+                if (find == null && obj == null || find != null && obj != null && find.Equals(obj))
+                    return true;
+            }
+            return false;
+        }
     }
-  }
 }

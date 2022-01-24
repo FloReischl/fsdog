@@ -9,6 +9,8 @@ using FR.Configuration;
 using FR.IO;
 using FR.Windows.Forms;
 using FsDog.Commands;
+using FsDog.Commands.Favorites;
+using FsDog.Commands.Files;
 using FsDog.Configuration;
 using FsDog.Dialogs;
 using System;
@@ -438,7 +440,7 @@ namespace FsDog.Detail {
                 }
             }
             else if (e.KeyCode == Keys.Return) {
-                FsApp.Instance.ExecuteCommand(typeof(CmdFileOpen), (DataContext)null);
+                FsApp.Instance.ExecuteCommand(typeof(CmdFileOpen));
                 this.dgvFiles.Focus();
             }
             else if (e.KeyCode == Keys.Escape) {
@@ -597,7 +599,7 @@ namespace FsDog.Detail {
         private void dgvFiles_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
-            FsApp.Instance.ExecuteCommand(typeof(CmdFileOpen), (DataContext)null);
+            FsApp.Instance.ExecuteCommand(typeof(CmdFileOpen));
         }
 
         private void dgvFiles_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
@@ -630,7 +632,7 @@ namespace FsDog.Detail {
             }
             catch (Exception ex) {
                 cell.Value = (object)detailItem.Name;
-                FormError.ShowException(ex, (IWin32Window)null);
+                FormError.ShowException(ex);
             }
         }
 
@@ -810,7 +812,7 @@ namespace FsDog.Detail {
                         this.DeleteSelected(!e.Shift);
                     else if (e.KeyCode == Keys.F2) {
                         if (this.dgvFiles.SelectedRows.Count > 1)
-                            FsApp.Instance.ExecuteCommand(typeof(CmdFileRenameMulti), (DataContext)null);
+                            FsApp.Instance.ExecuteCommand(typeof(CmdFileRenameMulti));
                         else if (this.dgvFiles.CurrentRow != null) {
                             this.dgvFiles.CurrentCell = this.dgvFiles.CurrentRow.Cells["Name"];
                             this.dgvFiles.BeginEdit(false);

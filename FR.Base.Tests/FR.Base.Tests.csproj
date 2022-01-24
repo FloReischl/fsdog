@@ -52,6 +52,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\Generic\UnitTest1.cs" />
     <Compile Include="Configuration\ConfigurationFileTests.cs" />
     <Compile Include="TextFileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

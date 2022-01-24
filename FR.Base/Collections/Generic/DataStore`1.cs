@@ -53,10 +53,8 @@ namespace FR.Collections.Generic {
 
         public DataStore(PropertyDescriptor primaryKeyProperty, IPrimaryKey primaryKey)
           : this() {
-            if (primaryKey == null)
-                throw ExceptionHelper.GetArgumentNull(nameof(primaryKey));
-            if (primaryKeyProperty == null)
-                throw ExceptionHelper.GetArgumentNull(nameof(primaryKeyProperty));
+            Check.NotNullArg(nameof(primaryKey), primaryKey);
+            Check.NotNullArg(nameof(primaryKeyProperty), primaryKeyProperty);
             this.SetPrimaryKey(primaryKeyProperty, primaryKey);
             this.SortIndex = (IIndex)primaryKey;
         }
@@ -66,12 +64,10 @@ namespace FR.Collections.Generic {
           IPrimaryKey primaryKey,
           IEnumerable<TItem> initialData)
           : this() {
-            if (primaryKey == null)
-                throw ExceptionHelper.GetArgumentNull(nameof(primaryKey));
-            if (primaryKeyProperty == null)
-                throw ExceptionHelper.GetArgumentNull(nameof(primaryKeyProperty));
-            if (initialData == null)
-                throw ExceptionHelper.GetArgumentNull(nameof(initialData));
+            Check.NotNullArg(nameof(primaryKey), primaryKey);
+            Check.NotNullArg(nameof(primaryKeyProperty), primaryKeyProperty);
+            Check.NotNullArg(nameof(initialData), initialData);
+
             foreach (TItem component in initialData) {
                 if ((object)component != null) {
                     this.SetPrimaryKey(PropertyDescriptorHelper.GetDynamicProperty(PropertyDescriptorHelper.GetProperty((object)component, primaryKeyProperty), true), primaryKey);
@@ -79,10 +75,14 @@ namespace FR.Collections.Generic {
                     break;
                 }
             }
-            if (this.PrimaryKey == null)
+
+            if (this.PrimaryKey == null) {
                 throw ExceptionHelper.GetInvalidOperation("PrimaryKey property could not be evaluated. Its required to specifiy at least one initial item to evaluate the primary key property");
-            foreach (TItem obj in initialData)
+            }
+
+            foreach (TItem obj in initialData) {
                 this.Add(obj);
+            }
         }
 
         public DataStore(SerializationInfo info, StreamingContext context)
@@ -171,10 +171,7 @@ namespace FR.Collections.Generic {
             }
         }
 
-        public bool IsSorted {
-            [DebuggerNonUserCode]
-            get => true;
-        }
+        public bool IsSorted { get => true; }
 
         public virtual ReadOnlyDictionary<string, PropertyDescriptor> ItemProperties {
             get {
@@ -232,10 +229,8 @@ namespace FR.Collections.Generic {
         }
 
         public void AddIndex(PropertyDescriptor property, IIndex index) {
-            if (property == null)
-                throw ExceptionHelper.GetArgumentNull(nameof(property));
-            if (index == null)
-                throw ExceptionHelper.GetArgumentNull(nameof(index));
+            Check.NotNullArg(nameof(property), property);
+            Check.NotNullArg(nameof(index), index);
             DataStore<TItem>.IndexValue indexInternal = this.FindIndexInternal(property, index.SortDirection);
             if (indexInternal != null) {
                 if (indexInternal.IsPublic)
@@ -413,13 +408,18 @@ namespace FR.Collections.Generic {
         }
 
         public virtual int Insert(int index, TItem item) {
-            object key = this.PrimaryKeyProperty.GetValue((object)item);
+            object key = this.PrimaryKeyProperty.GetValue(item);
             DataStore<TItem>.PrimaryKeyEntry pkEntry = new DataStore<TItem>.PrimaryKeyEntry(key, item);
-            this.PrimaryKey.Add(key, (object)pkEntry);
-            if (item is INotifyPropertyChanging propertyChanging)
+            this.PrimaryKey.Add(key, pkEntry);
+
+            if (item is INotifyPropertyChanging propertyChanging) {
                 propertyChanging.PropertyChanging += new PropertyChangingEventHandler(this.NotifyingItem_PropertyChanging);
-            if (item is INotifyPropertyChanged notifyPropertyChanged)
+            }
+
+            if (item is INotifyPropertyChanged notifyPropertyChanged) {
                 notifyPropertyChanged.PropertyChanged += new PropertyChangedEventHandler(this.NotifyingItem_PropertyChanged);
+            }
+
             this.UpdateIndexes(ListChangedType.ItemAdded, item, pkEntry);
             this.OnListChanged(new ListChangedEventArgs(ListChangedType.ItemAdded, index));
             return index;
@@ -437,12 +437,14 @@ namespace FR.Collections.Generic {
             DataStore<TItem>.PrimaryKeyEntry valueAt = (DataStore<TItem>.PrimaryKeyEntry)this.PrimaryKey.GetValueAt(index);
             TItem objectToRemove = valueAt.Value;
             this.PrimaryKey.Remove(valueAt.Key);
-            if (this.RemoveObjectCallback != null)
-                this.RemoveObjectCallback(objectToRemove);
+            this.RemoveObjectCallback?.Invoke(objectToRemove);
+
             if (objectToRemove is INotifyPropertyChanging propertyChanging)
                 propertyChanging.PropertyChanging -= new PropertyChangingEventHandler(this.NotifyingItem_PropertyChanging);
+
             if (objectToRemove is INotifyPropertyChanged notifyPropertyChanged)
                 notifyPropertyChanged.PropertyChanged -= new PropertyChangedEventHandler(this.NotifyingItem_PropertyChanged);
+
             this.UpdateIndexes(ListChangedType.ItemDeleted, objectToRemove, valueAt);
             this.OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, index));
         }
@@ -472,7 +474,7 @@ namespace FR.Collections.Generic {
                 }
                 this.PrimaryKey.Clear();
             }
-            if (!this.IsSorted || this.SortProperty == this.PrimaryKeyProperty)
+            if (this.SortProperty == this.PrimaryKeyProperty)
                 this.SortProperty = primaryKeyProperty;
             this.PrimaryKey = primaryKey;
             this.PrimaryKeyProperty = primaryKeyProperty;

@@ -58,14 +58,14 @@ namespace FR.Windows.Forms {
                 { "Property", property }
             };
             editControl.Location = new Point(0, 0);
-            editControl.Tag = (object)dataContext;
+            editControl.Tag = dataContext;
             button.Location = new Point(editControl.Width + editControl.Margin.Right, 0);
             button.Height = editControl.Height;
             button.Width = (int)((double)button.Height * 1.3);
             button.Text = "...";
-            button.Tag = (object)dataContext;
+            button.Tag = dataContext;
             button.Click += buttonClick;
-            controlWithButton.Tag = (object)dataContext;
+            controlWithButton.Tag = dataContext;
             controlWithButton.Controls.Add(editControl);
             controlWithButton.Controls.Add((Control)button);
             controlWithButton.Height = editControl.Height;
@@ -169,11 +169,11 @@ namespace FR.Windows.Forms {
                         object obj2;
                         if (obj1 == null) {
                             type = typeof(string);
-                            obj2 = (object)new Font(this.Font, this.Font.Style);
+                            obj2 = new Font(this.Font, this.Font.Style);
                         }
                         else if (obj1 is string && obj1.ToString() == "") {
                             type = obj1.GetType();
-                            obj2 = (object)new Font(this.Font, this.Font.Style);
+                            obj2 = new Font(this.Font, this.Font.Style);
                         }
                         else {
                             type = obj1.GetType();
@@ -181,13 +181,13 @@ namespace FR.Windows.Forms {
                         }
                         Font font = obj2 as Font;
                         TextBox editControl = new TextBox {
-                            Text = fontConverter.ConvertToString((object)font),
+                            Text = fontConverter.ConvertToString(font),
                             ReadOnly = true
                         };
                         Control controlWithButton = this.GetControlWithButton(property, (Control)editControl, new EventHandler(this.BtnFont_Click));
                         DataContext tag = (DataContext)controlWithButton.Tag;
-                        tag.Add((object)"Type", (object)type);
-                        tag.Add((object)"Font", (object)font);
+                        tag.Add("Type", type);
+                        tag.Add("Font", font);
                         controlWithButton.Width = int.MaxValue;
                         optionItemSet.EditControl = controlWithButton;
                     }
@@ -215,7 +215,7 @@ namespace FR.Windows.Forms {
                             comboBox.Validating += new CancelEventHandler(this.ComboBox_Validating);
                             optionItemSet.EditControl = (Control)comboBox;
                         }
-                        else if (BaseHelper.InList((object)property.PropertyType, (object)typeof(byte), (object)typeof(sbyte), (object)typeof(short), (object)typeof(ushort), (object)typeof(int), (object)typeof(uint), (object)typeof(long), (object)typeof(ulong), (object)typeof(float), (object)typeof(double), (object)typeof(Decimal))) {
+                        else if (BaseHelper.InList(property.PropertyType, typeof(byte), typeof(sbyte), typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(ulong), typeof(float), typeof(double), typeof(Decimal))) {
                             NumericUpDown numericUpDown = new NumericUpDown {
                                 Value = (Decimal)Convert.ChangeType(property.Value, typeof(Decimal))
                             };
@@ -248,11 +248,11 @@ namespace FR.Windows.Forms {
                     if (editControl.Tag == null || editControl.Tag is DataContext) {
                         if (!(editControl.Tag is DataContext dataContext))
                             dataContext = new DataContext();
-                        editControl.Tag = (object)dataContext;
-                        if (!dataContext.ContainsKey((object)"EditControl"))
-                            dataContext.Add((object)"EditControl", (object)editControl);
-                        if (!dataContext.ContainsKey((object)"Property"))
-                            dataContext.Add((object)"Property", (object)property);
+                        editControl.Tag = dataContext;
+                        if (!dataContext.ContainsKey("EditControl"))
+                            dataContext.Add("EditControl", editControl);
+                        if (!dataContext.ContainsKey("Property"))
+                            dataContext.Add("Property", property);
                     }
                     editControl.Top = num1;
                     num1 = editControl.Bottom + editControl.Margin.Bottom;
@@ -275,8 +275,8 @@ namespace FR.Windows.Forms {
 
         private void BtnColor_Click(object sender, EventArgs e) {
             DataContext tag = (DataContext)((Control)sender).Tag;
-            PictureBox pictureBox = (PictureBox)tag[(object)"EditControl"];
-            IOptionsProperty optionsProperty = (IOptionsProperty)tag[(object)"Property"];
+            PictureBox pictureBox = (PictureBox)tag["EditControl"];
+            IOptionsProperty optionsProperty = (IOptionsProperty)tag["Property"];
             ColorConverter colorConverter = new ColorConverter();
             Color color1 = optionsProperty.Value == null ? Color.Empty : (Color)colorConverter.ConvertFrom(optionsProperty.Value);
             ColorDialog colorDialog = new ColorDialog();
@@ -285,29 +285,29 @@ namespace FR.Windows.Forms {
             if (colorDialog.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
             Color color2 = colorDialog.Color;
-            optionsProperty.Value = colorConverter.ConvertTo((object)color2, typeof(string));
+            optionsProperty.Value = colorConverter.ConvertTo(color2, typeof(string));
             Image image = pictureBox.Image;
             Graphics.FromImage(image).FillRectangle((Brush)new SolidBrush(color2), new Rectangle(0, 0, image.Width, image.Height));
         }
 
         private void BtnDirectory_Click(object sender, EventArgs e) {
             DataContext tag = (DataContext)((Control)sender).Tag;
-            TextBox textBox = (TextBox)tag[(object)"EditControl"];
-            IOptionsProperty optionsProperty = (IOptionsProperty)tag[(object)"Property"];
+            TextBox textBox = (TextBox)tag["EditControl"];
+            IOptionsProperty optionsProperty = (IOptionsProperty)tag["Property"];
             string path = optionsProperty.Value == null ? (string)null : optionsProperty.Value.ToString();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             if (path != null && Directory.Exists(path))
                 folderBrowserDialog.SelectedPath = path;
             if (folderBrowserDialog.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            optionsProperty.Value = (object)folderBrowserDialog.SelectedPath;
+            optionsProperty.Value = folderBrowserDialog.SelectedPath;
             textBox.Text = folderBrowserDialog.SelectedPath;
         }
 
         private void BtnFile_Click(object sender, EventArgs e) {
             DataContext tag = (DataContext)((Control)sender).Tag;
-            TextBox textBox = (TextBox)tag[(object)"EditControl"];
-            IOptionsProperty optionsProperty = (IOptionsProperty)tag[(object)"Property"];
+            TextBox textBox = (TextBox)tag["EditControl"];
+            IOptionsProperty optionsProperty = (IOptionsProperty)tag["Property"];
             string str = optionsProperty.Value == null ? (string)null : optionsProperty.Value.ToString();
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (str != null && File.Exists(str)) {
@@ -318,29 +318,29 @@ namespace FR.Windows.Forms {
             }
             if (openFileDialog.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            optionsProperty.Value = (object)openFileDialog.FileName;
+            optionsProperty.Value = openFileDialog.FileName;
             textBox.Text = openFileDialog.FileName;
         }
 
         private void BtnFont_Click(object sender, EventArgs e) {
             DataContext tag = (DataContext)((Control)sender).Tag;
-            TextBox textBox = (TextBox)tag[(object)"EditControl"];
-            IOptionsProperty optionsProperty = (IOptionsProperty)tag[(object)"Property"];
+            TextBox textBox = (TextBox)tag["EditControl"];
+            IOptionsProperty optionsProperty = (IOptionsProperty)tag["Property"];
             FontConverter fontConverter = new FontConverter();
             System.Type asType = tag.GetValue<Type>("Type");
-            Font font = (Font)tag[(object)"Font"];
+            Font font = (Font)tag["Font"];
             FontDialog fontDialog = new FontDialog {
                 Font = font
             };
             if (fontDialog.ShowDialog((IWin32Window)this) != DialogResult.OK)
                 return;
-            optionsProperty.Value = fontConverter.ConvertTo((object)fontDialog.Font, asType);
-            textBox.Text = fontConverter.ConvertToString((object)fontDialog.Font);
+            optionsProperty.Value = fontConverter.ConvertTo(fontDialog.Font, asType);
+            textBox.Text = fontConverter.ConvertToString(fontDialog.Font);
         }
 
         private void ComboBox_Validating(object sender, CancelEventArgs e) {
             ComboBox comboBox = (ComboBox)sender;
-            IOptionsProperty optionsProperty = (IOptionsProperty)((DataContext)comboBox.Tag)[(object)"Property"];
+            IOptionsProperty optionsProperty = (IOptionsProperty)((DataContext)comboBox.Tag)["Property"];
             object selectedItem = comboBox.SelectedItem;
             if (selectedItem is ComboBoxItem)
                 optionsProperty.Value = ((ComboBoxItem)selectedItem).Value;
@@ -350,22 +350,22 @@ namespace FR.Windows.Forms {
 
         private void DateTimePicker_Validating(object sender, CancelEventArgs e) {
             DateTimePicker dateTimePicker = (DateTimePicker)sender;
-            ((IOptionsProperty)((DataContext)dateTimePicker.Tag)[(object)"Property"]).Value = (object)dateTimePicker.Value;
+            ((IOptionsProperty)((DataContext)dateTimePicker.Tag)["Property"]).Value = dateTimePicker.Value;
         }
 
         private void NumericUpDown_Validating(object sender, CancelEventArgs e) {
             NumericUpDown numericUpDown = (NumericUpDown)sender;
-            ((IOptionsProperty)((DataContext)numericUpDown.Tag)[(object)"Property"]).Value = (object)numericUpDown.Value;
+            ((IOptionsProperty)((DataContext)numericUpDown.Tag)["Property"]).Value = numericUpDown.Value;
         }
 
         private void TextBox_Validating(object sender, CancelEventArgs e) {
             TextBox textBox = (TextBox)sender;
-            ((IOptionsProperty)((DataContext)textBox.Tag)[(object)"Property"]).Value = (object)textBox.Text;
+            ((IOptionsProperty)((DataContext)textBox.Tag)["Property"]).Value = textBox.Text;
         }
 
         private void CheckBox_Click(object sender, EventArgs e) {
             CheckBox checkBox = (CheckBox)sender;
-            ((IOptionsProperty)((DataContext)checkBox.Tag)[(object)"Property"]).Value = (object)checkBox.Checked;
+            ((IOptionsProperty)((DataContext)checkBox.Tag)["Property"]).Value = checkBox.Checked;
         }
 
         protected override void Dispose(bool disposing) {

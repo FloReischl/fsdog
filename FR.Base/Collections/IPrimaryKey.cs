@@ -9,22 +9,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace FR.Collections
-{
-  public interface IPrimaryKey : IIndex, IEnumerable<IIndexNode>, IEnumerable, ICloneable
-  {
-    IPrimaryKey Clone(ListSortDirection sortDirection);
+namespace FR.Collections {
+    public interface IPrimaryKey : IIndex, IEnumerable<IIndexNode>, IEnumerable, ICloneable {
+        IPrimaryKey Clone(ListSortDirection sortDirection);
 
-    int Count { get; }
+        int Count { get; }
 
-    IPrimaryKeyNode FindNode(object key);
+        IPrimaryKeyNode FindNode(object key);
 
-    object FindValue(object key);
+        object FindValue(object key);
 
-    IPrimaryKeyNode GetNodeAt(int index);
+        IPrimaryKeyNode GetNodeAt(int index);
 
-    int IndexOf(object key);
+        int IndexOf(object key);
 
-    void Remove(object key);
-  }
+        void Remove(object key);
+    }
 }

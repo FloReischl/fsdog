@@ -7,6 +7,7 @@
 using FR.Configuration;
 using FR.Windows.Forms;
 using FsDog.Commands;
+using FsDog.Commands.Favorites;
 using FsDog.Configuration;
 using FsDog.Properties;
 using System;

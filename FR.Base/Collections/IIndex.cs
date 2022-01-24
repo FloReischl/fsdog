@@ -9,26 +9,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace FR.Collections
-{
-  public interface IIndex : IEnumerable<IIndexNode>, IEnumerable
-  {
-    ListSortDirection SortDirection { get; }
+namespace FR.Collections {
+    public interface IIndex : IEnumerable<IIndexNode>, IEnumerable {
+        ListSortDirection SortDirection { get; }
 
-    IIndexNode Add(object key, object value);
+        IIndexNode Add(object key, object value);
 
-    void Clear();
+        void Clear();
 
-    Array Find(object key);
+        Array Find(object key);
 
-    Array Find(object key, IndexFindOption option);
+        Array Find(object key, IndexFindOption option);
 
-    Array Find(IndexFindOption option, object key, params object[] keys);
+        Array Find(IndexFindOption option, object key, params object[] keys);
 
-    Array GetAll(ListSortDirection direction);
+        Array GetAll(ListSortDirection direction);
 
-    object GetValueAt(int index);
+        object GetValueAt(int index);
 
-    int Remove(object key, object valueToRemove, bool onlyOne);
-  }
+        int Remove(object key, object valueToRemove, bool onlyOne);
+    }
 }

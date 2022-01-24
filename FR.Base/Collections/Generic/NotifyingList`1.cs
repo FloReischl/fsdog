@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 
 namespace FR.Collections.Generic {
@@ -128,14 +129,25 @@ namespace FR.Collections.Generic {
         }
 
         public virtual void ApplySort(PropertyDescriptor property, ListSortDirection direction) {
-            SortedList<object, TItem> sortedList = new SortedList<object, TItem>();
-            sortedList.AllowDuplicates = true;
-            List<TItem> objList = new List<TItem>(this.Count);
-            objList.AddRange((IEnumerable<TItem>)this);
-            foreach (TItem component in objList)
-                sortedList.Add(property.GetValue((object)component), component);
+            //SortedList<object, TItem> sortedList = new SortedList<object, TItem>();
+            //sortedList.AllowDuplicates = true;
+            //List<TItem> objList = new List<TItem>(this.Count);
+            //objList.AddRange((IEnumerable<TItem>)this);
+            //foreach (TItem component in objList)
+            //    sortedList.Add(property.GetValue((object)component), component);
+
+            var sorted = new SortedList<object, List<TItem>>();
+            List<TItem> old = new List<TItem>(this.Count);
+            old.AddRange((IEnumerable<TItem>)this);
+
+            foreach (var item in old) {
+                var key = property.GetValue(item);
+                var items = sorted.GetOrAdd(key, (k) => new List<TItem>());
+            }
+
             this._list.Clear();
-            this._list.AddRange((IEnumerable<TItem>)sortedList.GetValueList());
+            //this._list.AddRange((IEnumerable<TItem>)sortedList.GetValueList());
+            _list.AddRange(sorted.SelectMany(kvp => kvp.Value));
             if (direction == ListSortDirection.Descending)
                 this._list.Reverse();
             this._isSorted = true;

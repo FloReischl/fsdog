@@ -32,7 +32,8 @@ namespace FsDog {
         [STAThread]
         private static void Main() {
             FsApp fsApp = new FsApp();
-            fsApp.Start(typeof(FormMain));
+            fsApp.Start(typeof(Form1));
+            //fsApp.Start(typeof(FormMain));
             fsApp.Config.Save();
         }
 
@@ -91,7 +92,7 @@ namespace FsDog {
                 case FileInfo fileInfo:
                     string lower = fileInfo.Extension.ToLower();
                     Image associatedImage;
-                    if (BaseHelper.InList((object)lower, (object)".exe", (object)".scr", (object)".lnk", (object)".ico", (object)".cur")) {
+                    if (BaseHelper.InList(lower, ".exe", ".scr", ".lnk", ".ico", ".cur")) {
                         if (!this._fileImages.TryGetValue(fileInfo.FullName, out associatedImage)) {
                             associatedImage = ImageHelper.ExtractAssociatedImage(fileInfo.FullName, true);
                             if (this.Config.Options.General.CacheImages)

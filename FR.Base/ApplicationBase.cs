@@ -104,7 +104,7 @@ namespace FR {
         }
 
         [DebuggerNonUserCode]
-        public virtual void ExecuteCommand(Type commandType, DataContext context) {
+        public virtual void ExecuteCommand(Type commandType, DataContext context = null) {
             Type[] typeArray = commandType != null ? commandType.GetInterfaces() : throw ExceptionHelper.GetArgumentNull(nameof(commandType));
             bool flag = false;
             foreach (Type type in typeArray) {

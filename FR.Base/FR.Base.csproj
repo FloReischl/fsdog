@@ -50,10 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Check.cs" />
+    <Compile Include="Collections\DictionaryExtensions.cs" />
     <Compile Include="Collections\Generic\DataStore`1_IndexKey.cs" />
     <Compile Include="Collections\Generic\DataStore`1_Interfaces.cs" />
     <Compile Include="Collections\Generic\DataStore`1_PrimaryKeyEntry.cs" />
     <Compile Include="Collections\Generic\DataStore`1_IndexValue.cs" />
+    <Compile Include="Collections\Generic\DictionaryExtensions.cs" />
+    <Compile Include="Collections\Generic\EnumerableExtensions.cs" />
+    <Compile Include="Collections\Generic\ListExtensions.cs" />
+    <Compile Include="Collections\ListExtensions.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Logging\ILogger.cs" />

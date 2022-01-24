@@ -1,11 +1,15 @@
 ﻿
 
-using FR.Configuration;
 using FR.Drawing;
 using FR.Windows.Forms.Commands;
 using FsDog.Commands;
+using FsDog.Commands.Edit;
+using FsDog.Commands.Favorites;
+using FsDog.Commands.Files;
+using FsDog.Commands.Help;
+using FsDog.Commands.Tools;
+using FsDog.Commands.View;
 using FsDog.Properties;
-using Microsoft.Win32;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -119,10 +123,10 @@ namespace FsDog.Dialogs {
                 ShowNeverToolStrip = true
             });
             toolsParent.Items.Add(new CommandToolItem("-"));
-            toolsParent.Items.Add(new CommandToolItem("Edit Applications and Scripts", typeof(CmdCommandsEdit)) {
+            toolsParent.Items.Add(new CommandToolItem("Edit Applications and Scripts", typeof(CmdToolsCommandsEdit)) {
                 ShowNeverToolStrip = true
             });
-            toolsParent.Items.Add(new CommandToolItem("Configure Scripting Hosts", typeof(CmdScriptConfigureHosts)) {
+            toolsParent.Items.Add(new CommandToolItem("Configure Scripting Hosts", typeof(CmdToolsConfigureHosts)) {
                 ShowNeverToolStrip = true
             });
             toolsParent.Items.Add(new CommandToolItem("-"));

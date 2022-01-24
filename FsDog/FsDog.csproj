@@ -72,14 +72,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppearanceProvider.cs" />
-    <Compile Include="Commands\CmdAppSaveConfig.cs" />
+    <Compile Include="Commands\App\CmdAppSaveConfig.cs" />
     <Compile Include="Commands\CommandHelper.cs" />
     <Compile Include="Commands\CommandType.cs" />
     <Compile Include="Commands\CommandInfo.cs" />
     <Compile Include="Commands\CmdFsDogIntern.cs" />
-    <Compile Include="Commands\CmdToolsClearImageCache.cs" />
-    <Compile Include="Commands\CmdToolsOpenConfigFile.cs" />
-    <Compile Include="Commands\CmdToolsOptions.cs" />
+    <Compile Include="Commands\Tools\CmdToolsClearImageCache.cs" />
+    <Compile Include="Commands\Tools\CmdToolsOpenConfigFile.cs" />
+    <Compile Include="Commands\Tools\CmdToolsOptions.cs" />
     <Compile Include="Configuration\AppearanceConfig.cs" />
     <Compile Include="Configuration\ApplicationsConfig.cs" />
     <Compile Include="Configuration\ColumnConfig.cs" />
@@ -129,6 +129,20 @@
     <Compile Include="Detail\DetailView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="FileSystem\DogDirectory.cs" />
+    <Compile Include="FileSystem\DogDrive.cs" />
+    <Compile Include="FileSystem\DogFile.cs" />
+    <Compile Include="FileSystem\DogItem.cs" />
+    <Compile Include="FileSystem\DogItemList.cs" />
+    <Compile Include="FileSystem\DogItemListView.cs" />
+    <Compile Include="FileSystem\DogItemType.cs" />
+    <Compile Include="FileSystem\ViewFilter.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Configuration\FsDogConfig.cs" />
     <Compile Include="Search\FormSearch.cs">
@@ -148,7 +162,7 @@
     <Compile Include="Tree\NodeNetworkDomain.cs" />
     <Compile Include="Tree\NodeNetworkServer.cs" />
     <Compile Include="Tree\NodeNetworkShare.cs" />
-    <Compile Include="Commands\CmdHelpAbout.cs" />
+    <Compile Include="Commands\Help\CmdHelpAbout.cs" />
     <Compile Include="IPreviewControl.cs" />
     <Compile Include="Detail\PreviewImage.cs">
       <SubType>UserControl</SubType>
@@ -161,11 +175,11 @@
     <Compile Include="Detail\DetailGrid.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Commands\CmdCommandsEdit.cs" />
-    <Compile Include="Commands\CmdCommandBase.cs" />
-    <Compile Include="Commands\CmdApplicationExecute.cs" />
-    <Compile Include="Commands\CmdScriptExecute.cs" />
-    <Compile Include="Commands\CmdScriptConfigureHosts.cs" />
+    <Compile Include="Commands\Tools\CmdToolsCommandsEdit.cs" />
+    <Compile Include="Commands\ScriptsApps\CmdCommandBase.cs" />
+    <Compile Include="Commands\ScriptsApps\CmdApplicationExecute.cs" />
+    <Compile Include="Commands\ScriptsApps\CmdScriptExecute.cs" />
+    <Compile Include="Commands\Tools\CmdToolsConfigureHosts.cs" />
     <Compile Include="Detail\PreviewText.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -175,35 +189,35 @@
     <Compile Include="Dialogs\FormFavorites.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Commands\CmdFavoritesEdit.cs" />
-    <Compile Include="Commands\CmdFavorite.cs" />
+    <Compile Include="Commands\Favorites\CmdFavoritesEdit.cs" />
+    <Compile Include="Commands\Favorites\CmdFavorite.cs" />
     <Compile Include="FavoriteInfo.cs" />
     <Compile Include="Detail\DetailViewRequestParentDirectoryHandler.cs" />
     <Compile Include="Detail\DetailViewRequestDirectoryArgs.cs" />
-    <Compile Include="Commands\CmdFileNewFile.cs" />
-    <Compile Include="Commands\CmdFileNewDirectory.cs" />
-    <Compile Include="Commands\CmdFileOpen.cs" />
-    <Compile Include="Commands\CmdFileOpenWith.cs" />
-    <Compile Include="Commands\CmdFileRunAs.cs" />
-    <Compile Include="Commands\CmdFileProperties.cs" />
-    <Compile Include="Commands\CmdFileRenameMulti.cs" />
+    <Compile Include="Commands\File\CmdFileNewFile.cs" />
+    <Compile Include="Commands\File\CmdFileNewDirectory.cs" />
+    <Compile Include="Commands\File\CmdFileOpen.cs" />
+    <Compile Include="Commands\File\CmdFileOpenWith.cs" />
+    <Compile Include="Commands\File\CmdFileRunAs.cs" />
+    <Compile Include="Commands\File\CmdFileProperties.cs" />
+    <Compile Include="Commands\File\CmdFileRenameMulti.cs" />
     <Compile Include="CopyErrorType.cs" />
     <Compile Include="CopyErrorHandling.cs" />
     <Compile Include="CopyItem.cs" />
-    <Compile Include="Commands\CmdViewPreview.cs" />
-    <Compile Include="Commands\CmdViewGotoFavorite.cs" />
-    <Compile Include="Commands\CmdViewDirectorySizes.cs" />
-    <Compile Include="Commands\CmdViewRefresh.cs" />
-    <Compile Include="Commands\CmdEditCut.cs" />
-    <Compile Include="Commands\CmdEditPaste.cs" />
-    <Compile Include="Commands\CmdEditCopy.cs" />
-    <Compile Include="Commands\CmdEditCopyToOtherView.cs" />
-    <Compile Include="Commands\CmdEditMoveToOtherView.cs" />
-    <Compile Include="Commands\CmdEditCopyFileNames.cs" />
-    <Compile Include="Commands\CmdEditDelete.cs" />
-    <Compile Include="Commands\CmdEditInvertSelection.cs" />
-    <Compile Include="Commands\CmdEditSelectAll.cs" />
-    <Compile Include="Commands\CmdViewFind.cs" />
+    <Compile Include="Commands\View\CmdViewPreview.cs" />
+    <Compile Include="Commands\View\CmdViewGotoFavorite.cs" />
+    <Compile Include="Commands\View\CmdViewDirectorySizes.cs" />
+    <Compile Include="Commands\View\CmdViewRefresh.cs" />
+    <Compile Include="Commands\Edit\CmdEditCut.cs" />
+    <Compile Include="Commands\Edit\CmdEditPaste.cs" />
+    <Compile Include="Commands\Edit\CmdEditCopy.cs" />
+    <Compile Include="Commands\Edit\CmdEditCopyToOtherView.cs" />
+    <Compile Include="Commands\Edit\CmdEditMoveToOtherView.cs" />
+    <Compile Include="Commands\Edit\CmdEditCopyFileNames.cs" />
+    <Compile Include="Commands\Edit\CmdEditDelete.cs" />
+    <Compile Include="Commands\Edit\CmdEditInvertSelection.cs" />
+    <Compile Include="Commands\Edit\CmdEditSelectAll.cs" />
+    <Compile Include="Commands\View\CmdViewFind.cs" />
     <Compile Include="ShellContextMenu.cs" />
     <Compile Include="ShellContextMenuException.cs" />
     <Compile Include="HookEventArgs.cs" />
@@ -233,6 +247,9 @@
     <EmbeddedResource Include="Dialogs\FormFavorites.resx" />
     <EmbeddedResource Include="Dialogs\FormMain_old.resx" />
     <EmbeddedResource Include="Dialogs\FormRename.resx" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\Help.png" />
     <EmbeddedResource Include="Detail\PreviewContainer.resx" />
     <EmbeddedResource Include="Detail\PreviewImage.resx" />
@@ -289,5 +306,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

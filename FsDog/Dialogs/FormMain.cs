@@ -1,28 +1,26 @@
 ﻿using FR.Commands;
-using FR.Configuration;
-using FR.Drawing;
 using FR.IO;
 using FR.Net;
 using FR.Windows.Forms;
 using FR.Windows.Forms.Commands;
 using FsDog.Commands;
+using FsDog.Commands.Edit;
+using FsDog.Commands.Favorites;
+using FsDog.Commands.Files;
+using FsDog.Commands.Help;
+using FsDog.Commands.ScriptsApps;
+using FsDog.Commands.Tools;
+using FsDog.Commands.View;
 using FsDog.Configuration;
 using FsDog.Detail;
-using FsDog.Properties;
 using FsDog.Tree;
 using FsDogBase;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FsDog.Dialogs {
@@ -44,8 +42,8 @@ namespace FsDog.Dialogs {
             typeof(CommandEditCutBase), typeof(CommandEditCopyBase), typeof(CommandEditPasteBase), typeof(CmdEditCopyToOtherView), typeof(CmdEditMoveToOtherView), typeof(CmdEditCopyFileNames), typeof(CmdEditDelete), typeof(CmdEditSelectAll), typeof(CmdEditInvertSelection),
             typeof(CmdViewFind), typeof(CmdViewPreview), typeof(CmdViewGotoFavorite), typeof(CmdViewDirectorySizes), typeof(CmdViewRefresh),
             typeof(CmdFavorite), typeof(CmdFavoritesEdit),
-            typeof(CmdCommandsEdit), typeof(CmdApplicationExecute), typeof(CmdScriptExecute), typeof(CmdScriptConfigureHosts),
-            typeof(CmdToolsClearImageCache), typeof(CmdToolsOpenConfigFile), typeof(CmdToolsOptions),
+            typeof(CmdApplicationExecute), typeof(CmdScriptExecute),
+            typeof(CmdToolsConfigureHosts), typeof(CmdToolsCommandsEdit), typeof(CmdToolsClearImageCache), typeof(CmdToolsOpenConfigFile), typeof(CmdToolsOptions),
             typeof(CmdHelpAbout)
         };
 
@@ -148,7 +146,7 @@ namespace FsDog.Dialogs {
         public override void FinishCommand(ICommand command) {
             base.FinishCommand(command);
             switch (command) {
-                case CmdCommandsEdit _:
+                case CmdToolsCommandsEdit _:
                     CreateCommandsToolStrips();
                     MenuStrip menuStrip1 = new CommandToolItem(".") {
                         Items = { CommandHelper.GetApplicationsToolItem() }

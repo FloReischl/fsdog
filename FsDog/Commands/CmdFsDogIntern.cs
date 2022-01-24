@@ -13,63 +13,20 @@ using System.Windows.Forms;
 
 namespace FsDog.Commands {
     public class CmdFsDogIntern : CmdFsDog {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Control _activeFileControl;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private DetailView _detailView1;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private DetailView _detailView2;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private DetailView _currentDetailView;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private FormMain _formMain;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private TreeMain _tree;
+        public Control ActiveFileControl { get; set; }
 
-        public Control ActiveFileControl {
-            [DebuggerNonUserCode]
-            get => this._activeFileControl;
-            [DebuggerNonUserCode]
-            set => this._activeFileControl = value;
-        }
+        public new FsApp Application => (FsApp)base.Application;
 
-        public new FsApp Application => (FsApp)this.Application;
+        public DetailView DetailView1 { get; set; }
 
-        public DetailView DetailView1 {
-            [DebuggerNonUserCode]
-            get => this._detailView1;
-            [DebuggerNonUserCode]
-            set => this._detailView1 = value;
-        }
+        public DetailView DetailView2 { get; set; }
 
-        public DetailView DetailView2 {
-            [DebuggerNonUserCode]
-            get => this._detailView2;
-            [DebuggerNonUserCode]
-            set => this._detailView2 = value;
-        }
-
-        public DetailView CurrentDetailView {
-            [DebuggerNonUserCode]
-            get => this._currentDetailView;
-            [DebuggerNonUserCode]
-            set => this._currentDetailView = value;
-        }
+        public DetailView CurrentDetailView { get; set; }
 
         public DetailView OtherDetailView => this.CurrentDetailView == this.DetailView1 ? this.DetailView2 : this.DetailView1;
 
-        public FormMain FormMain {
-            [DebuggerNonUserCode]
-            get => this._formMain;
-            [DebuggerNonUserCode]
-            set => this._formMain = value;
-        }
+        public FormMain FormMain { get; set; }
 
-        public TreeMain Tree {
-            [DebuggerNonUserCode]
-            get => this._tree;
-            [DebuggerNonUserCode]
-            set => this._tree = value;
-        }
+        public TreeMain Tree { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace FsDog.Search {
             cboDirectory.Text = Directory?.FullName;
 
             DataGridViewColumn createColumn(string name, int width) {
-                var col = GridColumnFactory.CreateGridColumn(_table.Columns[name]);
+                var col = GridColumnFactory.CreateGridColumn(name);
                 col.Width = width;
                 return col;
             }

@@ -7,6 +7,7 @@
 using FR.Configuration;
 using FR.Windows.Forms;
 using FR.Windows.Forms.Commands;
+using FsDog.Commands.ScriptsApps;
 using FsDog.Configuration;
 using System;
 using System.Collections.Generic;
